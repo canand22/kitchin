@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - $solutionName$</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+     @* <script src="@Url.Content("~/Scripts/jquery-1.5.1.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.9.2.min.js")" type="text/javascript"></script>
+       @* <script src="@Url.Content("~/Scripts/grid.locale-en.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery.maskedinput-1.2.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.fmatter.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-1.7.min.js")" type="text/javascript"></script>     
+
+
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    
+    
+</head>
+<body>
+    <header>
+            <div class="content-wrapper">
+                @*<div class="float-left">
+                    <p class="site-title">@Html.ActionLink("$solutionName$", "Index", "Home", new { area = "" }, new { })</p>
+                </div>*@
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LogOnPartial")
+                    </section>
+                    @*<nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+							<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
+							
+							@if (User.IsInRole("Administrator"))
+	   {
+								<li>@Html.ActionLink("Administration", "Index", "Users", new { area = "Admin" }, new { })</li>
+	   }
+                        </ul>
+                    </nav>*@
+                </div>
+            </div>
+        </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+    </div>
+	<footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - $solutionName$ Application</p>
+                </div>
+                @*<div class="float-right">                  
+                    <ul id="social">                       
+                        <li><a href="http://facebook.com" class="facebook">Facebook</a></li>
+                        <li><a href="http://twitter.com" class="twitter">Twitter</a></li>
+                    </ul>
+                </div>*@
+            </div>
+        </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

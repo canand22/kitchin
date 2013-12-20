@@ -1,0 +1,90 @@
+﻿@using KitchIn.Core.Entities
+@using SmartArch.NixJqGridFramework.Helpers
+@model KitchIn.Web.Core.Models.Admin.NixJqGridUserModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Users management";
+}
+
+@section scripts
+{
+	<link href="@Url.Content("~/Content/ui.jqgrid.css")" rel="stylesheet" type="text/css"/>
+	<link href="@Url.Content("~/Content/Admin/Users/styles.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/grid.locale-en.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery.jqDatePicker.min.js")" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		var allRoles = [
+    		@Html.Raw(string.Join(", ", ((IEnumerable<Role>)ViewBag.Roles).Select(r => "'" + r.Name + "'")))
+		];
+		var str = [];
+    
+		function namevalid(value, colname) {
+			if (value.length < 5)
+			{
+				return [false, 'The user name must be at least 5 characters.'];
+			}
+			return [true, ''];
+		}
+
+		function custRoleFormat(cellvalue, options, rowObject)
+		{
+			var htmlString = "";
+			var parretnControl;
+			var userRoles = cellvalue.toString().split(",");
+			for (var i = 0; i < allRoles.length; i++)
+			{
+        		var isCheckedText = '';
+				if (userRoles.indexOf(allRoles[i]) >= 0)
+				{
+            		isCheckedText = " checked='true'";
+				}
+        	
+        		parretnControl = "<span><input type='checkbox' disabled='true'" + isCheckedText +  ">" + allRoles[i] + "</span>";
+				htmlString += parretnControl;
+
+			}
+			return htmlString;
+		};
+
+		function passwordFormat(cellvalue, options, rowObject)
+		{
+		   str = cellvalue.substr(0, 20);
+		   return "<input type='password' disabled='true' value="+str+"/>"; 
+		}
+
+		function DeleteSelectedRow()
+		{
+		    debugger;
+		    var selRow = $('.ui-jqgrid-btable').jqGrid('getGridParam', 'selrow').join(',');
+		    $.ajax({
+		            method: "GET",
+		            url: '@Url.Action("DeleteAjaxGrid", "Users")/' + selRow,
+		            cache: false,
+		            complete: function () {
+		                
+		            }
+		        });
+		}
+//        
+//		function editLinkFunction(cellvalue, options, rowObject)
+//		{
+//			return "<a href='@Url.Action("EditUser", "Users")/" +rowObject.Id+"'><img src='@Url.Content("~/Content/images/editBtn.png")'/></a>";
+//		}
+    
+	</script>
+}
+<div>
+    <ul>
+         <li>Users</li>
+         <li>@(Html.ActionLink("Categories", "Index", "Categories"))</li>
+         <li>@(Html.ActionLink("Products", "Index", "Products"))</li>
+         <li>@(Html.ActionLink("Products added by Users", "Index", "ProductsByUser"))</li>
+         <li>@(Html.ActionLink("Stores", "Index", "Stores"))</li>
+    </ul>
+</div>
+<div>
+    <p>@Html.NixJqGrid(Model.AjaxGrid)</p>
+</div>

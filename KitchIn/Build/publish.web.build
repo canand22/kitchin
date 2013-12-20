@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<project name="KitchIn">
+
+	<property name="current.dir" value="${directory::get-current-directory()}" />
+	<property name="solution.dir" value="${directory::get-parent-directory(current.dir)}" />
+	<property name="publish.web.dir" value="${solution.dir}/Publish-Web" />
+
+	<property name="solution.file.name" value="KitchIn.sln" />
+	
+	<property name="framework.dir" value="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\" />
+	<property name="build.configuration" value="Release" />
+	<property name="build.platform" value="Any CPU" />
+	<property name="build.msbuildTargetList" value="Clean;Rebuild" />
+	<property name="build.verbosity" value="quiet" />
+
+	<target name="test">
+		<echo message="${(assemblyname::get-version(assemblyname::get-assembly-name('')))}" />
+	</target>
+  
+	<target name="build">
+		<exec program="msbuild.exe"
+			basedir="${framework.dir}"
+			workingdir="${solution.dir}"
+			resultproperty="build.result" failonerror="true">
+			<arg value="${solution.file.name}" />
+			<arg value="/property:Configuration=${build.configuration};Platform=${build.platform}" />
+			<arg value="/target:${build.msbuildTargetList}" />
+			<arg value="/verbosity:${build.verbosity}" />
+		</exec>
+	</target>
+  	
+	# UseWPP_CopyWebApplication = true requires PipelineDependsOnBuild = false
+	
+	<target name="publish_web" description="Publishes the project.">
+    	<exec basedir="." program="${framework.dir}msbuild.exe"
+			commandline="${solution.dir}/App/KitchIn.Web/KitchIn.Web.csproj /nologo 
+				/t:Rebuild
+				/t:ResolveReferences;_WPPCopyWebApplication
+				/p:CleanWebProjectOutputDir=False
+				/p:OutDir=${publish.web.dir}/bin/
+				/p:WebProjectOutputDir=${publish.web.dir}
+				/p:Configuration=${build.configuration}
+				/v:m"
+			workingdir="${solution.dir}" 
+			failonerror="true" />
+    </target>
+</project>

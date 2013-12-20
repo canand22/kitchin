@@ -1,0 +1,17 @@
+StyleCop.Cache
+.svn/*
+/bin/*
+/Bin/*
+/Obj/*
+/obj/*
+/.svn/*
+.orig
+_ReSharper.*
+.suo
+.dotCover
+.user
+
+syntax: glob
+
+syntax: regexp
+packages/*
