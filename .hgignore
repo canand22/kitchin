@@ -11,7 +11,7 @@ _ReSharper.*
 .dotCover
 .user
 
+
 syntax: glob
 
 syntax: regexp
-packages/*
