@@ -11,9 +11,10 @@ namespace KitchIn.Data.NHibernate.Mappings
              mapping.Table("Products");
              mapping.Id().GeneratedBy.Identity();
              mapping.Map(x => x.Name).Not.Nullable();
-             mapping.Map(x => x.ExpirationDate).Nullable();
-             mapping.Map(x => x.IsAddedByUser).Nullable();
+             mapping.Map(x => x.ShortName).Not.Nullable();
+             mapping.Map(x => x.UpcCode).Nullable();
 
+             mapping.References(x => x.Store, "StoreId").Not.Nullable();
              mapping.References(x => x.Category, "CategoryId").Nullable();
          }
     }

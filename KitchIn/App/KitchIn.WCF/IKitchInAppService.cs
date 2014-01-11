@@ -6,9 +6,13 @@ using KitchIn.WCF.Core.Models;
 using KitchIn.WCF.Core.Models.MyAccount;
 using KitchIn.WCF.Core.Models.MyFavorites;
 using KitchIn.WCF.Core.Models.MyKitchen;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace KitchIn.WCF
 {
+    using KitchIn.WCF.DataContract;
+
     [ServiceContract]
     public interface IKitchInAppService
     {
@@ -115,5 +119,10 @@ namespace KitchIn.WCF
         [OperationContract]
         [WebGet(UriTemplate = "Media/{videoId}")]
         Stream GetVideo(string videoId);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "ListProducts?storeId={storeId}")]
+        [Description("Returns a list of products for storeId by photo receipt")]
+        IList<ListProducts> ListProducts(Stream fileContents, long storeId);
     }
 }

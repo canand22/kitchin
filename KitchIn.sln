@@ -1,11 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4A2809A7-363F-4BF6-8563-0760C2B2A7F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.Tools.Migrator", "KitchIn\Tools\KitchIn.Tools.Migrator\KitchIn.Tools.Migrator.csproj", "{AFE1B98E-1EE5-4340-A90E-E6C5AFECC4F8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{31D8C263-D281-45B8-925D-F8A904E2F4D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F6EA49F5-3077-4328-825E-219D44CD4E71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{08AD45D1-CF2C-4201-9AF3-6445D002EE97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.Tools.Migrator", "KitchIn\Tools\KitchIn.Tools.Migrator\KitchIn.Tools.Migrator.csproj", "{AFE1B98E-1EE5-4340-A90E-E6C5AFECC4F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.Core", "KitchIn\App\KitchIn.Core\KitchIn.Core.csproj", "{9C4E2ED5-29DB-430B-9CAF-A0E2E522D7ED}"
 EndProject
@@ -25,11 +29,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.WCF.Core", "KitchIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.WCF", "KitchIn\App\KitchIn.WCF\KitchIn.WCF.csproj", "{7FB74340-6BFE-4712-8305-C9C581583DBD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F6EA49F5-3077-4328-825E-219D44CD4E71}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.Tests", "KitchIn\Tests\KitchIn.Tests\KitchIn.Tests.csproj", "{136F3041-8F56-4F76-8FC6-CEBE022A338E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{08AD45D1-CF2C-4201-9AF3-6445D002EE97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchIn.Tools.ImportDataFromPotash", "KitchIn\Tools\KitchIn.Tools.ImportDataFromPotash\KitchIn.Tools.ImportDataFromPotash.csproj", "{8708ADA7-35A9-4677-93BC-032B70837512}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{83056484-B878-417C-A1B5-CCBD357BDD23}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,16 +160,25 @@ Global
 		{136F3041-8F56-4F76-8FC6-CEBE022A338E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{136F3041-8F56-4F76-8FC6-CEBE022A338E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{136F3041-8F56-4F76-8FC6-CEBE022A338E}.Release|x86.ActiveCfg = Release|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A218CB18-C100-44DF-AC02-DE54C232D17E} = {4A2809A7-363F-4BF6-8563-0760C2B2A7F1}
 		{AFE1B98E-1EE5-4340-A90E-E6C5AFECC4F8} = {4A2809A7-363F-4BF6-8563-0760C2B2A7F1}
+		{8708ADA7-35A9-4677-93BC-032B70837512} = {4A2809A7-363F-4BF6-8563-0760C2B2A7F1}
 		{9C4E2ED5-29DB-430B-9CAF-A0E2E522D7ED} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
 		{EAA7A555-4CB4-47B8-9111-8D22C61AF158} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
-		{CDAD7B2F-8353-4C41-B4DE-B59D827C951D} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
 		{30F13F87-8607-422B-B34E-4444EB55F92E} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
 		{9475457A-236C-45FD-BB3C-35F4AA8CE5F3} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
 		{2A921118-A95D-4F94-8397-6A63366571A1} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}

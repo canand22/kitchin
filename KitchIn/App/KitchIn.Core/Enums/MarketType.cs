@@ -6,6 +6,7 @@
         Dominicks,
         JewelOsco,
         TraderJoes,
+        Potash,
         None
     }
 }

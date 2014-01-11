@@ -49,14 +49,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\M0003_CreateCategoriesAndProductsTables.cs" />
-    <Compile Include="Migrations\M0004_CreateUsersTable.cs" />
-    <Compile Include="Migrations\M0005_CreateKitchensTables.cs" />
-    <Compile Include="Migrations\M0006_AddNameColumnToKitchensTable.cs" />
-    <Compile Include="Migrations\M0007_AddCategoryColumnToKitchensTable.cs" />
-    <Compile Include="Migrations\M0008_AddBigOvenProductColumnToProductsTable.cs" />
-    <Compile Include="Migrations\M0009_CreateFavoritesRecipesTable.cs" />
-    <Compile Include="Migrations\M0010_CreateStoresTable.cs" />
+    <Compile Include="Migrations\M0001_CreateStoresAndCategoriesAndProductsTables.cs" />
+    <Compile Include="Migrations\M0002_CreateUsersTable.cs" />
+    <Compile Include="Migrations\M0003_CreateKitchensTables.cs" />
+    <Compile Include="Migrations\M0004_AddNameColumnToKitchensTable.cs" />
+    <Compile Include="Migrations\M0005_AddCategoryColumnToKitchensTable.cs" />
+    <Compile Include="Migrations\M0006_CreateFavoritesRecipesTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

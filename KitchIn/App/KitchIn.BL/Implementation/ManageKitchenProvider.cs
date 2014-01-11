@@ -15,7 +15,7 @@ namespace KitchIn.BL.Implementation
         {
             get { return ServiceLocator.Current.GetInstance<IRepository<ProductsOnKitchen>>(); }
         }
-        
+
         public void SaveProductOnKitchen(ProductsOnKitchen product)
         {
             this.ProductsOnKitchenRepo.Save(product);
@@ -35,7 +35,7 @@ namespace KitchIn.BL.Implementation
                            ProductId = x.Product.Id,
                            CategoryId = x.Category.Id,
                            Quantity = x.Quantity,
-                           HasExpired = this.HasExpiredProduct(x)
+                           //HasExpired = this.HasExpiredProduct(x)
                        }).ToList();
         }
 
@@ -43,18 +43,18 @@ namespace KitchIn.BL.Implementation
         {
             var models = new List<CategoryiPhoneModel>();
 
-            foreach (var cat in this.CategoriesRepo)
-            {
-                var categ = new CategoryiPhoneModel
-                                {
-                                    CategoryId = cat.Id,
-                                    Name = cat.Name,
-                                    CountProducts = this.GetProductsOnKitchen(id, cat.Id).Count(),
-                                    HasExpired = this.HasExpired(id, cat.Id)
-                                };
+            //foreach (var cat in this.CategoriesRepo)
+            //{
+            //    var categ = new CategoryiPhoneModel
+            //                    {
+            //                        CategoryId = cat.Id,
+            //                        Name = cat.Name,
+            //                        CountProducts = this.GetProductsOnKitchen(id, cat.Id).Count(),
+            //                        //HasExpired = this.HasExpired(id, cat.Id)
+            //                    };
 
-                models.Add(categ);
-            }
+            //    models.Add(categ);
+            //}
 
             return models;
         }
@@ -117,16 +117,16 @@ namespace KitchIn.BL.Implementation
                 .Where(x => x.User.SessionId == id && x.Category.Id == categoryId);
         }
 
-        private bool HasExpired(Guid id, long categoryId)
-        {
-            return this.GetProductsOnKitchen(id, categoryId).Any(this.HasExpiredProduct);
-        }
+        //private bool HasExpired(Guid id, long categoryId)
+        //{
+        //    return this.GetProductsOnKitchen(id, categoryId).Any(this.HasExpiredProduct);
+        //}
 
-        private bool HasExpiredProduct(ProductsOnKitchen product)
-        {
-            return product.Product != null
-                && (!string.IsNullOrWhiteSpace(product.Product.ExpirationDate)
-                    && (DateTime.Now - product.DateOfPurchase).Days > Convert.ToInt32(product.Product.ExpirationDate));
-        }
+        //private bool HasExpiredProduct(ProductsOnKitchen product)
+        //{
+        //    return product.Product != null
+        //        && (!string.IsNullOrWhiteSpace(product.Product.ExpirationDate)
+        //            && (DateTime.Now - product.DateOfPurchase).Days > Convert.ToInt32(product.Product.ExpirationDate));
+        //}
     }
 }

@@ -15,6 +15,8 @@ using SmartArch.Web.Membership;
 
 namespace KitchIn.ServiceLocation
 {
+    using KitchIn.Core.Services.Cache;
+
     /// <summary>
     /// The WCF initializer
     /// </summary>
@@ -32,22 +34,28 @@ namespace KitchIn.ServiceLocation
             container.Register(Component.For<ISessionFactory>().Instance(DbInitializer.Factory).LifeStyle.Singleton);
             container.Register(Component.For<ISession>().UsingFactoryMethod(x => x.Resolve<ISessionFactory>().OpenSession()).LifestylePerWebRequest());
 
-            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifeStyle.Transient);
-            container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
-            container.Register(Component.For<ITransactionManager>().ImplementedBy<TransactionManager>().LifestylePerWcfOperation());
-            container.AddFacility<WcfFacility>().Register(Component.For<IMembershipProvider>().ImplementedBy<MembershipProvider>());
-            container.Register(Component.For<IProvider>().ImplementedBy<BaseProvider>());
-            container.Register(Component.For<IManageUserProvider>().ImplementedBy<ManageUserProvider>());
-            container.Register(Component.For<IManageProductProvider>().ImplementedBy<ManageProductProvider>());
-            container.Register(Component.For<IManageKitchenProvider>().ImplementedBy<ManageKitchenProvider>());
-            container.Register(Component.For<IManageFavoritesProvider>().ImplementedBy<ManageFavoritesProvider>());
+            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestylePerWebRequest());
+            container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestylePerWebRequest());
+            container.Register(Component.For<ITransactionManager>().ImplementedBy<TransactionManager>().LifestylePerWebRequest());
+            //container.AddFacility<WcfFacility>().Register(Component.For<IMembershipProvider>().ImplementedBy<MembershipProvider>());
+            container.AddFacility<WcfFacility>();
+
+            container.Register(Component.For<IProvider>().ImplementedBy<BaseProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageUserProvider>().ImplementedBy<ManageUserProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageProductProvider>().ImplementedBy<ManageProductProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageKitchenProvider>().ImplementedBy<ManageKitchenProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageFavoritesProvider>().ImplementedBy<ManageFavoritesProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IAuthenticationService>().ImplementedBy<AuthenticationService>().LifestylePerWcfOperation());
+            container.Register(Component.For<IManageStoreProvider>().ImplementedBy<ManageStoreProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageMatchingTexts>().ImplementedBy<ManageMatchingTexts>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageCaches>().ImplementedBy<ManageCaches>().LifestylePerWebRequest());
+
             container.Register(
                 AllTypes
                  .FromAssembly(typeof(IAuthenticationService).Assembly)
                  .Pick()
                  .WithService.DefaultInterfaces()
-                 .Configure(m => m.LifestylePerWcfOperation()));
+                 .Configure(m => m.LifestylePerWebRequest()));
             
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
         }

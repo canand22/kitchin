@@ -4,37 +4,46 @@ using System.Linq;
 using KitchIn.Core.Entities;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
-using Microsoft.Practices.ServiceLocation;
+
 using SmartArch.Data;
 
 namespace KitchIn.BL.Implementation
 {
     public class ManageProductProvider : BaseProvider, IManageProductProvider
     {
-        public IRepository<Product> ProductsRepo
+        private readonly IRepository<Product> productsRepo;
+
+        private readonly IRepository<Category> categoriesRepo;
+
+        private readonly IRepository<Store> storesRepo;
+
+        private const string NonFoodCategory = "NON-FOOD";
+
+        public ManageProductProvider()
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<IRepository<Product>>();
-            }
+            
         }
 
-        public IRepository<Category> CategoriesRepo
+        public ManageProductProvider(IRepository<Product> productsRepo, IRepository<Category> categoriesRepo, IRepository<Store> storesRepo)
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<IRepository<Category>>();
-            }
+            this.productsRepo = productsRepo;
+            this.categoriesRepo = categoriesRepo;
+            this.storesRepo = storesRepo;
         }
 
         public void Save(Product product)
         {
-            this.ProductsRepo.Save(product);
+            this.productsRepo.Save(product);
         }
 
         public Product GetProduct(long id)
         {
-            return this.ProductsRepo.SingleOrDefault(x => x.Id == id);
+            return this.productsRepo.SingleOrDefault(x => x.Id == id);
+        }
+
+        public Product GetProduct(string shortName, long storeId)
+        {
+            return this.productsRepo.SingleOrDefault(x => x.ShortName == shortName && x.Store.Id == storeId);
         }
         
         public long CreateProduct(ProductiPhoneModel prod)
@@ -42,9 +51,9 @@ namespace KitchIn.BL.Implementation
             var product = new Product
                        {
                            Category = this.GetCategory(prod.CategoryId.Value),
-                           ExpirationDate = string.Empty,
+                           //ExpirationDate = string.Empty,
                            Name = prod.Name,
-                           IsAddedByUser = true
+                           //IsAddedByUser = true
                        };
 
             this.Save(product);
@@ -54,14 +63,35 @@ namespace KitchIn.BL.Implementation
         public IEnumerable<KeyValuePair<long, string>> GetAllProducts(string categoryId)
         {
             return
-                this.ProductsRepo
+                this.productsRepo
                 .Where(x => x.Category.Id == Convert.ToInt64(categoryId))
                 .Select(x => new KeyValuePair<long, string>(x.Id, x.Name));
         }
 
+        public IEnumerable<Product> GetProductsMatchesFirstLetters(int numberFirstLetters, string firstLetters)
+        {
+            return this.productsRepo.Where(x => x.ShortName.Substring(0, numberFirstLetters) == firstLetters);
+        }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return this.productsRepo;
+        }
+
+        public IEnumerable<Product> GetAllProductsByStore(long storeId)
+        {
+            return this.productsRepo.Where(x => x.Store.Id == storeId);
+        }
+
         protected Category GetCategory(long categoryId)
         {
-            return this.CategoriesRepo.Get(categoryId);
+            return this.categoriesRepo.Get(categoryId);
+        }
+
+        public bool IsFoodGroupe(long productId)
+        {
+            var singleOrDefault = this.productsRepo.SingleOrDefault(x => x.Id == productId);
+            return singleOrDefault != null && singleOrDefault.Category.Name != NonFoodCategory;
         }
     }
 }

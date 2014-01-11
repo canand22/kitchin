@@ -10,7 +10,7 @@ namespace KitchIn.Data.NHibernate.Mappings
         {
             mapping.Table("Stores");
             mapping.Id().GeneratedBy.Identity();
-            mapping.Map(x => x.Name).Nullable();
+            mapping.Map(x => x.Name).Not.Nullable();
             mapping.Map(x => x.Latitude).Nullable();
             mapping.Map(x => x.Longitude).Nullable();
         }

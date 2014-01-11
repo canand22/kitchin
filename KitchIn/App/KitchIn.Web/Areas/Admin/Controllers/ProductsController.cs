@@ -151,11 +151,13 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         {
             var products = this.repositoryProduct.ToList();
 
-            var viewModel = products.Where(x => !x.IsAddedByUser).Select(p => new ProductViewModel
+            //var viewModel = products.Where(x => !x.IsAddedByUser).Select(p => new ProductViewModel
+            var viewModel = products.Select(p => new ProductViewModel
+
                                                      {
                                                          Id = p.Id,
                                                          Category = p.Category.Name,
-                                                         ExpirationDate = p.ExpirationDate,
+                                                         //ExpirationDate = p.ExpirationDate,
                                                          Name = p.Name
                                                      });
 
@@ -169,7 +171,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
 
             product.Category = this.repositoryCategory.Get(Convert.ToInt64(model.Category));
             product.Name = model.Name;
-            product.ExpirationDate = model.ExpirationDate;
+            //product.ExpirationDate = model.ExpirationDate;
         
             this.repositoryProduct.Save(product);
         }

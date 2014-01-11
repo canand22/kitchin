@@ -1,17 +1,18 @@
 ﻿using System.Configuration;
 using System.IO;
 using System.Net;
-using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 
 namespace KitchIn.Core.Services.OCRRecognize
 {
+    using System.Collections.Generic;
+
     public class OCRRecognizeService
     {
-        public OCRRecognizeService(byte[] img)
+        public OCRRecognizeService(MemoryStream stream)
         {
-            Image = img;
+            ImgStream = stream;
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace KitchIn.Core.Services.OCRRecognize
             }
         }
 
-        private static byte[] Image { get; set; }
+        private static MemoryStream ImgStream { get; set; }
 
         /// <summary>
         /// Network credentials
@@ -74,11 +75,11 @@ namespace KitchIn.Core.Services.OCRRecognize
         /// Gets file processing result, specified by provided parameters, and returns it as downloadable resource
         /// </summary>
         /// <remarks>Language and export formats specification can be obtained from "http://ocrsdk.com/documentation/apireference/processImage/"</remarks>
-        public string GetResult()
+        public string[] GetResult()
         {
             // Specifying new post request filling it with file content
             var url = "http://cloud.ocrsdk.com/processImage?language=English&exportFormat=txt";
-            string filepath;
+            List<string> srings = new List<string>();
             var request = CreateRequest(url, "POST", this.Credentials, this.Proxy);
             FillRequestWithContent(request);
 
@@ -104,37 +105,17 @@ namespace KitchIn.Core.Services.OCRRecognize
             {
                 using (var stream = result.GetResponseStream())
                 {
-                    filepath = HttpContext.Current.Server.MapPath("~/Content/temp/result.txt");
-                    using (Stream file = File.OpenWrite(filepath))
+                    using (StreamReader reader = new StreamReader(stream))
                     {
-                        copyStream(stream, file);
+                        while (!reader.EndOfStream)
+                        {
+                            var item = reader.ReadLine();
+                            srings.Add(item);
+                        }
                     }
-
-                    //byte[] b = null;
-
-                    //using (MemoryStream ms = new MemoryStream())
-                    //{
-                    //    int count = 0;
-                    //    do
-                    //    {
-                    //        byte[] buf = new byte[1024];
-                    //        count = stream.Read(buf, 0, 1024);
-                    //        ms.Write(buf, 0, count);
-                    //    }
-                    //    while (stream.CanRead && count > 0);
-                        
-                    //    SaveStreamToFile(filepath, ms);
-                    //    b = ms.ToArray();
-                    //}
-                    
-                    //HttpContext.Current.Response.ContentType = "application/octet-stream";
-                    //HttpContext.Current.Response.AddHeader("Content-Disposition", string.Format("attachment; filename=\"{0}\"", "result.txt"));
-                    //var length = CopyStream(stream, HttpContext.Current.Response.OutputStream);
-                    //HttpContext.Current.Response.AddHeader("Content-Length", length.ToString());
                 }
             }
-
-            return filepath;
+            return srings.ToArray();
         }
 
         private static void copyStream(Stream input, Stream output)
@@ -184,9 +165,9 @@ namespace KitchIn.Core.Services.OCRRecognize
         /// </summary>
         private static void FillRequestWithContent(WebRequest request)
         {
-            var filepath = HttpContext.Current.Server.MapPath("~/Content/temp/TraderJoesReceipt_1.13.jpg");
-            ////new MemoryStream(Image)
-            using (var reader = new BinaryReader(File.OpenRead(filepath))) 
+            //var filepath = HttpContext.Current.Server.MapPath("~/Content/temp/2013-11-03_13.08.26.jpg");
+            ImgStream.Position = 0;
+            using (var reader = new BinaryReader(ImgStream)) //File.OpenRead(filepath)
             {
                 request.ContentLength = reader.BaseStream.Length;
                 using (var stream = request.GetRequestStream())
@@ -199,7 +180,6 @@ namespace KitchIn.Core.Services.OCRRecognize
                         {
                             break;
                         }
-
                         stream.Write(buffer, 0, bytesRead);
                     }
                 }

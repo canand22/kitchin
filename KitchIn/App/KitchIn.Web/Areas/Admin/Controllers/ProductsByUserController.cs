@@ -44,13 +44,15 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         {
             var products = this.repositoryProduct.ToList();
 
-            var viewModel = products.Where(x => x.IsAddedByUser).Select(p => new ProductViewModel
+            //var viewModel = products.Where(x => x.IsAddedByUser).Select(p => new ProductViewModel
+            var viewModel = products.Select(p => new ProductViewModel
+
             {
                 Id = p.Id,
                 Category = p.Category != null ? p.Category.Name : string.Empty,
-                ExpirationDate = p.ExpirationDate,
-                Name = p.Name,
-                IsAddedByUser = p.IsAddedByUser
+                //ExpirationDate = p.ExpirationDate,
+                Name = p.Name
+                //IsAddedByUser = p.IsAddedByUser
             });
 
             return gridContext.Response(viewModel, isAllDataSearch: true);
@@ -60,7 +62,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         public void Approve(long id)
         {
             var product = this.repositoryProduct.Get(id);
-            product.IsAddedByUser = false;
+            //product.IsAddedByUser = false;
 
             this.repositoryProduct.Save(product);
         }

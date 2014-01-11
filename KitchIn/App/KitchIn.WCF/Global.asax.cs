@@ -9,6 +9,8 @@ using KitchIn.WCF.Services;
 
 namespace KitchIn.WCF
 {
+    using KitchIn.Core.Services.Cache;
+
     /// <summary>
     /// The application global events.
     /// </summary>
@@ -36,7 +38,12 @@ namespace KitchIn.WCF
             container.Install(new WcfNHibernateInstaller());
 
             ////container.Register(Component.For<IAccountService>().ImplementedBy<AccountService>());
-            container.Register(Component.For<IKitchInAppService>().ImplementedBy<KitchInAppService>());
+            //container.Register(Component.For<IKitchInAppService>().ImplementedBy<KitchInAppService>());
+
+            container.Register(Component.For<IKitchInAppService>().ImplementedBy<KitchInAppService>().AsWcfService(new DefaultServiceModel().
+            Hosted()).IsDefault().LifestylePerWebRequest());
+
+            //container.AddFacility<WcfFacility>();
         }
 
         /// <summary>
