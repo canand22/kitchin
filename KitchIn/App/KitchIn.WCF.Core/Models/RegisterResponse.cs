@@ -9,6 +9,8 @@ namespace KitchIn.WCF.Core.Models
         /// </summary>
         public bool IsUserRegistered { get; set; }
 
+        public string Message { get; set; }
+
         public Guid? SessionId { get; set; }
     }
 }

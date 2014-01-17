@@ -35,6 +35,23 @@ namespace KitchIn.Core.Entities
         public virtual string Email { get; set; }
 
         /// <summary>
+        /// Gets or sets the First Name.
+        /// </summary>
+        /// <value>
+        /// The First Name.
+        /// </value>
+        public virtual string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Last Name.
+        /// </summary>
+        /// <value>
+        /// The Last Name.
+        /// </value>
+        public virtual string LastName { get; set; }
+
+
+        /// <summary>
         /// Gets or sets the sessionId.
         /// </summary>
         /// <value>

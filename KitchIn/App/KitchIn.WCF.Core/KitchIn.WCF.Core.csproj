@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Authentification\UserNameAuthenticatorModule.cs" />
     <Compile Include="Authentification\WrapSecurityAuthentications.cs" />
+    <Compile Include="Models\RegisterRequest.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Models\MyAccount\PasswordRequest.cs" />

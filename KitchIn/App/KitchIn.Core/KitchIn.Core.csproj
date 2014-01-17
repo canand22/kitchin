@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\CategoryInStore.cs" />
     <Compile Include="Entities\FavoriteRecipe.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductsOnKitchen.cs" />

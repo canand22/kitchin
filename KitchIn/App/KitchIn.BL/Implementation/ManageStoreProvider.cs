@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using KitchIn.Core.Entities;
-using Microsoft.Practices.ServiceLocation;
 using SmartArch.Data;
 
 namespace KitchIn.BL.Implementation
@@ -30,6 +29,16 @@ namespace KitchIn.BL.Implementation
        public IEnumerable<KeyValuePair<long, string>> GetAllStores()
         {
             return this.storesRepo.Select(x => new KeyValuePair<long, string>(x.Id, x.Name));
+        }
+
+        public IEnumerable<CategoryInStore> GetAllCategoriesInStore(long id)
+        {
+            var store = this.storesRepo.SingleOrDefault(x => x.Id == id);
+            if (store != null)
+            {
+                return store.Categories;
+            }
+            return null;
         }
     }
 }

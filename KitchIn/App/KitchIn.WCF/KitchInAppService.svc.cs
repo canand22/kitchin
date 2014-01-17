@@ -24,6 +24,10 @@ using KitchIn.WCF.DataContract;
 
 namespace KitchIn.WCF
 {
+    using System.Text.RegularExpressions;
+
+    using KitchIn.BL.Entities;
+    using KitchIn.BL.Extensions;
     using KitchIn.Core.Services.OCRRecognize.Parsers;
 
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
@@ -99,6 +103,8 @@ namespace KitchIn.WCF
                        : new LoginResponse
                              {
                                  SessionId = user.SessionId,
+                                 FirstName = user.FirstName,
+                                 LastName = user.LastName,
                                  Success = true
                              };
         }
@@ -108,23 +114,44 @@ namespace KitchIn.WCF
             this.userProvider.LogOut(id);
         }
 
-        public RegisterResponse Register(LoginRequest request)
+        public RegisterResponse Register(RegisterRequest request)
         {
             if (request == null)
             {
-                return new RegisterResponse { IsUserRegistered = false, SessionId = null };
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyRequest.GetMessage()};
             }
 
-            var user = this.userProvider.CreateUser(request.Email, request.Password);
+            if (!this.IsEmail(request.Email))
+
+            {
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = String.Format(Errors.EmailNotValid.GetMessage(), request.Email) };
+            }
+
+            if (String.IsNullOrEmpty(request.FirstName))
+            {
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyFirstName.GetMessage()};
+            }
+
+            if (String.IsNullOrEmpty(request.LastName))
+            {
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyLastName.GetMessage() };
+            }
+
+            if (String.IsNullOrEmpty(request.Password))
+            {
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyPassword.GetMessage() };
+            }
+
+            var user = this.userProvider.CreateUser(request.Email, request.Password, request.FirstName, request.LastName);
 
             return user == null
                       ? new RegisterResponse
                       {
-                          IsUserRegistered = false, SessionId = null
+                          IsUserRegistered = false, SessionId = null, Message = Errors.ErrorCreatingUser.GetMessage()
                       }
                       : new RegisterResponse
                       {
-                          IsUserRegistered = true, SessionId = user.SessionId
+                          IsUserRegistered = true, SessionId = user.SessionId, Message = "Ok"
                       };
         }
 
@@ -273,25 +300,25 @@ namespace KitchIn.WCF
             return null;
         }
 
-        public IList<ListProducts> ListProducts(Stream fileContents, long storeId)
+        public IList<ListProducts> ListProducts(CheckOutOfTheStore checkOutOfTheStore)
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             var result = new List<ListProducts>();
             string[] textRecognizersResult;
-            bool isExistStore = this.manageStoreProvider.GetStore(storeId) != null;
-            if (fileContents != null && isExistStore)
+            bool isExistStore = this.manageStoreProvider.GetStore(checkOutOfTheStore.StoreId) != null;
+            if (!String.IsNullOrEmpty(checkOutOfTheStore.ImageAsBase64String) && isExistStore)
             {
-                var image = Image.FromStream(fileContents);
+                var image = Base64ToImage(checkOutOfTheStore.ImageAsBase64String);
                 var bitmap = new Bitmap(image, image.Width, image.Height);
                 var memoryStream = new MemoryStream();
                 bitmap.Save(memoryStream, ImageFormat.Jpeg);
                 var ocrRecognizeService = new OCRRecognizeService(memoryStream);
                 textRecognizersResult = ocrRecognizeService.GetResult();
-                
+
                 var parser = new PotashParser(textRecognizersResult);
                 var products = parser.GetProducts().Select(x => x.Title).ToArray();
-                var resultsOfTheMatching = manageMatchingTexts.GetResultsOfTheMatching(products, storeId);
+                var resultsOfTheMatching = manageMatchingTexts.GetResultsOfTheMatching(products, checkOutOfTheStore.StoreId);
                 resultsOfTheMatching.ForEach(
                     x => {
                              if (x.IsSuccessMatching && x.Id!=null && productProvider.IsFoodGroupe(x.Id.Value))
@@ -310,6 +337,27 @@ namespace KitchIn.WCF
             stopWatch.Stop();
             var time = stopWatch.ElapsedMilliseconds;
             return result;
+        }
+
+        private Image Base64ToImage(string base64String)
+        {
+            // Convert Base64 String to byte[]
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream ms = new MemoryStream(imageBytes, 0,
+              imageBytes.Length);
+
+            // Convert byte[] to Image
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            Image image = Image.FromStream(ms, true);
+            return image;
+        }
+
+        private bool IsEmail(String strEmail)
+        {
+            var rgxEmail = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                                       @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                                       @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            return rgxEmail.IsMatch(strEmail);
         }
 
         //private static Stream ConverImgToBytes(Stream fileContents)

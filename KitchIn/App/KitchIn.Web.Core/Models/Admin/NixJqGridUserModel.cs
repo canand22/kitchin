@@ -31,6 +31,8 @@ namespace KitchIn.Web.Core.Models.Admin
                    new List<NixJqGridColumn<UserViewModel>>
                        {
                            new NixJqGridColumn<UserViewModel>(x => x.Id).Hidden(),
+                           new NixJqGridColumn<UserViewModel>(x => x.FirstName).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<UserViewModel>(x => x.LastName).Set(p => p.Searchable, true),
                            new NixJqGridColumn<UserViewModel>(x => x.Email).Set(p => p.Searchable, true),
                            new NixJqGridColumn<UserViewModel>(x => x.Password),
                            new NixJqGridColumn<UserViewModel>(x => x.Role).SetDropDownList(roles)
@@ -70,6 +72,15 @@ namespace KitchIn.Web.Core.Models.Admin
                 OnClickFunction = "DeleteSelectedRow",
                 Position = ToolBarButtonPosition.last
             });
+
+            this.AjaxGrid[c => c.FirstName].ColumnName = "First Name";
+            this.AjaxGrid[c => c.FirstName].Searchable = true;
+            this.AjaxGrid[c => c.FirstName].Width = 200;
+
+            this.AjaxGrid[c => c.LastName].ColumnName = "Last Name";
+            this.AjaxGrid[c => c.LastName].Searchable = true;
+            this.AjaxGrid[c => c.LastName].Width = 200;
+
 
             this.AjaxGrid[c => c.Email].ColumnName = "Login/Email";
             this.AjaxGrid[c => c.Email].Searchable = true;

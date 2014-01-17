@@ -65,6 +65,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ErrorsAttribute.cs" />
+    <Compile Include="Entities\Errors.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Implementation\BaseProvider.cs" />
     <Compile Include="Implementation\ManageCategoryProvider.cs" />
     <Compile Include="Implementation\ManageMatchingTexts.cs" />
@@ -80,9 +83,7 @@
     <Compile Include="Specification\CommonSpec.cs" />
     <Compile Include="Specification\UserSpec.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\KitchIn.Core\KitchIn.Core.csproj">
       <Project>{A4850AF2-0B5E-4A3C-B020-CE2CFF22506B}</Project>

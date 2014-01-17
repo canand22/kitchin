@@ -43,7 +43,7 @@ namespace KitchIn.BL.Implementation
 
         public Product GetProduct(string shortName, long storeId)
         {
-            return this.productsRepo.SingleOrDefault(x => x.ShortName == shortName && x.Store.Id == storeId);
+            return this.productsRepo.FirstOrDefault(x => x.ShortName == shortName && x.Store.Id == storeId);
         }
         
         public long CreateProduct(ProductiPhoneModel prod)

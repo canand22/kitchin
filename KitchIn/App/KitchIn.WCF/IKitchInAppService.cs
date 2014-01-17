@@ -30,7 +30,7 @@ namespace KitchIn.WCF
         [WebInvoke(Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        RegisterResponse Register(LoginRequest request);
+        RegisterResponse Register(RegisterRequest request);
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
@@ -121,8 +121,9 @@ namespace KitchIn.WCF
         Stream GetVideo(string videoId);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "ListProducts?storeId={storeId}")]
+        [WebInvoke(Method = "POST", UriTemplate = "ListProducts", RequestFormat = WebMessageFormat.Json, 
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Returns a list of products for storeId by photo receipt")]
-        IList<ListProducts> ListProducts(Stream fileContents, long storeId);
+        IList<ListProducts> ListProducts(CheckOutOfTheStore checkOutOfTheStore);
     }
 }

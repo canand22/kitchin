@@ -175,6 +175,8 @@ namespace KitchIn.Web.Areas.Admin.Controllers
             IList<UserViewModel> viewModel = us.Select(user => new UserViewModel
                                                                    {
                                                                        Id = user.Id,
+                                                                       FirstName = user.FirstName,
+                                                                       LastName = user.LastName,
                                                                        Email = user.Email,
                                                                        Password = user.Password,
                                                                        Role = user.Role.ToString()
@@ -187,6 +189,8 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         public void EditAjaxGrid(UserViewModel model)
         {
             var user = this.repositoryUser.Get(model.Id);
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
             user.Email = model.Email;
             user.Password = model.Password;
             user.Role = model.Role == "0" ? UserRoles.Admin : UserRoles.User;

@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\M0008_CreateCategoryInStoresTable.cs" />
+    <Compile Include="Migrations\M0007_AddColumnsToUserTable.cs" />
     <Compile Include="Migrations\M0001_CreateStoresAndCategoriesAndProductsTables.cs" />
     <Compile Include="Migrations\M0002_CreateUsersTable.cs" />
     <Compile Include="Migrations\M0003_CreateKitchensTables.cs" />

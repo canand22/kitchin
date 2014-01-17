@@ -20,7 +20,10 @@ namespace KitchIn.BL.Implementation
 
         private readonly IManageCaches manageCaches;
 
-        private const int PercCorrect = 70; // percentage correct for matching
+        private const int PercCorrectForMatchingProduct = 70; // percentage correct for matching
+
+        private const int PercCorrectForMatchingCategoryInStore = 80; // percentage correct for matching
+
 
         public ManageMatchingTexts(IManageProductProvider manageProductProvider, IManageStoreProvider manageStoreProvider, IManageCaches manageCaches)
         {
@@ -36,35 +39,42 @@ namespace KitchIn.BL.Implementation
             Store = manageStoreProvider.GetStore(storeId);
 
             var result = new List<ResultMatching>();
+            var unMutching = new List<ResultMatching>();
+
             foreach (var item in TextForRecognizer)
             {
                 var firstAttempt = productProvider.GetProduct(item, Store.Id);
                 if (firstAttempt != null)
                 {
-                    result.Add(new ResultMatching() { Id = firstAttempt.Id, IsSuccessMatching = true, ItemName = firstAttempt.Name});
+                    result.Add(new ResultMatching() { Id = firstAttempt.Id, IsSuccessMatching = true, ItemName = firstAttempt.Name, Category = firstAttempt.Category.Name});
                     continue;
                 }
 
-                var secondAttempt = GetProductMatchesFirstLetters(item, Store.Name);
+                var secondAttempt = GetMatcheProduct(item, Store.Name);
                 if (secondAttempt != null)
                 {
-                    result.Add(new ResultMatching() { Id = secondAttempt.Id, IsSuccessMatching = true, ItemName = secondAttempt.Name });
+                    result.Add(new ResultMatching() { Id = secondAttempt.Id, IsSuccessMatching = true, ItemName = secondAttempt.Name, Category = secondAttempt.Category.Name});
                     continue;
-                }
-                else
+                }else
                 {
-                    result.Add(new ResultMatching() { IsSuccessMatching = false, ItemName = item });
+                    var categriesInStore = this.manageStoreProvider.GetStore(storeId).Categories.Select(x => x.Name).ToList();
+                    if (IsCategoryStore(item, categriesInStore))
+                    {
+                        continue;
+                    }
+                    unMutching.Add(new ResultMatching() { IsSuccessMatching = false, ItemName = item });
                 }
-
             }
-            return result;
+            var tmp = result.GroupBy(x => x.Id).Select(x => x.First()).ToList();
+            tmp.AddRange(unMutching);
+            return tmp;
         }
 
-        private Product GetProductMatchesFirstLetters(string item, string storeName)
+        private Product GetMatcheProduct(string item, string storeName)
         {
             var result = new Product();
             var productsForMatching = KitchInCache.GetCachedItem(storeName) as List<KeyValuePair<string, long>>;
-            var levenshteinDistance = new LevenshteinDistance(item, PercCorrect);
+            var levenshteinDistance = new LevenshteinDistance(item, PercCorrectForMatchingProduct);
             var candidates = new List<KeyValuePair<string, long>>();
             if (productsForMatching != null)
             {
@@ -83,6 +93,19 @@ namespace KitchIn.BL.Implementation
             var productId = levenshteinDistance.GetStringWithMinimumDistanceLevenshtein(candidates);
             result = productProvider.GetProduct(productId);
             return result;
+        }
+
+        private bool IsCategoryStore(string item, List<string> categoryInStores)
+        {
+            var levenshteinDistance = new LevenshteinDistance(item, PercCorrectForMatchingCategoryInStore);
+            foreach (var category in categoryInStores)
+            {
+                if (levenshteinDistance.PercentageCheck(category))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

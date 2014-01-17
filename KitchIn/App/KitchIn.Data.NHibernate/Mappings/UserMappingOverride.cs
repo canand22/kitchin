@@ -12,6 +12,8 @@ namespace KitchIn.Data.NHibernate.Mappings
             mapping.Id().GeneratedBy.Identity();
             mapping.Map(x => x.Email).Not.Nullable();
             mapping.Map(x => x.Password).Not.Nullable();
+            mapping.Map(x => x.FirstName).Not.Nullable();
+            mapping.Map(x => x.LastName).Not.Nullable();
             mapping.Map(x => x.Role).CustomType<int>().Not.Nullable();
             mapping.Map(x => x.SessionId).Nullable();
             mapping.HasMany(x => x.Products).KeyColumn("UserId").Cascade.AllDeleteOrphan().Inverse();

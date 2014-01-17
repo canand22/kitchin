@@ -2,6 +2,8 @@
 
 namespace KitchIn.Core.Entities
 {
+    using System.Collections.Generic;
+
     public class Store : BaseEntity
     {
         public virtual string Name { get; set; }
@@ -9,5 +11,7 @@ namespace KitchIn.Core.Entities
         public virtual double? Latitude { get; set; }
 
         public virtual double? Longitude { get; set; }
+
+        public virtual IList<CategoryInStore> Categories { get; set; }
     }
 }

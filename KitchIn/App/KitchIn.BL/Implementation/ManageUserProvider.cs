@@ -14,7 +14,7 @@ namespace KitchIn.BL.Implementation
             this.UserRepo.Save(user);
         }
 
-        public User CreateUser(string email, string password)
+        public User CreateUser(string email, string password, string firstname, string lastname)
         {
             var user = this.UserRepo.SingleOrDefault(x => x.Email == email);
 
@@ -24,6 +24,8 @@ namespace KitchIn.BL.Implementation
                            {
                                Email = email,
                                Password = password,
+                               FirstName = firstname,
+                               LastName = lastname,
                                SessionId = Guid.NewGuid(),
                                Role = UserRoles.User
                            };

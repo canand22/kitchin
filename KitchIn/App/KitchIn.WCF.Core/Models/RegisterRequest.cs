@@ -1,16 +1,15 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace KitchIn.WCF.Core.Models
 {
     [DataContract]
-    public class LoginResponse
+    public class RegisterRequest
     {
         [DataMember]
-        public bool Success { get; set; }
+        public string Email { get; set; }
 
         [DataMember]
-        public Guid? SessionId { get; set; }
+        public string Password { get; set; }
 
         [DataMember]
         public string FirstName { get; set; }

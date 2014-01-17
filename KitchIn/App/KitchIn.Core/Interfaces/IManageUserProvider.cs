@@ -5,7 +5,7 @@ namespace KitchIn.Core.Interfaces
 {
     public interface IManageUserProvider
     {
-        User CreateUser(string email, string password);
+        User CreateUser(string email, string password, string firstname, string lastname);
 
         bool ChangeUserPassword(string email);
 

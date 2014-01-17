@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using KitchIn.Core.Enums;
 using SmartArch.Web.Membership;
 
 namespace KitchIn.Web.Core.Models.Admin
@@ -34,6 +32,16 @@ namespace KitchIn.Web.Core.Models.Admin
         /// Gets or sets Email.
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// Gets or sets the First Name.
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Last Name.
+        /// </summary>
+        public string LastName { get; set; }
 
         public Guid? SessionId { get; set; }
 
