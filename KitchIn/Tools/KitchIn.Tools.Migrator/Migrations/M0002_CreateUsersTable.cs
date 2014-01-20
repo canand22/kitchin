@@ -9,9 +9,9 @@ namespace KitchIn.Tools.Migrator.Migrations
         {
             this.Create.Table("Users")
                 .WithColumn("Id").AsInt64().NotNullable().PrimaryKey("Pk_UserTab_ID").Identity()
-                .WithColumn("Email").AsString(255).Nullable()
+                .WithColumn("Email").AsGuid().Nullable()
                 .WithColumn("Password").AsString(255).Nullable()
-                .WithColumn("SessionId").AsGuid().Nullable()
+                .WithColumn("SessionId").AsString(255).Nullable()
                 .WithColumn("Role").AsInt32().Nullable();
         }
 

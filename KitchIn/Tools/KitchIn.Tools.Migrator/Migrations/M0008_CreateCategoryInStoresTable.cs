@@ -3,7 +3,7 @@
 namespace KitchIn.Tools.Migrator.Migrations
 {
     [Migration(8)]
-    public class CreateCategoryInStoresTable : Migration
+    public class M0008_CreateCategoryInStoresTable : Migration
     {
         public override void Up()
         {

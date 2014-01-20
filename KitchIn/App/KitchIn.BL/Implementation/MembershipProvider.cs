@@ -27,11 +27,6 @@ namespace KitchIn.BL.Implementation
         /// </summary>
         private readonly IRepository<User> repositoryUser;
 
-        /// <summary>
-        /// The role repository
-        /// </summary>
-        private readonly IRepository<Role> repositoryRole;
-
         static MembershipProvider()
         {
             Mapper.CreateMap<IMembershipUser, User>()
@@ -44,10 +39,9 @@ namespace KitchIn.BL.Implementation
         /// </summary>
         /// <param name="repositoryUser">The repository user.</param>
         /// <param name="repositoryRole">The repository Role.</param>
-        public MembershipProvider(IRepository<User> repositoryUser, IRepository<Role> repositoryRole)
+        public MembershipProvider(IRepository<User> repositoryUser)
         {
             this.repositoryUser = repositoryUser;
-            this.repositoryRole = repositoryRole;
         }
 
         /// <summary>
@@ -72,8 +66,8 @@ namespace KitchIn.BL.Implementation
         /// </returns>
         public bool ValidateUser(string email, string password)
         {
-            var guidPassword = this.GetHashString(password);
-            return this.repositoryUser.Any(x => x.Email.Equals(email) && x.Password.Equals(guidPassword));
+            //var guidPassword = this.GetHashString(password);
+            return this.repositoryUser.Any(x => x.Email.Equals(email) && x.Password.Equals(password));
         }
 
         /// <summary>
@@ -184,6 +178,39 @@ namespace KitchIn.BL.Implementation
             return query;
         }
 
+        public void LoginUser(string email, string password)
+        {
+            var user = this.GetUser(email);
+            if (user != null)
+            {
+                this.AddSession(user);
+            }
+        }
+
+        public void LogoutUser(User user)
+        {
+            //var user = this.GetUser(email);
+            if (user != null)
+            {
+                this.RemoveSession(user);
+            }
+        }
+
+        private void AddSession(User user)
+        {
+            var session = Guid.NewGuid();
+            user.SessionId = session;
+            repositoryUser.Save(user);
+            repositoryUser.SaveChanges();
+        }
+
+        private void RemoveSession(User user)
+        {
+            user.SessionId = null;
+            repositoryUser.Save(user);
+            repositoryUser.SaveChanges();
+        }
+        
         /// <summary>
         /// Convert string to hash-code
         /// </summary>

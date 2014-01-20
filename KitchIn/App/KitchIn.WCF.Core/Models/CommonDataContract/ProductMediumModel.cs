@@ -1,10 +1,12 @@
 ﻿using System.Runtime.Serialization;
 using KitchIn.Core.Models;
 
-namespace KitchIn.WCF.DataContract
+namespace KitchIn.WCF.Core.Models.CommonDataContract
 {
+    using KitchIn.Core.Entities;
+
     [DataContract]
-    public class ListProducts
+    public class ProductMediumModel
     {
         [DataMember]
         public string ItemName { get; set; }
@@ -18,9 +20,9 @@ namespace KitchIn.WCF.DataContract
         [DataMember]
         public bool IsSuccessMatching { get; set; }
 
-        public static implicit operator ListProducts(ResultMatching resultMatching)
+        public static implicit operator ProductMediumModel(ResultMatching resultMatching)
         {
-            var model = new ListProducts()
+            var model = new ProductMediumModel()
             {
                 Id = resultMatching.Id,
                 IsSuccessMatching = resultMatching.IsSuccessMatching,
@@ -29,6 +31,18 @@ namespace KitchIn.WCF.DataContract
             };
             return model;
         }
-    
+
+        public static implicit operator ProductMediumModel(Product product)
+        {
+            var model = new ProductMediumModel()
+            {
+                Id = product.Id,
+                IsSuccessMatching = true,
+                ItemName = product.Name,
+                Category = product.Category.Name
+            };
+            return model;
+        }
+
     }
 }

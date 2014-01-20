@@ -103,8 +103,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContract\CheckOutOfTheStore.cs" />
-    <Compile Include="DataContract\ListProducts.cs" />
     <Compile Include="IKitchInAppService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

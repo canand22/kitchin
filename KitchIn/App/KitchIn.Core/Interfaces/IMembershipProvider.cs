@@ -98,5 +98,9 @@ namespace KitchIn.Core.Interfaces
         /// The user data
         /// </returns>
         User GetUser(string login);
+
+        void LoginUser(string email, string password);
+
+        void LogoutUser(User user);
     }
 }

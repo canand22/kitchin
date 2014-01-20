@@ -150,4 +150,7 @@
   <data name="Model_Validation_Account_EmailSize" xml:space="preserve">
     <value>The email must no more than 125 characters</value>
   </data>
+  <data name="ModelState_LoginError" xml:space="preserve">
+    <value>Internal error logon</value>
+  </data>
 </root>

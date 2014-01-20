@@ -22,6 +22,10 @@ namespace KitchIn.Core.Interfaces
 
         IEnumerable<Product> GetAllProductsByStore(long storeId);
 
+        IEnumerable<Product> GetAllProductsByStoreAndCategory(long storeId, long categoryId);
+
+        IEnumerable<Product> SearchProductsByFirstLetters(string letters, long categoryId, long storeId);
+
         bool IsFoodGroupe(long productId);
     }
 }

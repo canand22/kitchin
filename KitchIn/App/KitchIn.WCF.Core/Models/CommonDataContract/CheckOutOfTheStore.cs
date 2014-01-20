@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace KitchIn.WCF.DataContract
+namespace KitchIn.WCF.Core.Models.CommonDataContract
 {
     [DataContract]
     public class CheckOutOfTheStore

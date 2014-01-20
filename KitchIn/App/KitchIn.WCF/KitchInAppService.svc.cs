@@ -19,7 +19,7 @@ using System.Drawing.Imaging;
 using System.Diagnostics;
 using Castle.Core.Internal;
 using KitchIn.Core.Services.OCRRecognize;
-using KitchIn.WCF.DataContract;
+using KitchIn.WCF.Core.Models.CommonDataContract;
 
 
 namespace KitchIn.WCF
@@ -29,6 +29,7 @@ namespace KitchIn.WCF
     using KitchIn.BL.Entities;
     using KitchIn.BL.Extensions;
     using KitchIn.Core.Services.OCRRecognize.Parsers;
+    using KitchIn.WCF.Core.Models.CommonDataContract;
 
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class KitchInAppService : IKitchInAppService
@@ -237,9 +238,11 @@ namespace KitchIn.WCF
             return this.kitchenProvider.AddProductOnKitchen(request.Guid, request.Product);
         }
 
-        public ProductsResponse AllProducts(string categoryId)
+        public ProductsResponse AllProducts(long storeId, long categoryId)
         {
-            return new ProductsResponse { Products = this.productProvider.GetAllProducts(categoryId) };
+            var products = this.productProvider.GetAllProductsByStoreAndCategory(storeId, categoryId)
+                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name});
+            return new ProductsResponse { Products = products };
         }
 
         public void RemoveProduct(string productId)
@@ -300,11 +303,9 @@ namespace KitchIn.WCF
             return null;
         }
 
-        public IList<ListProducts> ListProducts(CheckOutOfTheStore checkOutOfTheStore)
+        public IList<ProductMediumModel> ListProducts(CheckOutOfTheStore checkOutOfTheStore)
         {
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            var result = new List<ListProducts>();
+            var result = new List<ProductMediumModel>();
             string[] textRecognizersResult;
             bool isExistStore = this.manageStoreProvider.GetStore(checkOutOfTheStore.StoreId) != null;
             if (!String.IsNullOrEmpty(checkOutOfTheStore.ImageAsBase64String) && isExistStore)
@@ -334,8 +335,26 @@ namespace KitchIn.WCF
                              }
                     });
             }
-            stopWatch.Stop();
-            var time = stopWatch.ElapsedMilliseconds;
+            return result;
+        }
+
+        public IList<ProductMediumModel> SearchProduct(string product, string categoryId, string storeId)
+        {
+            var result = new List<ProductMediumModel>();
+            if (!String.IsNullOrEmpty(product))
+            {
+                try
+                {
+                    var stId = Convert.ToInt64(storeId);
+                    var catid = Convert.ToInt64(categoryId);
+                    var tmp = productProvider.SearchProductsByFirstLetters(product, stId, catid);
+                    result.AddRange(tmp.Select(item => (ProductMediumModel)item));
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Can not convert string to long: {0}", ex);
+                }
+            }
             return result;
         }
 

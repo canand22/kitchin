@@ -83,6 +83,19 @@ namespace KitchIn.BL.Implementation
             return this.productsRepo.Where(x => x.Store.Id == storeId);
         }
 
+        public IEnumerable<Product> GetAllProductsByStoreAndCategory(long storeId, long categoryId)
+        {
+            return this.productsRepo.Where(x => x.Store.Id == storeId && x.Category.Id == categoryId);
+        }
+
+        public IEnumerable<Product> SearchProductsByFirstLetters(string letters, long categoryId, long storeId)
+        {
+            var products = new List<Product>();
+            products = this.productsRepo.Where(x => x.Store.Id == storeId && x.Category.Id == categoryId && 
+                x.ShortName.Substring(0, letters.Length).Equals(letters)).ToList();
+            return products;
+        } 
+
         protected Category GetCategory(long categoryId)
         {
             return this.categoriesRepo.Get(categoryId);

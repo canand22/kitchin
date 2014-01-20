@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using KitchIn.WCF.Core.Models.CommonDataContract;
 
 namespace KitchIn.WCF.Core.Models.MyKitchen
 {
@@ -7,6 +8,6 @@ namespace KitchIn.WCF.Core.Models.MyKitchen
     public class ProductsResponse
     {
         [DataMember]
-        public IEnumerable<KeyValuePair<long, string>> Products { get; set; }
+        public IEnumerable<PropuctSimpleModel> Products { get; set; }
     }
 }

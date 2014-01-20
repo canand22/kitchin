@@ -59,6 +59,9 @@
   <ItemGroup>
     <Compile Include="Authentification\UserNameAuthenticatorModule.cs" />
     <Compile Include="Authentification\WrapSecurityAuthentications.cs" />
+    <Compile Include="Models\CommonDataContract\CheckOutOfTheStore.cs" />
+    <Compile Include="Models\CommonDataContract\ProductMediumModel.cs" />
+    <Compile Include="Models\CommonDataContract\PropuctSimpleModel.cs" />
     <Compile Include="Models\RegisterRequest.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />

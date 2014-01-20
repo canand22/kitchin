@@ -6,12 +6,13 @@ using KitchIn.WCF.Core.Models;
 using KitchIn.WCF.Core.Models.MyAccount;
 using KitchIn.WCF.Core.Models.MyFavorites;
 using KitchIn.WCF.Core.Models.MyKitchen;
+using KitchIn.WCF.Core.Models.CommonDataContract;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace KitchIn.WCF
 {
-    using KitchIn.WCF.DataContract;
+    using KitchIn.Core.Entities;
 
     [ServiceContract]
     public interface IKitchInAppService
@@ -72,10 +73,9 @@ namespace KitchIn.WCF
         bool AddProduct(KitchenProductRequest request);
 
         [OperationContract]
-        [WebGet(
-            UriTemplate = "MyKitchen/AllProducts/{categoryId}",
-            ResponseFormat = WebMessageFormat.Json)]
-        ProductsResponse AllProducts(string categoryId);
+        [WebGet(UriTemplate = "MyKitchen/AllProducts?storeId={storeid}&categoryId={categoryId}", ResponseFormat = WebMessageFormat.Json)]
+        [Description("Gat all products in category into the store")]
+        ProductsResponse AllProducts(long storeId, long categoryId);
 
         [OperationContract]
         [WebGet(
@@ -121,9 +121,15 @@ namespace KitchIn.WCF
         Stream GetVideo(string videoId);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "ListProducts", RequestFormat = WebMessageFormat.Json, 
+        [WebInvoke(Method = "POST", UriTemplate = "ListProducts", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Returns a list of products for storeId by photo receipt")]
-        IList<ListProducts> ListProducts(CheckOutOfTheStore checkOutOfTheStore);
+        IList<ProductMediumModel> ListProducts(CheckOutOfTheStore checkOutOfTheStore);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "SearchProduct?product={product}&categoryId={categoryId}&storeId={storeId}",
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Product search by first letters on the short name")]
+        IList<ProductMediumModel> SearchProduct(string product, string categoryId, string storeId);
     }
 }

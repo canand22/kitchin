@@ -9,6 +9,8 @@ using SmartArch.Web.Membership;
 
 namespace KitchIn.Web.Controllers
 {
+    using System.Web;
+
     /// <summary>
     /// The account controller
     /// </summary>
@@ -48,6 +50,11 @@ namespace KitchIn.Web.Controllers
         [HttpGet]
         public ActionResult LogOff()
         {
+            var user = this.provider.GetUser(User.Identity.Name);
+            if (user != null)
+            {
+                this.provider.LogoutUser(user);
+            }
             this.authenticationService.SignOut();
             return this.RedirectToAction("LogOn", "Account");
         }
@@ -59,6 +66,11 @@ namespace KitchIn.Web.Controllers
         [HttpGet]
         public ActionResult LogOn()
         {
+            var isAuth = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isAuth)
+            {
+                return this.RedirectToAction("Index", "Users", new { area = "Admin" });
+            }
             return this.View();
         }
 
@@ -74,86 +86,100 @@ namespace KitchIn.Web.Controllers
             if (ModelState.IsValid)
             {
                 model.Email = model.Login;
-                this.authenticationService.SignIn(model);
-                return this.RedirectToAction("Index", "Users", new { area = "Admin" });
-            }
-
-            return this.View();
-        }
-
-        /// <summary>
-        /// Call view register user in system
-        /// </summary>
-        /// <returns>The register view</returns>
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return this.View();
-        }
-
-        /// <summary>
-        /// Register user in system
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>Logon view</returns>
-        [HttpPost]
-        [Transaction]
-        public ActionResult Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                this.provider.CreateUser(model);
-                return this.RedirectToAction("LogOn", "Account");
-            }
-
-            return this.View(model);
-        }
-
-        /// <summary>
-        /// Call view change the user password
-        /// </summary>
-        /// <returns>View ChangePassword</returns>
-        [HttpGet]
-        [Authorize]
-        public ActionResult ChangePassword()
-        {
-            return this.View();
-        }
-
-        /// <summary>
-        /// Change the user password
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>
-        /// If success - redirect to the ChangePasswordSuccess, else display an error message
-        /// </returns>
-        [Transaction]
-        [HttpPost]
-        [Authorize]
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
                 try
                 {
-                    var user = this.provider.GetUser(User.Identity.Name);
-                    if (this.provider.ValidateUser(user.Email, model.OldPassword))
+                    if (this.provider.ValidateUser(model.Email, model.Password))
                     {
-                        this.provider.ChangeUserPassword(user.Id, model.NewPassword);
-                        return this.View("ChangePasswordSuccess");
+                        this.authenticationService.SignIn(model);
+                        this.provider.LoginUser(model.Email, model.Password);
+                        return this.RedirectToAction("Index", "Users", new { area = "Admin" });
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, WEB.ModelState_OldPasswordError);
+                        ModelState.AddModelError(string.Empty, WEB.ModelState_InvaliLoginPassword);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty, WEB.ModelState_ChangePasswordError);
+                    ModelState.AddModelError(string.Empty, WEB.ModelState_LoginError);
                 }
             }
-
-            return this.View(model);
+            return this.View();
         }
+
+        ///// <summary>
+        ///// Call view register user in system
+        ///// </summary>
+        ///// <returns>The register view</returns>
+        //[HttpGet]
+        //public ActionResult Register()
+        //{
+        //    return this.View();
+        //}
+
+        // <summary>
+        // Register user in system
+        // </summary>
+        // <param name="model">The model.</param>
+        // <returns>Logon view</returns>
+        //[HttpPost]
+        //[Transaction]
+        //public ActionResult Register(RegisterModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        this.provider.CreateUser(model);
+        //        return this.RedirectToAction("LogOn", "Account");
+        //    }
+
+        //    return this.View(model);
+        //}
+
+    //    /// <summary>
+    //    /// Call view change the user password
+    //    /// </summary>
+    //    /// <returns>View ChangePassword</returns>
+    //    [HttpGet]
+    //    [Authorize]
+    //    public ActionResult ChangePassword()
+    //    {
+    //        return this.View();
+    //    }
+
+    //    /// <summary>
+    //    /// Change the user password
+    //    /// </summary>
+    //    /// <param name="model">The model.</param>
+    //    /// <returns>
+    //    /// If success - redirect to the ChangePasswordSuccess, else display an error message
+    //    /// </returns>
+    //    [Transaction]
+    //    [HttpPost]
+    //    [Authorize]
+    //    public ActionResult ChangePassword(ChangePasswordModel model)
+    //    {
+    //        if (ModelState.IsValid)
+    //        {
+    //            try
+    //            {
+    //                var user = this.provider.GetUser(User.Identity.Name);
+    //                if (this.provider.ValidateUser(user.Email, model.OldPassword))
+    //                {
+    //                    this.provider.ChangeUserPassword(user.Id, model.NewPassword);
+    //                    return this.View("ChangePasswordSuccess");
+    //                }
+    //                else
+    //                {
+    //                    ModelState.AddModelError(string.Empty, WEB.ModelState_OldPasswordError);
+    //                }
+    //            }
+    //            catch (Exception)
+    //            {
+    //                ModelState.AddModelError(string.Empty, WEB.ModelState_ChangePasswordError);
+    //            }
+    //        }
+
+    //        return this.View(model);
+    //    }
     }
 }

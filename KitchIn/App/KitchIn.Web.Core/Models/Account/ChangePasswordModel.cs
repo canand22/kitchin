@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using FluentValidation.Attributes;
 using KitchIn.Web.Core.Validation;
-using SmartArch.Web.Membership;
 
 namespace KitchIn.Web.Core.Models.Account
 {
