@@ -8,6 +8,8 @@ namespace KitchIn.Core.Interfaces
     {
         void Save(Product product);
 
+        void Save(string shortName, string name, string ingredientName, long categoryId, long storeId, long id = 0, string upcCode = null);
+
         Product GetProduct(long id);
 
         Product GetProduct(string shortName, long storeId);
@@ -27,5 +29,7 @@ namespace KitchIn.Core.Interfaces
         IEnumerable<Product> SearchProductsByFirstLetters(string letters, long categoryId, long storeId);
 
         bool IsFoodGroupe(long productId);
+
+        void Remove(Product product);
     }
 }

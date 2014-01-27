@@ -19,6 +19,7 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
 
         private List<string> SecondaryVerification { get; set; }
 
+        private const int MinLengthShortname = 3;
         private static readonly Regex PatternLf = new Regex(@"((\s|\t)*(L|I)(\s|\t)*(F)?){1}$");
         private static readonly Regex PatternH = new Regex(@"((\s|\t)*(H|h)(B)?(F)?){1}$");
         private static readonly Regex PatternCanceledOrSubtracted = new Regex(@"(-\d+(([ ]?)|(\.?))(\d+)?){1}$");
@@ -26,9 +27,10 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
         private static readonly Regex PatternBegining = new Regex(@"^(\W*(\s|\t)*)");
         private static readonly Regex PatternEnding = new Regex(@"((((\s|\t)+((\d)+((\d+(([ ]?)|(\.?)|(\,?))(\d+)?))+)(\s|\t)*)$)|(((\t)+(.)*)*$))");
         private static readonly Regex PatternTwoFor = new Regex(@"((\d)*(\s|\t)*(@|8|6|§|\(2)?(\s|\t)+\d(.)*FOR(.)*(\d)+(\.|\,)(\d){2})");
+        private static readonly Regex PatternTwoForLight = new Regex(@"(\d(.)*FOR(.)*(\d)+(\.|\,)(\d){2})");
         private static readonly Regex PatternFewPieces = new Regex(@"((\s|\t)*\d(\s|\t)*(@|8|6|§|\(2)(\s|\t)*(\d)+(\.|\,)(\d){2}(\s|\t)*(EA)?)");
-        private static readonly Regex PatternWeighting = new Regex(@"(\d(.)*(lb|1b|Ib)+(.)*\d(.)*(lb|1b|Ib)+)"); 
-
+        private static readonly Regex PatternWeighting = new Regex(@"(\d(.)*(lb|1b|Ib)+(.)*\d(.)*(lb|1b|Ib)+)");
+        private static readonly Regex PatternDoubleWithGarbage = new Regex(@"^((\W)*(\d)+((\.)|(\,))(\d+)+(\W)*){1}");
 
         public PotashParser(string[] lines)
         {
@@ -85,6 +87,11 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
                     if (PatternTwoFor.IsMatch(withoutPrice))
                     {
                         withoutPrice = Regex.Replace(withoutPrice, PatternTwoFor.ToString(), "").Trim();
+                    }
+
+                    if (PatternTwoForLight.IsMatch(withoutPrice))
+                    {
+                        continue;
                     }
 
                     //without Few Pieces
@@ -167,7 +174,13 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
                 {
                     continue;
                 }
-                var wittoutBegining = Regex.Replace(SecondaryVerification[i], PatternBegining.ToString(),"").Trim();
+
+                if (PatternTwoForLight.IsMatch(SecondaryVerification[i]))
+                {
+                    continue;
+                }
+
+                var wittoutBegining = Regex.Replace(SecondaryVerification[i], PatternBegining.ToString(), "").Trim();
                 var wittoutEndining = Regex.Replace(wittoutBegining, PatternEnding.ToString(), "").Trim();
 
                 if (IsSubtracted(SecondaryVerification[i]) || IsCancelled(SecondaryVerification[i]))
@@ -175,12 +188,34 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
                     continue;
                 }
 
+                //to weed out waste - assuming that the length of the short name can not be less than or equal to 3
+                if (wittoutEndining.Length <= MinLengthShortname)
+                {
+                    continue;
+                }
+
+                //sifting garbage
+                wittoutEndining = SiftingGarbage(wittoutEndining);
+
                 if (wittoutEndining != string.Empty)
                 {
                     FirstResult.Add(wittoutEndining);
                 }
             }
         }
+
+        private string SiftingGarbage(string text)
+        {
+            var result = string.Empty;
+
+            if (PatternDoubleWithGarbage.IsMatch(text))
+            {
+                return result;
+            }
+            result = text;
+            return result;
+        }
+
 
         private void GetQuantity()
         {

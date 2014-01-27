@@ -40,7 +40,7 @@ namespace KitchIn.Tools.ImportDataFromPotash
 
             Console.WriteLine("End reading exel file!");
             var potashDataManagment = new ImportDataManagment();
-            potashDataManagment.MigrationGrocery(groceryDataFromExcel);
+            //potashDataManagment.MigrationGrocery(groceryDataFromExcel);
             potashDataManagment.MigrationNonFood(nonFoodDataFromExcel);
 
             Console.WriteLine("Migration done!");

@@ -13,8 +13,14 @@ namespace KitchIn.Core.Interfaces
 
         User GetUser(string email, string password);
 
+        User GetUser(string email);
+
         void Save(User user);
 
         void LogOut(Guid id);
+
+        void LogIn(User user);
+
+        bool IsExistIser(Guid guid);
     }
 }

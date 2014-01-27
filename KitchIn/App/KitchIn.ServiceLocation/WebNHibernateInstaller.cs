@@ -36,12 +36,21 @@ namespace KitchIn.ServiceLocation
             container.Register(Component.For<ITransactionManager>().ImplementedBy<TransactionManager>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IMembershipProvider>().ImplementedBy<MembershipProvider>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IAuthenticationService>().ImplementedBy<AuthenticationService>().LifeStyle.PerWebRequest);
+            container.Register(Component.For<IProvider>().ImplementedBy<BaseProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageUserProvider>().ImplementedBy<ManageUserProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageProductProvider>().ImplementedBy<ManageProductProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageKitchenProvider>().ImplementedBy<ManageKitchenProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageFavoritesProvider>().ImplementedBy<ManageFavoritesProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageStoreProvider>().ImplementedBy<ManageStoreProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageCategoryProvider>().ImplementedBy<ManageCategoryProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageProductByUserProvider>().ImplementedBy<ManageProductByUserProvider>().LifestylePerWebRequest());
             container.Register(
                 AllTypes
                  .FromAssembly(typeof(IAuthenticationService).Assembly)
                  .Pick()
                  .WithService.DefaultInterfaces()
                  .Configure(m => m.LifestylePerWebRequest()));
+
 
             var controllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);

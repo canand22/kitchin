@@ -15,40 +15,56 @@ using SmartArch.Web.Attributes;
 
 namespace KitchIn.Web.Areas.Admin.Controllers
 {
+    using KitchIn.Core.Enums;
+    using KitchIn.Core.Interfaces;
+
     [Authorize]
     ////(Roles = "Administrator")
     public class ProductsController : Controller
     {
         /// <summary>
-        /// The category repository
+        /// The manage Product Provider
         /// </summary>
-        protected readonly IRepository<Category> repositoryCategory;
-        
+        protected readonly IManageProductProvider manageProductProvider;
+
         /// <summary>
-        /// The product repository
+        /// The manage Product Provider
         /// </summary>
-        protected readonly IRepository<Product> repositoryProduct;
+        protected readonly IManageCategoryProvider manageCategoryProvider;
+
+        /// <summary>
+        /// The manage Product Provider
+        /// </summary>
+        protected readonly IManageStoreProvider manageStoreProvider;
+
+        /// <summary>
+        /// The manage Kitchen Provider
+        /// </summary>
+        protected readonly IManageKitchenProvider manageKitchenProvider;
 
 
-        private readonly IRepository<ProductsOnKitchen> repositoryProductsOnKitchens;
- 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsController"/> class.
         /// </summary>
-        /// <param name="repositoryCategory">
-        /// The repository Category.
+        /// <param name="manageProductProvider">
+        /// The manage Product Provider.
         /// </param>
-        /// <param name="repositoryProduct">
-        /// The repository Product.
+        /// <param name="manageCategoryProvider">
+        /// The manage Category Provider.
         /// </param>
-        public ProductsController(
-            IRepository<Category> repositoryCategory,
-            IRepository<Product> repositoryProduct,
-            IRepository<ProductsOnKitchen> repositoryProductsOnKitchens)
+        /// <param name="manageStoreProvider">
+        /// The manage Store Provider.
+        /// </param>
+        /// <param name="manageKitchenProvider">
+        /// The manage Kitchen Provider.
+        /// </param>
+        public ProductsController(IManageProductProvider manageProductProvider, IManageCategoryProvider manageCategoryProvider, 
+            IManageStoreProvider manageStoreProvider, IManageKitchenProvider manageKitchenProvider)
         {
-            this.repositoryCategory = repositoryCategory;
-            this.repositoryProduct = repositoryProduct;
-            this.repositoryProductsOnKitchens = repositoryProductsOnKitchens;
+            this.manageProductProvider = manageProductProvider;
+            this.manageCategoryProvider = manageCategoryProvider;
+            this.manageStoreProvider = manageStoreProvider;
+            this.manageKitchenProvider = manageKitchenProvider;
         }
 
         /// <summary>
@@ -60,13 +76,18 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            var categories = this.repositoryCategory.OrderBy(x => x.Name).Select(x => new SelectListItem
+            var categories = this.manageCategoryProvider.GetAllCategories().OrderBy(x => x.Value).Select(x => new SelectListItem
                                                     {
-                                                        Text = x.Name,
-                                                        Value = x.Id.ToString()
+                                                        Text = x.Value,
+                                                        Value = x.Key.ToString()
                                                     }).ToList();
-            var model = new NixJqGridProductModel(categories);
+            var stores = this.manageStoreProvider.GetAllStores().OrderBy(x => x.Value).Select(x => new SelectListItem
+            {
+                Text = x.Value,
+                Value = x.Key.ToString()
+            }).ToList();
 
+            var model = new NixJqGridProductModel(categories, stores);
             return this.View(model);
         }
 
@@ -149,31 +170,28 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         /// <returns>Returns the view</returns>
         public virtual JsonResult GetDataForAjaxGrid(NixJqGridContext gridContext)
         {
-            var products = this.repositoryProduct.ToList();
-
-            //var viewModel = products.Where(x => !x.IsAddedByUser).Select(p => new ProductViewModel
+            var products = this.manageProductProvider.GetAllProducts().ToList();
             var viewModel = products.Select(p => new ProductViewModel
-
                                                      {
                                                          Id = p.Id,
                                                          Category = p.Category.Name,
-                                                         //ExpirationDate = p.ExpirationDate,
-                                                         Name = p.Name
+                                                         Name = p.Name,
+                                                         PosDescription = p.ShortName,
+                                                         TypeAdd = p.TypeAdd.ToString(),
+                                                         IngredientName = p.IngredientName,
+                                                         ModificationDate = p.ModificationDate.ToString("MM/dd/yyyy HH:mm"),
+                                                         Store = p.Store.Name
                                                      });
-
             return gridContext.Response(viewModel, isAllDataSearch: true);
         }
 
         [Transaction]
         public virtual void EditAjaxGrid(ProductViewModel model)
         {
-            var product = model.Id != 0 ? this.repositoryProduct.Get(model.Id) : new Product();
-
-            product.Category = this.repositoryCategory.Get(Convert.ToInt64(model.Category));
-            product.Name = model.Name;
-            //product.ExpirationDate = model.ExpirationDate;
-        
-            this.repositoryProduct.Save(product);
+            var id = Convert.ToInt64(model.Id);
+            var categoryId = Convert.ToInt64(model.Category);
+            var storeId = Convert.ToInt64(model.Store);
+            this.manageProductProvider.Save(model.PosDescription, model.Name, model.IngredientName, categoryId, storeId, id);
         }
 
         /// <summary>
@@ -183,21 +201,21 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         [Transaction]
         public virtual void DeleteAjaxGrid(long id)
         {
-            var product = this.repositoryProduct.Get(id);
+            var product = this.manageProductProvider.GetProduct(id);
 
             if (product == null)
             {
                 throw new HttpException(404, string.Format("Product with id [{0}] not found.", id));
             }
 
-            foreach (var prod in this.repositoryProductsOnKitchens.Where(x => x.Product.Id == id))
-            {
-                prod.Product = null;
-            }
+            //foreach (var prod in this.manageKitchenProvider.GetAllProducts().Where(x => x.Product.Id == id))
+            //{
+            //    prod.Product = null;
+            //}
             
-            this.repositoryProductsOnKitchens.SaveChanges();
+            //this.repositoryProductsOnKitchens.SaveChanges();
 
-            this.repositoryProduct.Remove(product);
+            this.manageProductProvider.Remove(product);
         }
 
         [HttpPost]

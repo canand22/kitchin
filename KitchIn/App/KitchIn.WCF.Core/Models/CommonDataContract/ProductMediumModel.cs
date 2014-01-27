@@ -12,6 +12,9 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
         public string ItemName { get; set; }
 
         [DataMember]
+        public string ItemShortName { get; set; }
+
+        [DataMember]
         public long? Id { get; set; }
 
         [DataMember]
@@ -19,7 +22,7 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
 
         [DataMember]
         public bool IsSuccessMatching { get; set; }
-
+        
         public static implicit operator ProductMediumModel(ResultMatching resultMatching)
         {
             var model = new ProductMediumModel()
@@ -27,7 +30,8 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
                 Id = resultMatching.Id,
                 IsSuccessMatching = resultMatching.IsSuccessMatching,
                 ItemName = resultMatching.ItemName,
-                Category = resultMatching.Category
+                Category = resultMatching.Category,
+                ItemShortName = resultMatching.ItemShortName
             };
             return model;
         }
@@ -39,7 +43,8 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
                 Id = product.Id,
                 IsSuccessMatching = true,
                 ItemName = product.Name,
-                Category = product.Category.Name
+                Category = product.Category.Name,
+                ItemShortName = product.ShortName
             };
             return model;
         }

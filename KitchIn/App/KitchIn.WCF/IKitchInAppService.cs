@@ -131,5 +131,11 @@ namespace KitchIn.WCF
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Product search by first letters on the short name")]
         IList<ProductMediumModel> SearchProduct(string product, string categoryId, string storeId);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "Product", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Adding of the product to the database by the user")]
+        bool Product(ProductByUserModel productByUserModel);
     }
 }

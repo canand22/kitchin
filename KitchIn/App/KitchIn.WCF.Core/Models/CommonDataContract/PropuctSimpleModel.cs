@@ -9,6 +9,9 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
         public long Id { get; set; }
 
         [DataMember]
+        public string ShortName { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
     }
 }

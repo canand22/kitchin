@@ -28,6 +28,7 @@ namespace KitchIn.WCF
 
     using KitchIn.BL.Entities;
     using KitchIn.BL.Extensions;
+    using KitchIn.BL.Implementation;
     using KitchIn.Core.Services.OCRRecognize.Parsers;
     using KitchIn.WCF.Core.Models.CommonDataContract;
 
@@ -46,7 +47,11 @@ namespace KitchIn.WCF
 
         private readonly IManageMatchingTexts manageMatchingTexts;
 
-        public KitchInAppService(IManageUserProvider userProvider, IManageProductProvider productProvider, IManageKitchenProvider kitchenProvider, IManageFavoritesProvider favoritesProvider, IManageStoreProvider manageStoreProvider, IManageMatchingTexts manageMatchingTexts)
+        private readonly IManageProductByUserProvider productByUserProvider;
+
+        public KitchInAppService(IManageUserProvider userProvider, IManageProductProvider productProvider, IManageKitchenProvider kitchenProvider, 
+            IManageFavoritesProvider favoritesProvider, IManageStoreProvider manageStoreProvider, IManageMatchingTexts manageMatchingTexts,
+            IManageProductByUserProvider productByUserProvider)
         {
             this.userProvider = userProvider;
             this.productProvider = productProvider;
@@ -54,47 +59,18 @@ namespace KitchIn.WCF
             this.favoritesProvider = favoritesProvider;
             this.manageStoreProvider = manageStoreProvider;
             this.manageMatchingTexts = manageMatchingTexts;
+            this.productByUserProvider = productByUserProvider;
         }
 
         public LoginResponse LogIn(LoginRequest request)
         {
-
-            ////var uriRequest = new Uri("http://api.yummly.com/v1/api/metadata/ingredient?_app_id=9c98447e&_app_key=f5d8155ae0acc445e0fe2f504dc46bce");
-            ////var req = WebRequest.Create(uriRequest);
-
-            ////var response = (HttpWebResponse)req.GetResponse();
-
-            ////var dataStream = response.GetResponseStream();
-            ////if (response.ContentEncoding.ToLower().Contains("gzip"))
-            ////{
-            ////    dataStream = new GZipStream(dataStream, CompressionMode.Decompress);
-            ////}
-
-            ////var reader = new StreamReader(dataStream);
-
-            ////var responseFromServer = reader.ReadToEnd();
-
-            ////var startIndex = responseFromServer.IndexOf("[");
-           
-            ////responseFromServer = responseFromServer.Substring(startIndex);
-            ////var ar = responseFromServer.ToCharArray();
-            ////Array.Resize(ref ar, ar.Length - 2);
-            ////responseFromServer = new string(ar);
-            ////var r = JsonConvert.DeserializeObject<List<IngredientModel>>(responseFromServer);
-
-            ////reader.Close();
-
-            ////dataStream.Close();
-
-            ////response.Close();
-
             if (request == null)
             {
                 return new LoginResponse { Success = false, SessionId = null };
             }
 
             var user = this.userProvider.GetUser(request.Email, request.Password);
-
+            this.userProvider.LogIn(user);
             return user == null
                        ? new LoginResponse
                              {
@@ -241,7 +217,7 @@ namespace KitchIn.WCF
         public ProductsResponse AllProducts(long storeId, long categoryId)
         {
             var products = this.productProvider.GetAllProductsByStoreAndCategory(storeId, categoryId)
-                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name});
+                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName});
             return new ProductsResponse { Products = products };
         }
 
@@ -358,6 +334,23 @@ namespace KitchIn.WCF
             return result;
         }
 
+        public bool Product(ProductByUserModel product)
+        {
+            if (String.IsNullOrEmpty(product.Name) && String.IsNullOrEmpty(product.ShortName) && String.IsNullOrEmpty(product.UpcCode))
+            {
+                return false;
+            }
+            if (!userProvider.IsExistIser(product.SessionId))
+            {
+                return false;
+            }
+            var provider = (this.userProvider as BaseProvider);
+            var user = provider.GetUser(product.SessionId);
+            this.productByUserProvider.Save(product.UpcCode, product.ShortName, product.Name, product.IngredientName, product.CategoryId, product.StoreId,
+                user, Convert.ToInt32(product.ExpirationDate));
+            return true;
+        }
+
         private Image Base64ToImage(string base64String)
         {
             // Convert Base64 String to byte[]
@@ -378,26 +371,5 @@ namespace KitchIn.WCF
                                        @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
             return rgxEmail.IsMatch(strEmail);
         }
-
-        //private static Stream ConverImgToBytes(Stream fileContents)
-        //{
-        //    //using (var memoryStream = new MemoryStream())
-        //    //{
-        //    //    fileContents.CopyTo(memoryStream);
-        //    //    System.Drawing.ImageConverter converter = new System.Drawing.ImageConverter();
-        //    //    Image img = (Image)converter.ConvertFrom(memoryStream.ToArray());
-        //    //}
-
-        //    Stream serviceStream = new MemoryStream();
-        //    byte[] buffer = new byte[10000];
-        //    int bytesRead = 0;
-        //    do
-        //    {
-        //        bytesRead = fileContents.Read(buffer, 0, buffer.Length);
-        //        serviceStream.Write(buffer, 0, bytesRead);
-        //    } while (bytesRead > 0);
-
-        //    return serviceStream;
-        //}
     }
 }

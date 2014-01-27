@@ -66,8 +66,8 @@ namespace KitchIn.BL.Implementation
         /// </returns>
         public bool ValidateUser(string email, string password)
         {
-            //var guidPassword = this.GetHashString(password);
-            return this.repositoryUser.Any(x => x.Email.Equals(email) && x.Password.Equals(password));
+            var guidPassword = this.GetHashString(password);
+            return this.repositoryUser.Any(x => x.Email.Equals(email) && x.Password.Equals(guidPassword));
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace KitchIn.BL.Implementation
         public void LoginUser(string email, string password)
         {
             var user = this.GetUser(email);
-            if (user != null)
+            if (user != null && this.GetHashString(password).Equals(user.Password))
             {
                 this.AddSession(user);
             }
@@ -189,7 +189,6 @@ namespace KitchIn.BL.Implementation
 
         public void LogoutUser(User user)
         {
-            //var user = this.GetUser(email);
             if (user != null)
             {
                 this.RemoveSession(user);

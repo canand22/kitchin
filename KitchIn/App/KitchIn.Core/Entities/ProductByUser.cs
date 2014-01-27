@@ -1,10 +1,9 @@
 ﻿using SmartArch.Core.Domain.Base;
 using System;
-using KitchIn.Core.Enums;
 
 namespace KitchIn.Core.Entities
 {
-    public class Product : BaseEntity
+    public class ProductByUser : BaseEntity
     {
         public virtual string UpcCode { get; set; }
 
@@ -18,8 +17,10 @@ namespace KitchIn.Core.Entities
 
         public virtual Store Store { get; set; }
 
-        public virtual TypeAdd TypeAdd { get; set; }
+        public virtual User User { get; set; }
 
-        public virtual DateTime ModificationDate { get; set; }
+        public virtual int? ExpirationDate { get; set; }
+
+        public virtual DateTime Date { get; set; }
     }
 }

@@ -7,8 +7,16 @@ using KitchIn.Core.Services.Mailing;
 
 namespace KitchIn.BL.Implementation
 {
+    using System.Security.Cryptography;
+    using System.Text;
+
     public class ManageUserProvider : BaseProvider, IManageUserProvider 
     {
+        public User GetUser(string email)
+        {
+            return this.UserRepo.SingleOrDefault(x => x.Email == email);
+        }
+
         public void Save(User user)
         {
             this.UserRepo.Save(user);
@@ -23,7 +31,7 @@ namespace KitchIn.BL.Implementation
                 user = new User
                            {
                                Email = email,
-                               Password = password,
+                               Password = this.GetHashString(password),
                                FirstName = firstname,
                                LastName = lastname,
                                SessionId = Guid.NewGuid(),
@@ -49,14 +57,16 @@ namespace KitchIn.BL.Implementation
 
         public bool ChangeUserPassword(Guid id, string oldPassword, string newPassword)
         {
-            var user = this.UserRepo.SingleOrDefault(x => x.SessionId == id && x.Password == oldPassword);
+            var oldPass = this.GetHashString(oldPassword);
+            var user = this.UserRepo.SingleOrDefault(x => x.SessionId == id && x.Password == oldPass);
 
             return this.ChangePassword(user, newPassword);
         }
 
         public User GetUser(string email, string password)
         {
-            return this.UserRepo.SingleOrDefault(x => x.Email == email && x.Password == password);
+            var guidPassword = this.GetHashString(password);
+            return this.UserRepo.SingleOrDefault(x => x.Email == email && x.Password.Equals(guidPassword));
         }
 
         public void LogOut(Guid id)
@@ -72,18 +82,53 @@ namespace KitchIn.BL.Implementation
             this.UserRepo.SaveChanges();
         }
 
+        public void LogIn(User user)
+        {
+            if (user != null)
+            {
+                var session = Guid.NewGuid();
+                user.SessionId = session;
+                this.UserRepo.Save(user);
+                this.UserRepo.SaveChanges();
+            }
+        }
+
         private bool ChangePassword(User user, string password = null)
         {
-            if (user == null)
+            if (user == null || password == null)
             {
                 return false;
             }
 
-            user.Password = password ?? "new password";
+            user.Password = this.GetHashString(password);
             this.UserRepo.SaveChanges();
-            new MailService().Send(user.Email, user.Password);
-
+            new MailService().Send(user.Email, password);
             return true;
         }
+
+        public bool IsExistIser(Guid guid)
+        {
+            var result = this.GetUser(guid) != null;
+            return result;
+        }
+
+        /// <summary>
+        /// Convert string to hash-code
+        /// </summary>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The hash-code
+        /// </returns>
+        private string GetHashString(string password)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(password);
+            var csp = new MD5CryptoServiceProvider();
+            byte[] byteHash = csp.ComputeHash(bytes);
+
+            return byteHash.Aggregate(string.Empty, (current, b) => current + string.Format("{0:x2}", b));
+        }
+
     }
 }

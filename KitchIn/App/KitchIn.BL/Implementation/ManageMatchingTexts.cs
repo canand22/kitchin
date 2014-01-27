@@ -46,14 +46,16 @@ namespace KitchIn.BL.Implementation
                 var firstAttempt = productProvider.GetProduct(item, Store.Id);
                 if (firstAttempt != null)
                 {
-                    result.Add(new ResultMatching() { Id = firstAttempt.Id, IsSuccessMatching = true, ItemName = firstAttempt.Name, Category = firstAttempt.Category.Name});
+                    result.Add(new ResultMatching() { Id = firstAttempt.Id, IsSuccessMatching = true, ItemName = firstAttempt.Name, 
+                        Category = firstAttempt.Category.Name, ItemShortName = firstAttempt.ShortName});
                     continue;
                 }
 
                 var secondAttempt = GetMatcheProduct(item, Store.Name);
                 if (secondAttempt != null)
                 {
-                    result.Add(new ResultMatching() { Id = secondAttempt.Id, IsSuccessMatching = true, ItemName = secondAttempt.Name, Category = secondAttempt.Category.Name});
+                    result.Add(new ResultMatching() { Id = secondAttempt.Id, IsSuccessMatching = true, ItemName = secondAttempt.Name, 
+                        Category = secondAttempt.Category.Name, ItemShortName = secondAttempt.ShortName});
                     continue;
                 }else
                 {

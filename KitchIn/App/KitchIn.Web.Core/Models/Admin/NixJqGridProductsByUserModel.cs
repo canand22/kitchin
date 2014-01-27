@@ -16,19 +16,25 @@ namespace KitchIn.Web.Core.Models.Admin
         /// <param name="categories">
         /// The list categories.
         /// </param>
-        public NixJqGridProductsByUserModel(List<SelectListItem> categories)
+        public NixJqGridProductsByUserModel(List<SelectListItem> categories, List<SelectListItem> stores)
         {
             this.AjaxGrid =
-               new NixJqGrid<ProductViewModel>(
+               new NixJqGrid<ProductByUserViewModel>(
                    new ActionUrl("ProductsByUser/GetDataForAjaxGrid", "ProductsByUser/EditAjaxGrid", "ProductsByUser/DeleteAjaxGrid", null),
-                   new List<NixJqGridColumn<ProductViewModel>>
+                   new List<NixJqGridColumn<ProductByUserViewModel>>
                        {
-                           new NixJqGridColumn<ProductViewModel>(x => x.Id).Hidden(),
-                           new NixJqGridColumn<ProductViewModel>(x => x.Name).Set(p => p.Searchable, true),
-                           new NixJqGridColumn<ProductViewModel>(x => x.Category).SetDropDownList(categories),
-                           new NixJqGridColumn<ProductViewModel>(x => x.ExpirationDate),
-                           new NixJqGridColumn<ProductViewModel>(x => x.ApproveRow).SetCustomFormatterFunction("approveProductLink"),
-                           new NixJqGridColumn<ProductViewModel>(x => x.DeclineRow).SetCustomFormatterFunction("declineProductLink")
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.Id).Hidden(),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.PosDescription).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.Category).SetDropDownList(categories),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.Name).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.UpcCode).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.IngredientName).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.ExpirationDate),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.Store).SetDropDownList(stores),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.Date),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.UsersEmail).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.ApproveRow).SetCustomFormatterFunction("approveProductLink"),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.DeclineRow).SetCustomFormatterFunction("declineProductLink")
                        })
                         .Id(c => c.Id).ShowFilterToolBar();
 
@@ -72,14 +78,32 @@ namespace KitchIn.Web.Core.Models.Admin
             this.AjaxGrid[c => c.Id].Sortable = false;
             this.AjaxGrid[c => c.Id].Width = 100;
 
-            this.AjaxGrid[c => c.Name].Searchable = true;
-            this.AjaxGrid[c => c.Name].Width = 250;
+            this.AjaxGrid[c => c.PosDescription].Searchable = true;
+            this.AjaxGrid[c => c.PosDescription].Width = 100;
 
             this.AjaxGrid[c => c.Category].Searchable = true;
-            this.AjaxGrid[c => c.Category].Width = 250;
+            this.AjaxGrid[c => c.Category].Width = 150;
+
+            this.AjaxGrid[c => c.Name].Searchable = true;
+            this.AjaxGrid[c => c.Name].Width = 200;
+
+            this.AjaxGrid[c => c.UpcCode].Searchable = true;
+            this.AjaxGrid[c => c.UpcCode].Width = 100;
+
+            this.AjaxGrid[c => c.IngredientName].Searchable = true;
+            this.AjaxGrid[c => c.IngredientName].Width = 100;
 
             this.AjaxGrid[c => c.ExpirationDate].Sortable = false;
-            this.AjaxGrid[c => c.ExpirationDate].Width = 250;
+            this.AjaxGrid[c => c.ExpirationDate].Width = 70;
+
+            this.AjaxGrid[c => c.Store].Searchable = true;
+            this.AjaxGrid[c => c.Store].Width = 100;
+
+            this.AjaxGrid[c => c.Date].Sortable = false;
+            this.AjaxGrid[c => c.Date].Width = 100;
+
+            this.AjaxGrid[c => c.UsersEmail].Sortable = false;
+            this.AjaxGrid[c => c.UsersEmail].Width = 200;
 
             this.AjaxGrid[c => c.ApproveRow].Align = ColumnAlign.center;
             this.AjaxGrid[c => c.ApproveRow].Editable = false;
@@ -104,6 +128,6 @@ namespace KitchIn.Web.Core.Models.Admin
         /// <summary>
         /// Gets or sets AjaxGrid.
         /// </summary>
-        public NixJqGrid<ProductViewModel> AjaxGrid { get; set; }
+        public NixJqGrid<ProductByUserViewModel> AjaxGrid { get; set; }
     }
 }

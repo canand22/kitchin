@@ -67,6 +67,7 @@
     <Compile Include="Models\Account\LogOnModel.cs" />
     <Compile Include="Models\Account\RegisterModel.cs" />
     <Compile Include="Models\Admin\CategoryViewModel.cs" />
+    <Compile Include="Models\Admin\ProductByUserViewModel.cs" />
     <Compile Include="Models\Admin\EditRoleModel.cs" />
     <Compile Include="Models\Admin\NixJqGridCategoryModel.cs" />
     <Compile Include="Models\Admin\NixJqGridProductsByUserModel.cs" />

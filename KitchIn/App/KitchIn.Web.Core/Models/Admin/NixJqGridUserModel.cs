@@ -34,7 +34,6 @@ namespace KitchIn.Web.Core.Models.Admin
                            new NixJqGridColumn<UserViewModel>(x => x.FirstName).Set(p => p.Searchable, true),
                            new NixJqGridColumn<UserViewModel>(x => x.LastName).Set(p => p.Searchable, true),
                            new NixJqGridColumn<UserViewModel>(x => x.Email).Set(p => p.Searchable, true),
-                           new NixJqGridColumn<UserViewModel>(x => x.Password),
                            new NixJqGridColumn<UserViewModel>(x => x.Role).SetDropDownList(roles)
                        })
                         .Id(c => c.Id).ShowFilterToolBar();
@@ -85,10 +84,6 @@ namespace KitchIn.Web.Core.Models.Admin
             this.AjaxGrid[c => c.Email].ColumnName = "Login/Email";
             this.AjaxGrid[c => c.Email].Searchable = true;
             this.AjaxGrid[c => c.Email].Width = 300;
-
-            this.AjaxGrid[c => c.Password].ColumnName = "Password";
-            this.AjaxGrid[c => c.Password].Sortable = false;
-            this.AjaxGrid[c => c.Password].Width = 300;
 
             this.AjaxGrid[c => c.Role].ColumnName = "Role";
             this.AjaxGrid[c => c.Role].Searchable = true;

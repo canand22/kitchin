@@ -69,6 +69,7 @@
     <Compile Include="Entities\Errors.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Implementation\BaseProvider.cs" />
+    <Compile Include="Implementation\ManageProductByUserProvider.cs" />
     <Compile Include="Implementation\ManageCategoryProvider.cs" />
     <Compile Include="Implementation\ManageMatchingTexts.cs" />
     <Compile Include="Implementation\ManageStoreProvider.cs" />

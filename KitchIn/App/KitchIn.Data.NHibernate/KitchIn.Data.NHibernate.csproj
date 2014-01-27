@@ -67,6 +67,7 @@
     <Compile Include="DbInitializer.cs" />
     <Compile Include="Mappings\CategoryMappingOverride.cs" />
     <Compile Include="Mappings\CategoryInStoresMappingOverride.cs" />
+    <Compile Include="Mappings\ProductByUserMappingOverride.cs" />
     <Compile Include="Mappings\FavoriteRecipeMappingOverride.cs" />
     <Compile Include="Mappings\ProductMappingOverride.cs" />
     <Compile Include="Mappings\ProductsOnKitchenMappingOverride.cs" />

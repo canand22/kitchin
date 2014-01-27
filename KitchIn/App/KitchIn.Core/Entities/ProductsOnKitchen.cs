@@ -14,8 +14,6 @@ namespace KitchIn.Core.Entities
 
         public virtual Product Product { get; set; }
 
-        public virtual Category Category { get; set; }
-
         public virtual string Name { get; set; }
 
         public virtual DateTime DateOfPurchase { get; set; }
@@ -25,5 +23,7 @@ namespace KitchIn.Core.Entities
         public virtual double Quantity { get; set; }
 
         public virtual UnitType UnitType { get; set; }
+
+        public virtual Category Category { get; set; }
     }
 }

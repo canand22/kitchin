@@ -9,29 +9,75 @@ using KitchIn.Web.Core.Models.Admin;
 using SmartArch.Data;
 using SmartArch.NixJqGridFramework.Helpers.ModelBinder;
 using SmartArch.Web.Attributes;
+using System.Web.UI.WebControls;
+using KitchIn.Core.Interfaces;
 
 namespace KitchIn.Web.Areas.Admin.Controllers
 {
-    public class ProductsByUserController : ProductsController
+    [Authorize]
+    public class ProductsByUserController : Controller 
     {
-        public ProductsByUserController(
-            IRepository<Category> repositoryCategory,
-            IRepository<Product> repositoryProduct,
-            IRepository<ProductsOnKitchen> repositoryProductsOnKitchens)
-            : base(repositoryCategory, repositoryProduct, repositoryProductsOnKitchens)
+        /// <summary>
+        /// The manage Product Provider
+        /// </summary>
+        protected readonly IManageProductProvider manageProductProvider;
+
+        /// <summary>
+        /// The manage Category Provider
+        /// </summary>
+        protected readonly IManageCategoryProvider manageCategoryProvider;
+
+        /// <summary>
+        /// The manage Store Provider
+        /// </summary>
+        protected readonly IManageStoreProvider manageStoreProvider;
+
+        /// <summary>
+        /// The manage Store Provider
+        /// </summary>
+        protected readonly IManageProductByUserProvider manageProductByUserProvider;
+
+        /// <summary>
+        /// The manage User Provider
+        /// </summary>
+        protected readonly IManageUserProvider manageUserProvider;
+
+
+        public ProductsByUserController(IManageProductProvider manageProductProvider, IManageCategoryProvider manageCategoryProvider,
+            IManageStoreProvider manageStoreProvider, IManageProductByUserProvider manageProductByUserProvider, IManageUserProvider manageUserProvider)
         {
+            this.manageCategoryProvider = manageCategoryProvider;
+            this.manageProductByUserProvider = manageProductByUserProvider;
+            this.manageProductProvider = manageProductProvider;
+            this.manageStoreProvider = manageStoreProvider;
+            this.manageUserProvider = manageUserProvider;
         }
-       
-        public override ActionResult Index()
+
+        /// <summary>
+        /// Call the index view
+        /// </summary>
+        /// <returns>
+        /// The index view
+        /// </returns>
+        [HttpGet]
+        public virtual ActionResult Index()
         {
-            var categories = this.repositoryCategory.Select(x => new SelectListItem
+            var categories = this.manageCategoryProvider.GetAllCategories().OrderBy(x => x.Value).Select(x => new SelectListItem
             {
-                Text = x.Name ?? string.Empty,
-                Value = x.Id.ToString()
+                Text = x.Value,
+                Value = x.Key.ToString()
             }).ToList();
-            var model = new NixJqGridProductsByUserModel(categories);
-            return View(model);
+
+            var stores = this.manageStoreProvider.GetAllStores().OrderBy(x => x.Value).Select(x => new SelectListItem
+            {
+                Text = x.Value,
+                Value = x.Key.ToString()
+            }).ToList();
+
+            var model = new NixJqGridProductsByUserModel(categories, stores);
+            return this.View(model);
         }
+
 
         #region AJAX actions
 
@@ -40,32 +86,68 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="gridContext">The grid context</param>
         /// <returns>Returns the view</returns>
-        public override JsonResult GetDataForAjaxGrid(NixJqGridContext gridContext)
+        public JsonResult GetDataForAjaxGrid(NixJqGridContext gridContext)
         {
-            var products = this.repositoryProduct.ToList();
+            var products = this.manageProductByUserProvider.GetAllProducts().ToList();
 
-            //var viewModel = products.Where(x => x.IsAddedByUser).Select(p => new ProductViewModel
-            var viewModel = products.Select(p => new ProductViewModel
-
+            var viewModel = products.Select(p => new ProductByUserViewModel()
             {
+                Category = p.Category.Name,
+                Date = p.Date.ToString("MM/dd/yyyy"),
+                ExpirationDate = p.ExpirationDate.ToString(),
                 Id = p.Id,
-                Category = p.Category != null ? p.Category.Name : string.Empty,
-                //ExpirationDate = p.ExpirationDate,
-                Name = p.Name
-                //IsAddedByUser = p.IsAddedByUser
+                IngredientName = p.IngredientName,
+                Name = p.Name,
+                Store = p.Store.Name,
+                PosDescription = p.ShortName,
+                UpcCode = p.UpcCode,
+                UsersEmail = p.User.Email,
             });
 
             return gridContext.Response(viewModel, isAllDataSearch: true);
         }
 
         [Transaction]
+        public virtual void EditAjaxGrid(ProductByUserViewModel product)
+        {
+            var id = Convert.ToInt64(product.Id);
+            var categoryId = Convert.ToInt64(product.Category);
+            var storeId = Convert.ToInt64(product.Store);
+            var user = this.manageUserProvider.GetUser(product.UsersEmail);
+            this.manageProductByUserProvider.Save(product.UpcCode, product.PosDescription, product.Name, product.IngredientName, categoryId, 
+                storeId, user, Convert.ToInt32(product.ExpirationDate), id);
+        }
+
+
+        [Transaction]
         public void Approve(long id)
         {
-            var product = this.repositoryProduct.Get(id);
-            //product.IsAddedByUser = false;
+            var product = this.manageProductByUserProvider.GetProduct(id);
 
-            this.repositoryProduct.Save(product);
+            if (product == null)
+            {
+                throw new HttpException(404, string.Format("ProductByuser with id [{0}] not found.", id));
+            }
+            this.manageProductProvider.Save(product.ShortName, product.Name, product.IngredientName, product.Category.Id, product.Store.Id, upcCode:product.UpcCode);
+            this.manageProductByUserProvider.Remove(product);
         }
+
+        /// <summary>
+        /// Delete the row from ajax grid
+        /// </summary>
+        /// <param name="id">The id-code.</param>
+        [Transaction]
+        public virtual void DeleteAjaxGrid(long id)
+        {
+            var product = this.manageProductByUserProvider.GetProduct(id);
+
+            if (product == null)
+            {
+                throw new HttpException(404, string.Format("ProductByuser with id [{0}] not found.", id));
+            }
+            this.manageProductByUserProvider.Remove(product);
+        }
+
 
         #endregion AJAX actions
     }

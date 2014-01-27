@@ -70,15 +70,14 @@
 
     
 		function DeleteSelectedRow()
-		{
-		    debugger;
-		    var selRow = $('.ui-jqgrid-btable').jqGrid('getGridParam', 'selrow').join(',');
+	    {
+		    var selRow = $('.ui-jqgrid-btable').jqGrid('getGridParam', 'selarrrow').join(',');
 		    $.ajax({
 		            method: "GET",
-		            url: '@Url.Action("DeleteAjaxGrid", "Users")/' + selRow,
+		            url: '@Url.Action("DeleteAjaxGrid", "Stores")/' + selRow,
 		            cache: false,
 		            complete: function () {
-		                
+		                $(".ui-jqgrid-btable").trigger('reloadGrid');
 		            }
 		        });
 		}

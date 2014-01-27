@@ -9,6 +9,8 @@ using SmartArch.Data;
 
 namespace KitchIn.BL.Implementation
 {
+    using KitchIn.Core.Enums;
+
     public class ManageProductProvider : BaseProvider, IManageProductProvider
     {
         private readonly IRepository<Product> productsRepo;
@@ -34,6 +36,38 @@ namespace KitchIn.BL.Implementation
         public void Save(Product product)
         {
             this.productsRepo.Save(product);
+        }
+
+        public void Save(string shortName, string name, string ingredientName, long categoryId, long storeId, long id = 0, string upcCode = null)
+        {
+            var isNewItem = id == 0;
+            if (isNewItem)
+            {
+                var product = new Product()
+                                  {
+                                      Category = this.categoriesRepo.Get(categoryId),
+                                      IngredientName = ingredientName,
+                                      ModificationDate = DateTime.Now,
+                                      Name = name,
+                                      ShortName = shortName,
+                                      Store = this.storesRepo.Get(storeId),
+                                      TypeAdd = TypeAdd.Manually,
+                                      UpcCode = upcCode
+                                  };
+                this.productsRepo.Save(product);
+            }
+            else
+            {
+                var product = this.productsRepo.Get(id);
+                product.Category = this.categoriesRepo.Get(categoryId);
+                product.IngredientName = ingredientName;
+                product.ModificationDate = DateTime.Now;
+                product.Name = name;
+                product.ShortName = shortName;
+                product.Store = this.storesRepo.Get(storeId);
+                product.TypeAdd = TypeAdd.Manually;
+                product.UpcCode = upcCode;
+            }
         }
 
         public Product GetProduct(long id)
@@ -105,6 +139,11 @@ namespace KitchIn.BL.Implementation
         {
             var singleOrDefault = this.productsRepo.SingleOrDefault(x => x.Id == productId);
             return singleOrDefault != null && singleOrDefault.Category.Name != NonFoodCategory;
+        }
+
+        public void Remove(Product product)
+        {
+            this.productsRepo.Remove(product);
         }
     }
 }

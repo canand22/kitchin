@@ -178,7 +178,6 @@ namespace KitchIn.Web.Areas.Admin.Controllers
                                                                        FirstName = user.FirstName,
                                                                        LastName = user.LastName,
                                                                        Email = user.Email,
-                                                                       Password = user.Password,
                                                                        Role = user.Role.ToString()
                                                                    }).ToList();
 
@@ -192,7 +191,6 @@ namespace KitchIn.Web.Areas.Admin.Controllers
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Email = model.Email;
-            user.Password = model.Password;
             user.Role = model.Role == "0" ? UserRoles.Admin : UserRoles.User;
 
             this.repositoryUser.SaveChanges();

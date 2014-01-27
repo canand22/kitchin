@@ -94,6 +94,9 @@ namespace KitchIn.Core.Interfaces
         /// <param name="login">
         /// The login.
         /// </param>
+        /// <param name="pass">
+        /// The password.
+        /// </param>
         /// <returns>
         /// The user data
         /// </returns>

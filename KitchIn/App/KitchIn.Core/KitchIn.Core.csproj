@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\CategoryInStore.cs" />
+    <Compile Include="Entities\ProductByUser.cs" />
     <Compile Include="Entities\FavoriteRecipe.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductsOnKitchen.cs" />
@@ -73,8 +74,10 @@
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\MarketType.cs" />
+    <Compile Include="Enums\TypeAdd.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="Enums\UserRoles.cs" />
+    <Compile Include="Interfaces\IManageProductByUserProvider.cs" />
     <Compile Include="Interfaces\IManageCaches.cs" />
     <Compile Include="Interfaces\IManageMatchingTexts.cs" />
     <Compile Include="Interfaces\IManageStoreProvider.cs" />

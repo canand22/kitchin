@@ -49,6 +49,7 @@ namespace KitchIn.ServiceLocation
             container.Register(Component.For<IManageStoreProvider>().ImplementedBy<ManageStoreProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IManageMatchingTexts>().ImplementedBy<ManageMatchingTexts>().LifestylePerWebRequest());
             container.Register(Component.For<IManageCaches>().ImplementedBy<ManageCaches>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageProductByUserProvider>().ImplementedBy<ManageProductByUserProvider>().LifestylePerWebRequest());
 
             container.Register(
                 AllTypes

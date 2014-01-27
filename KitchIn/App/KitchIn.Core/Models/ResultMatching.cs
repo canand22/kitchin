@@ -6,6 +6,8 @@ namespace KitchIn.Core.Models
     {
         public string ItemName { get; set; }
 
+        public string ItemShortName { get; set; }
+
         public long? Id { get; set; }
 
         public bool IsSuccessMatching { get; set; }

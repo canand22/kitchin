@@ -7,13 +7,15 @@ namespace KitchIn.Tools.ImportDataFromPotash
 {
     using System.Text;
 
+    using KitchIn.Core.Enums;
+
     public class ImportDataManagment
     {
         private IDictionary<string, int> CatgoriesDictionary { get; set; }
 
         private const string ConnectionString = "Data Source=(local);Initial Catalog=KitchIn;Integrated Security=true";
 
-        private const string QueryStringTemplate = "INSERT INTO [KitchIn].[dbo].[Products] (UpcCode, ShortName, Name, CategoryId, StoreId) VALUES ";
+        private const string QueryStringTemplate = "INSERT INTO [KitchIn].[dbo].[Products] (UpcCode, ShortName, Name, CategoryId, StoreId, IngredientName, TypeAdd, ModificationDate) VALUES ";
 
         public ImportDataManagment()
         {
@@ -68,8 +70,11 @@ namespace KitchIn.Tools.ImportDataFromPotash
                 var upc = item.UpcCode.Replace("'", "''");
                 var pos = item.PosDescription.Replace("'", "''");
                 var description = item.LongDescription.Replace("'", "''");
-
-                var product = String.Format("('{0}', '{1}', '{2}', {3}, {4})", upc, pos, description, category, PotashId);
+                var ingredientName = item.ApiMainMatch.Replace("'", "''");
+                var typeAdd = TypeAdd.Exported.ToString();
+                var modificationDate = DateTime.Now;
+                var product = String.Format("('{0}', '{1}', '{2}', {3}, {4}, '{5}', '{6}', '{7}')", 
+                    upc, pos, description, category, PotashId, ingredientName, typeAdd, modificationDate);
                 queryString += product;
                 countRow++;
                 if (countRow % lengthBlock == 0)
@@ -140,8 +145,12 @@ namespace KitchIn.Tools.ImportDataFromPotash
                 var upc = item.UpcCode.Replace("'", "''");
                 var pos = item.PosDescription.Replace("'", "''");
                 var description = item.LongDescription.Replace("'", "''");
+                var ingredientName = string.Empty;
+                var typeAdd = TypeAdd.Exported.ToString();
+                var modificationDate = DateTime.Now;
 
-                var product = String.Format("('{0}', '{1}', '{2}', {3}, {4})", upc, pos, description, Category, PotashId);
+                var product = String.Format("('{0}', '{1}', '{2}', {3}, {4}, '{5}', '{6}', '{7}')", 
+                    upc, pos, description, Category, PotashId, ingredientName, typeAdd, modificationDate);
                 queryString += product;
                 countRow++;
                 if (countRow % lengthBlock == 0)

@@ -63,7 +63,7 @@ namespace KitchIn.Web
             // NHibernate Initialization
             container.Install(new WebNHibernateInstaller());
 
-            container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
+            container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestylePerWebRequest());
             FluentValidationModelValidatorProvider.Configure();
 
             LogWriter.WriteInfo("Application started successfully!");

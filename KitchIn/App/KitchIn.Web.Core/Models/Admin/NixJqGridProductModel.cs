@@ -18,7 +18,7 @@ namespace KitchIn.Web.Core.Models.Admin
         /// <param name="categories">
         /// The list categories.
         /// </param>
-        public NixJqGridProductModel(List<SelectListItem> categories)
+        public NixJqGridProductModel(List<SelectListItem> categories, List<SelectListItem> stores)
         {
             this.AjaxGrid =
                new NixJqGrid<ProductViewModel>(
@@ -26,8 +26,13 @@ namespace KitchIn.Web.Core.Models.Admin
                    new List<NixJqGridColumn<ProductViewModel>>
                        {
                            new NixJqGridColumn<ProductViewModel>(x => x.Id).Hidden(),
+                           new NixJqGridColumn<ProductViewModel>(x => x.PosDescription).Set(p => p.Searchable, true),
                            new NixJqGridColumn<ProductViewModel>(x => x.Name).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductViewModel>(x => x.IngredientName).Set(p => p.Searchable, true),
                            new NixJqGridColumn<ProductViewModel>(x => x.Category).SetDropDownList(categories),
+                           new NixJqGridColumn<ProductViewModel>(x => x.TypeAdd).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductViewModel>(x => x.Store).SetDropDownList(stores),
+                           new NixJqGridColumn<ProductViewModel>(x => x.ModificationDate).Set(p => p.Searchable, true),
                            new NixJqGridColumn<ProductViewModel>(x => x.ExpirationDate)
                        })
                         .Id(c => c.Id).ShowFilterToolBar();
@@ -89,14 +94,29 @@ namespace KitchIn.Web.Core.Models.Admin
             this.AjaxGrid[c => c.Id].Sortable = false;
             this.AjaxGrid[c => c.Id].Width = 100;
 
+            this.AjaxGrid[c => c.PosDescription].Searchable = true;
+            this.AjaxGrid[c => c.PosDescription].Width = 150;
+
             this.AjaxGrid[c => c.Name].Searchable = true;
             this.AjaxGrid[c => c.Name].Width = 250;
 
-            this.AjaxGrid[c => c.Category].Searchable = true;
-            this.AjaxGrid[c => c.Category].Width = 250;
+            this.AjaxGrid[c => c.IngredientName].Searchable = true;
+            this.AjaxGrid[c => c.IngredientName].Width = 250;
 
+            this.AjaxGrid[c => c.Category].Searchable = true;
+            this.AjaxGrid[c => c.Category].Width = 220;
+
+            this.AjaxGrid[c => c.TypeAdd].Searchable = true;
+            this.AjaxGrid[c => c.TypeAdd].Width = 70;
+
+            this.AjaxGrid[c => c.Store].Searchable = true;
+            this.AjaxGrid[c => c.Store].Width = 70;
+
+            this.AjaxGrid[c => c.ModificationDate].Searchable = true;
+            this.AjaxGrid[c => c.ModificationDate].Width = 120;
+            //this.AjaxGrid[c => c.ModificationDate].Formatters = Formatter.date;
             this.AjaxGrid[c => c.ExpirationDate].Sortable = false;
-            this.AjaxGrid[c => c.ExpirationDate].Width = 250;
+            this.AjaxGrid[c => c.ExpirationDate].Width = 100;
             
             this.AjaxGrid.CanMultipleSearch();
             this.AjaxGrid.AltRows = false;

@@ -144,6 +144,7 @@ namespace KitchIn.Tools.Migrator
             {
                 Console.WriteLine(ex);
             }
+            Console.ReadKey();
         }
     }
 }
