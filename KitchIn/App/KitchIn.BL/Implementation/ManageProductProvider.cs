@@ -126,7 +126,7 @@ namespace KitchIn.BL.Implementation
         {
             var products = new List<Product>();
             products = this.productsRepo.Where(x => x.Store.Id == storeId && x.Category.Id == categoryId && 
-                x.ShortName.Substring(0, letters.Length).Equals(letters)).ToList();
+                x.ShortName.Substring(0, letters.Length).ToLower().Equals(letters.ToLower())).ToList();
             return products;
         } 
 

@@ -20,13 +20,13 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
         public string IngredientName { get; set; }
 
         [DataMember]
-        public long CategoryId { get; set; }
+        public long? CategoryId { get; set; }
 
         [DataMember]
         public long StoreId { get; set; }
 
         [DataMember]
-        public string ExpirationDate { get; set; }
+        public int? ExpirationDate { get; set; }
 
         [DataMember]
         public Guid SessionId { get; set; }

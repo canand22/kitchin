@@ -92,9 +92,11 @@ namespace KitchIn.Web.Core.Models.Admin
 
             this.AjaxGrid[c => c.IngredientName].Searchable = true;
             this.AjaxGrid[c => c.IngredientName].Width = 100;
+            this.AjaxGrid[c => c.IngredientName].ColumnName = "Ingredient";
 
             this.AjaxGrid[c => c.ExpirationDate].Sortable = false;
             this.AjaxGrid[c => c.ExpirationDate].Width = 70;
+            this.AjaxGrid[c => c.ExpirationDate].ColumnName = "Exp. data";
 
             this.AjaxGrid[c => c.Store].Searchable = true;
             this.AjaxGrid[c => c.Store].Width = 100;

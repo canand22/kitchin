@@ -6,6 +6,9 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
 {
     using System.Configuration;
     using System.Linq;
+    using System.Runtime.Remoting;
+
+    using KitchIn.Core.Services.TextMatching;
 
     public class PotashParser : IParser
     {
@@ -31,6 +34,9 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
         private static readonly Regex PatternFewPieces = new Regex(@"((\s|\t)*\d(\s|\t)*(@|8|6|§|\(2)(\s|\t)*(\d)+(\.|\,)(\d){2}(\s|\t)*(EA)?)");
         private static readonly Regex PatternWeighting = new Regex(@"(\d(.)*(lb|1b|Ib)+(.)*\d(.)*(lb|1b|Ib)+)");
         private static readonly Regex PatternDoubleWithGarbage = new Regex(@"^((\W)*(\d)+((\.)|(\,))(\d+)+(\W)*){1}");
+
+        private static readonly Regex PatternSpacea = new Regex(@"\s");
+        private static readonly Regex PatternNotDecimalDigit = new Regex(@"\D+");
 
         public PotashParser(string[] lines)
         {
@@ -103,7 +109,16 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
                     string description;
                     if (PatternWeighting.IsMatch(withoutPrice) && line != 0)
                     {
-                        description = lines[line - 1].Trim();
+                        //if weight product recognised in one line
+                        var tmp = Regex.Replace(withoutPrice, PatternWeighting.ToString(), "").Trim();
+                        if (PatternNotDecimalDigit.IsMatch(tmp) && tmp.Length > 3)
+                        {
+                            description = tmp;
+                        }
+                        else
+                        {
+                            description = lines[line - 1].Trim();
+                        }
                     }
                     else
                     {
@@ -112,6 +127,12 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
 
                     var withoutEndingSecondParse = Regex.Replace(description, PatternEnding.ToString(), "").Trim();
                     description = withoutEndingSecondParse;
+
+                    //to weed out waste - assuming that the length of the short name can not be less than or equal to 3
+                    if (description.Length <= MinLengthShortname)
+                    {
+                        continue;
+                    }
 
                     if (isCanceled)
                     {
@@ -183,8 +204,24 @@ namespace KitchIn.Core.Services.OCRRecognize.Parsers
                 var wittoutBegining = Regex.Replace(SecondaryVerification[i], PatternBegining.ToString(), "").Trim();
                 var wittoutEndining = Regex.Replace(wittoutBegining, PatternEnding.ToString(), "").Trim();
 
-                if (IsSubtracted(SecondaryVerification[i]) || IsCancelled(SecondaryVerification[i]))
+                if (IsSubtracted(SecondaryVerification[i]))
                 {
+                    continue;
+                }
+
+                if (IsCancelled(SecondaryVerification[i]))
+                {
+                    if ((i < SecondaryVerification.Count - 1))
+                    {
+                        // percentage correct for matching canselled products
+                        const int PercCorrectForMatchingProduct = 80;
+                        var levenshteinDistance = new LevenshteinDistance(SecondaryVerification[i+1], PercCorrectForMatchingProduct);
+                        if (levenshteinDistance.PercentageCheck(FirstResult.LastOrDefault()))
+                        {
+                            FirstResult.RemoveAt(FirstResult.Count-1);
+                            i++;
+                        }
+                    }
                     continue;
                 }
 

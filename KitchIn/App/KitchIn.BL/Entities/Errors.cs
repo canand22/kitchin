@@ -20,6 +20,12 @@ namespace KitchIn.BL.Entities
         EmptyPassword,
 
         [Errors("Error creating user")]
-        ErrorCreatingUser
+        ErrorCreatingUser,
+
+        [Errors("Not filled in the required fields")]
+        NotFilledRequiredFields,
+
+        [Errors("User Not Exist")]
+        UserNotExist
     }
 }

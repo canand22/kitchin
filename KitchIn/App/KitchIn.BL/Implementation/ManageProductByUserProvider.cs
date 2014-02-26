@@ -35,20 +35,20 @@ namespace KitchIn.BL.Implementation
             this.productByUserRepo = productByUserRepo;
         }
 
-        public void Save(string upcCode, string shortName, string name, string ingredientName, long categoryId, long storeId, User user, int? expirationDate, long id = 0)
+        public void Save(string upcCode, string shortName, string name, string ingredientName, long? categoryId, long? storeId, User user, int? expirationDate, long id = 0)
         {
             var isNewItem = id == 0;
             if (isNewItem)
             {
                 var product = new ProductByUser
                                   {
-                                      Category = this.categoriesRepo.Get(categoryId),
+                                      Category = categoryId.HasValue? this.categoriesRepo.Get(categoryId.Value) : null,
                                       UpcCode = upcCode,
                                       IngredientName = ingredientName,
                                       Date = DateTime.Now,
                                       Name = name,
                                       ShortName = shortName,
-                                      Store = this.storesRepo.Get(storeId),
+                                      Store = storeId.HasValue ?  this.storesRepo.Get(storeId.Value) : null,
                                       ExpirationDate = expirationDate,
                                       User = user
                                   };
@@ -57,13 +57,13 @@ namespace KitchIn.BL.Implementation
             else
             {
                 var product = this.productByUserRepo.Get(id);
-                product.Category = this.categoriesRepo.Get(categoryId);
+                product.Category = categoryId.HasValue ? this.categoriesRepo.Get(categoryId.Value) : null;
                 product.UpcCode = upcCode;
                 product.IngredientName = ingredientName;
                 product.Date = DateTime.Now;
                 product.Name = name;
                 product.ShortName = shortName;
-                product.Store = this.storesRepo.Get(storeId);
+                product.Store = storeId.HasValue ? this.storesRepo.Get(storeId.Value) : null ;
                 product.ExpirationDate = expirationDate;
                 product.User = user;
                 this.productByUserRepo.Save(product);

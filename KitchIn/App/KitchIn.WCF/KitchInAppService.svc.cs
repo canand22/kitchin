@@ -323,7 +323,7 @@ namespace KitchIn.WCF
                 {
                     var stId = Convert.ToInt64(storeId);
                     var catid = Convert.ToInt64(categoryId);
-                    var tmp = productProvider.SearchProductsByFirstLetters(product, stId, catid);
+                    var tmp = productProvider.SearchProductsByFirstLetters(product, catid, stId);
                     result.AddRange(tmp.Select(item => (ProductMediumModel)item));
                 }
                 catch (Exception ex)
@@ -334,21 +334,29 @@ namespace KitchIn.WCF
             return result;
         }
 
-        public bool Product(ProductByUserModel product)
+        public StatusResponse Product(ProductByUserModel product)
         {
+            var result = new StatusResponse();
             if (String.IsNullOrEmpty(product.Name) && String.IsNullOrEmpty(product.ShortName) && String.IsNullOrEmpty(product.UpcCode))
             {
-                return false;
+                result.IsSuccessfully = false;
+                result.Message = Errors.NotFilledRequiredFields.GetMessage();
+                return result;
             }
-            if (!userProvider.IsExistIser(product.SessionId))
+            if (!userProvider.IsExistUser(product.SessionId))
             {
-                return false;
+                result.IsSuccessfully = false;
+                result.Message = Errors.UserNotExist.GetMessage();
+                return result;
             }
             var provider = (this.userProvider as BaseProvider);
             var user = provider.GetUser(product.SessionId);
+
             this.productByUserProvider.Save(product.UpcCode, product.ShortName, product.Name, product.IngredientName, product.CategoryId, product.StoreId,
-                user, Convert.ToInt32(product.ExpirationDate));
-            return true;
+                user, product.ExpirationDate);
+            result.IsSuccessfully = true;
+            result.Message = "Ok";
+            return result;
         }
 
         private Image Base64ToImage(string base64String)

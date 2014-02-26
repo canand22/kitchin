@@ -136,6 +136,6 @@ namespace KitchIn.WCF
         [WebInvoke(Method = "POST", UriTemplate = "Product", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Adding of the product to the database by the user")]
-        bool Product(ProductByUserModel productByUserModel);
+        StatusResponse Product(ProductByUserModel productByUserModel);
     }
 }

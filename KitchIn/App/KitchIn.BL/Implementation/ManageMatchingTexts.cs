@@ -20,7 +20,7 @@ namespace KitchIn.BL.Implementation
 
         private readonly IManageCaches manageCaches;
 
-        private const int PercCorrectForMatchingProduct = 70; // percentage correct for matching
+        private const int PercCorrectForMatchingProduct = 80; // percentage correct for matching
 
         private const int PercCorrectForMatchingCategoryInStore = 80; // percentage correct for matching
 

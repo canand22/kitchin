@@ -92,13 +92,13 @@ namespace KitchIn.Web.Areas.Admin.Controllers
 
             var viewModel = products.Select(p => new ProductByUserViewModel()
             {
-                Category = p.Category.Name,
+                Category = p.Category!= null ? p.Category.Name : null,
                 Date = p.Date.ToString("MM/dd/yyyy"),
                 ExpirationDate = p.ExpirationDate.ToString(),
                 Id = p.Id,
                 IngredientName = p.IngredientName,
                 Name = p.Name,
-                Store = p.Store.Name,
+                Store = p.Store != null ? p.Store.Name : null,
                 PosDescription = p.ShortName,
                 UpcCode = p.UpcCode,
                 UsersEmail = p.User.Email,

@@ -106,7 +106,7 @@ namespace KitchIn.BL.Implementation
             return true;
         }
 
-        public bool IsExistIser(Guid guid)
+        public bool IsExistUser(Guid guid)
         {
             var result = this.GetUser(guid) != null;
             return result;

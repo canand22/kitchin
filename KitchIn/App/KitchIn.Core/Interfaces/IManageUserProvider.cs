@@ -21,6 +21,6 @@ namespace KitchIn.Core.Interfaces
 
         void LogIn(User user);
 
-        bool IsExistIser(Guid guid);
+        bool IsExistUser(Guid guid);
     }
 }
