@@ -86,9 +86,11 @@ namespace KitchIn.WCF
                              };
         }
 
-        public void LogOut(Guid id)
+        public StatusResponse LogOut(Guid id)
         {
             this.userProvider.LogOut(id);
+            var result = new StatusResponse() { IsSuccessfully = true, Message = "Ok" };
+            return result;
         }
 
         public RegisterResponse Register(RegisterRequest request)
@@ -132,9 +134,11 @@ namespace KitchIn.WCF
                       };
         }
 
-        public bool Forgot(string email)
+        public StatusResponse Forgot(string email)
         {
-            return this.userProvider.ChangeUserPassword(email);
+            this.userProvider.ChangeUserPassword(email);
+            var result = new StatusResponse() { IsSuccessfully = true, Message = "Ok" };
+            return result;
         }
 
         public PreviewResponse Preview(PreviewRequest request)

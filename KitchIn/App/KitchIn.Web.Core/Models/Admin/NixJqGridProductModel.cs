@@ -89,6 +89,7 @@ namespace KitchIn.Web.Core.Models.Admin
             this.AjaxGrid.PagerSettings.PageSizeOptions = new List<int> { 20, 30, 50 };
             this.AjaxGrid.PagerSettings.PageSize = 20;
 
+
             this.AjaxGrid[c => c.Id].Align = ColumnAlign.center;
             this.AjaxGrid[c => c.Id].ColumnName = string.Empty;
             this.AjaxGrid[c => c.Id].Sortable = false;

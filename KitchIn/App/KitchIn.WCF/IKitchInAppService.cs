@@ -25,7 +25,7 @@ namespace KitchIn.WCF
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        void LogOut(Guid id);
+        StatusResponse LogOut(Guid id);
         
         [OperationContract]
         [WebInvoke(Method = "POST",
@@ -35,7 +35,7 @@ namespace KitchIn.WCF
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        bool Forgot(string email);
+        StatusResponse Forgot(string email);
 
         [OperationContract]
         [WebInvoke(Method = "POST",

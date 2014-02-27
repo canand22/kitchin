@@ -9,6 +9,7 @@ using SmartArch.Web.Membership;
 
 namespace KitchIn.Web.Controllers
 {
+    using System.Reflection;
     using System.Web;
 
     /// <summary>

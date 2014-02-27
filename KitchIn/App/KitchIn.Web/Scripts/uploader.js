@@ -106,7 +106,6 @@ qq.FineUploader = function (o) {
     this._listElement = this._options.listElement || this._find(this._element, 'list');
 
     this._classes = this._options.classes;
-    debugger;
     if (!this._button) {
         this._button = this._createUploadButton(this._find(this._element, 'button'));
     }
@@ -299,7 +298,6 @@ qq.extend(qq.FineUploader.prototype, {
         }
     },
     _onUpload: function (id, fileName, xhr) {
-        debugger;
         qq.FineUploaderBasic.prototype._onUpload.apply(this, arguments);
 
         var item = this.getItemByFileId(id);

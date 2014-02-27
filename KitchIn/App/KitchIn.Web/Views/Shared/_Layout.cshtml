@@ -46,13 +46,14 @@
     <div id="body">
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+            @RenderBody()
+        </section>
     </div>
 	<footer>
             <div class="content-wrapper">
                 <div class="float-left">
                     <p>&copy; @DateTime.Now.Year - $solutionName$ Application</p>
+                    <p>Build: </p>
                 </div>
                 @*<div class="float-right">                  
                     <ul id="social">                       

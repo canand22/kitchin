@@ -79,7 +79,7 @@
         
 		function DeleteSelectedRow(){
 		    var selRow = $('.ui-jqgrid-btable').jqGrid('getGridParam', 'selrow').join(',');
-		    $.ajax({
+		   $.ajax({
 		            method: "GET",
 		            url: '@Url.Action("DeleteAjaxGrid", "Products")/' + selRow,
 		            cache: false,
@@ -91,7 +91,7 @@
 		
 		function editLinkFunction(cellvalue, options, rowObject)
 		{
-			return "<a href='@Url.Action("EditUser", "Users")/" +rowObject.Id+"'><img src='@Url.Content("~/Content/images/editBtn.png")'/></a>";
+			return "<a href='@Url.Action("EditAjaxGrid", "Products")/" +rowObject.Id+"'><img src='@Url.Content("~/Content/images/editBtn.png")'/></a>";
 		}
 		var manualuploader;
 		
