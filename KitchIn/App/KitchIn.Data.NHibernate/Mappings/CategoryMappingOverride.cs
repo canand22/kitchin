@@ -11,6 +11,7 @@ namespace KitchIn.Data.NHibernate.Mappings
             mapping.Table("Categories");
             mapping.Id().GeneratedBy.Identity();
             mapping.Map(x => x.Name).Not.Nullable();
+            mapping.Map(x => x.Description).Nullable();
         }
     }
 }

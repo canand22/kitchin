@@ -21,30 +21,34 @@ namespace KitchIn.BL.Implementation
 
         private readonly IRepository<Store> storesRepo;
 
+        private readonly IRepository<Ingredient> ingredientsRepo;
+
         public ManageProductByUserProvider()
         {
             
         }
 
-        public ManageProductByUserProvider(IRepository<Product> productsRepo, IRepository<Category> categoriesRepo, IRepository<Store> storesRepo, 
-            IRepository<ProductByUser> productByUserRepo)
+        public ManageProductByUserProvider(IRepository<Product> productsRepo, IRepository<Category> categoriesRepo, IRepository<Store> storesRepo,
+            IRepository<ProductByUser> productByUserRepo, IRepository<Ingredient> ingredientsRepo)
         {
             this.productsRepo = productsRepo;
             this.categoriesRepo = categoriesRepo;
             this.storesRepo = storesRepo;
             this.productByUserRepo = productByUserRepo;
+            this.ingredientsRepo = ingredientsRepo;
         }
 
         public void Save(string upcCode, string shortName, string name, string ingredientName, long? categoryId, long? storeId, User user, int? expirationDate, long id = 0)
         {
             var isNewItem = id == 0;
+            var ingredient = this.ingredientsRepo.FirstOrDefault(p => p.Term == ingredientName);
             if (isNewItem)
             {
                 var product = new ProductByUser
                                   {
                                       Category = categoryId.HasValue? this.categoriesRepo.Get(categoryId.Value) : null,
                                       UpcCode = upcCode,
-                                      IngredientName = ingredientName,
+                                      Ingredient = ingredient,
                                       Date = DateTime.Now,
                                       Name = name,
                                       ShortName = shortName,
@@ -59,7 +63,7 @@ namespace KitchIn.BL.Implementation
                 var product = this.productByUserRepo.Get(id);
                 product.Category = categoryId.HasValue ? this.categoriesRepo.Get(categoryId.Value) : null;
                 product.UpcCode = upcCode;
-                product.IngredientName = ingredientName;
+                product.Ingredient = ingredient;
                 product.Date = DateTime.Now;
                 product.Name = name;
                 product.ShortName = shortName;

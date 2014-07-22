@@ -1,4 +1,6 @@
-﻿namespace KitchIn.Web.Core.Models.Admin
+﻿using KitchIn.Core.Entities;
+
+namespace KitchIn.Web.Core.Models.Admin
 {
     public class ProductByUserViewModel
     {
@@ -10,7 +12,7 @@
 
         public string UpcCode { get; set; }
 
-        public string IngredientName { get; set; }
+        public Ingredient Ingredient { get; set; }
 
         public string Category { get; set; }
 

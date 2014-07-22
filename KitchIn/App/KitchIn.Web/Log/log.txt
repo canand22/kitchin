@@ -1071,3 +1071,255 @@ ClientConnectionId:a56e3d94-6446-4111-ba31-41452373bb23
 2013-12-20 11:12:58.1096|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
 2013-12-20 11:12:58.4246|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
 2013-12-20 11:12:58.7576|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-18 16:01:38.7000|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'NIX\ann_es'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 52
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 109
+ClientConnectionId:35c72b1b-b0e5-4b58-aff1-116688b041ca
+2014-07-18 16:01:39.4096|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'NIX\ann_es'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 52
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 109
+ClientConnectionId:35c72b1b-b0e5-4b58-aff1-116688b041ca
+2014-07-18 16:02:07.1977|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-18 16:02:41.8974|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'NIX\ann_es'.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 52
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 109
+ClientConnectionId:ac161685-ef4c-490b-939c-4e585a9709aa
+2014-07-18 16:02:42.2512|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'NIX\ann_es'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 52
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 109
+ClientConnectionId:ac161685-ef4c-490b-939c-4e585a9709aa
+2014-07-18 16:03:46.1962|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-18 16:04:36.1562|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-18 16:04:47.4036|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-18 16:04:47.6725|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-18 17:05:14.6707|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-18 17:05:32.0270|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: FluentNHibernate.Cfg.FluentConfigurationException: An invalid or incomplete configuration was used while creating a SessionFactory. Check PotentialReasons collection, and InnerException for more detail.
+
+ ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.MissingMethodException: Method not found: 'System.String KitchIn.Core.Entities.UserPreference.get_Time()'.
+   at KitchIn.Data.NHibernate.Mappings.UserPreferenceMappingOverride.Override(AutoMapping`1 mapping)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.OverrideHelper[T](AutoMapping`1 x, IAutoMappingOverride`1 mappingOverride)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.<>c__DisplayClass29.<Override>b__25(Object x)
+   at FluentNHibernate.Automapping.InlineOverride.Apply(Object mapping)
+   at FluentNHibernate.Automapping.AutoMapper.<>c__DisplayClass2.<ApplyOverrides>b__1(InlineOverride x)
+   at FluentNHibernate.Utils.CollectionExtensions.Each[T](IEnumerable`1 enumerable, Action`1 each)
+   at FluentNHibernate.Automapping.AutoMapper.ApplyOverrides(Type classType, IList`1 mappedMembers, ClassMappingBase mapping)
+   at FluentNHibernate.Automapping.AutoMapper.MergeMap(Type classType, ClassMappingBase mapping, IList`1 mappedMembers)
+   at FluentNHibernate.Automapping.AutoMapper.Map(Type classType, List`1 types)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.AddMapping(Type type)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.CompileMappings()
+   at FluentNHibernate.Automapping.AutoPersistenceModel.Configure(Configuration configuration)
+   at FluentNHibernate.Cfg.AutoMappingsContainer.Apply(Configuration cfg, PersistenceModel model)
+   at FluentNHibernate.Cfg.MappingConfiguration.Apply(Configuration cfg)
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   --- End of inner exception stack trace ---
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   at KitchIn.Data.NHibernate.DbInitializer.GetConfiguration() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 61
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 109
+
+
+2014-07-18 17:05:32.2458|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: FluentNHibernate.Cfg.FluentConfigurationException: An invalid or incomplete configuration was used while creating a SessionFactory. Check PotentialReasons collection, and InnerException for more detail.
+
+ ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.MissingMethodException: Method not found: 'System.String KitchIn.Core.Entities.UserPreference.get_Time()'.
+   at KitchIn.Data.NHibernate.Mappings.UserPreferenceMappingOverride.Override(AutoMapping`1 mapping)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.OverrideHelper[T](AutoMapping`1 x, IAutoMappingOverride`1 mappingOverride)
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.<>c__DisplayClass29.<Override>b__25(Object x)
+   at FluentNHibernate.Automapping.InlineOverride.Apply(Object mapping)
+   at FluentNHibernate.Automapping.AutoMapper.<>c__DisplayClass2.<ApplyOverrides>b__1(InlineOverride x)
+   at FluentNHibernate.Utils.CollectionExtensions.Each[T](IEnumerable`1 enumerable, Action`1 each)
+   at FluentNHibernate.Automapping.AutoMapper.ApplyOverrides(Type classType, IList`1 mappedMembers, ClassMappingBase mapping)
+   at FluentNHibernate.Automapping.AutoMapper.MergeMap(Type classType, ClassMappingBase mapping, IList`1 mappedMembers)
+   at FluentNHibernate.Automapping.AutoMapper.Map(Type classType, List`1 types)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.AddMapping(Type type)
+   at FluentNHibernate.Automapping.AutoPersistenceModel.CompileMappings()
+   at FluentNHibernate.Automapping.AutoPersistenceModel.Configure(Configuration configuration)
+   at FluentNHibernate.Cfg.AutoMappingsContainer.Apply(Configuration cfg, PersistenceModel model)
+   at FluentNHibernate.Cfg.MappingConfiguration.Apply(Configuration cfg)
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   --- End of inner exception stack trace ---
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   at KitchIn.Data.NHibernate.DbInitializer.GetConfiguration() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 61
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 109
+
+
+2014-07-18 17:07:01.3056|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-18 17:08:15.3319|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-18 17:08:22.1108|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-18 17:08:22.3466|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 11:40:43.6975|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 12:40:35.6154|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 12:40:50.1892|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 12:40:50.5653|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 12:48:58.7135|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 12:50:32.4330|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 12:50:38.2283|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 12:50:38.3764|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 15:03:49.2208|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 15:05:18.7402|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:05:29.3637|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:05:29.5715|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 15:08:43.7130|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 15:09:11.0112|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:09:19.9271|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:09:20.0739|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 15:11:52.1085|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 15:12:29.6049|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:12:44.1024|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:12:44.2435|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 15:49:16.8719|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 15:50:26.6910|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:50:51.0465|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:50:51.1945|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 15:54:40.9075|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 15:55:08.3598|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:55:19.2047|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 15:55:19.3597|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 16:13:49.9552|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 16:14:26.6689|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: FluentNHibernate.Cfg.FluentConfigurationException: An invalid or incomplete configuration was used while creating a SessionFactory. Check PotentialReasons collection, and InnerException for more detail.
+
+ ---> NHibernate.HibernateException: There is already an object named 'Categories' in the database. ---> System.Data.SqlClient.SqlException: There is already an object named 'Categories' in the database.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Tool.hbm2ddl.SchemaExport.ExecuteSql(IDbCommand cmd, String sql)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean throwOnError, TextWriter exportOutput, IDbCommand statement, String sql)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean justDrop, IDbConnection connection, TextWriter exportOutput)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean justDrop)
+   --- End of inner exception stack trace ---
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean justDrop)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Boolean script, Boolean export, Boolean justDrop)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Create(Boolean script, Boolean export)
+   at KitchIn.Data.NHibernate.DbInitializer.<GetConfiguration>b__0(Configuration cfg) in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 70
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   --- End of inner exception stack trace ---
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   at KitchIn.Data.NHibernate.DbInitializer.GetConfiguration() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 61
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 125
+
+
+2014-07-21 16:14:31.1423|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 16:14:31.2915|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 16:16:06.6958|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 16:16:25.4375|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 16:16:29.0691|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 16:16:29.2844|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 16:44:18.2481|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 16:44:41.4015|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 16:44:43.9600|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 16:44:44.1130|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 17:13:48.4994|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 17:14:06.0942|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 17:14:10.1192|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 17:14:10.3233|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-21 17:38:49.3201|INFO|KitchIn.Core.LogWriter|Application stopped!
+2014-07-21 17:48:24.1457|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: FluentNHibernate.Cfg.FluentConfigurationException: An invalid or incomplete configuration was used while creating a SessionFactory. Check PotentialReasons collection, and InnerException for more detail.
+
+ ---> NHibernate.HibernateException: There is already an object named 'Categories' in the database. ---> System.Data.SqlClient.SqlException: There is already an object named 'Categories' in the database.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at NHibernate.Tool.hbm2ddl.SchemaExport.ExecuteSql(IDbCommand cmd, String sql)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean throwOnError, TextWriter exportOutput, IDbCommand statement, String sql)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean justDrop, IDbConnection connection, TextWriter exportOutput)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean justDrop)
+   --- End of inner exception stack trace ---
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Action`1 scriptAction, Boolean export, Boolean justDrop)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Execute(Boolean script, Boolean export, Boolean justDrop)
+   at NHibernate.Tool.hbm2ddl.SchemaExport.Create(Boolean script, Boolean export)
+   at KitchIn.Data.NHibernate.DbInitializer.<GetConfiguration>b__0(Configuration cfg) in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 70
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   --- End of inner exception stack trace ---
+   at FluentNHibernate.Cfg.FluentConfiguration.BuildConfiguration()
+   at KitchIn.Data.NHibernate.DbInitializer.GetConfiguration() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 61
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in d:\KIA\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 125
+
+
+2014-07-21 17:48:27.2254|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2014-07-21 17:48:27.4313|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2014-07-22 10:34:05.3721|INFO|KitchIn.Core.LogWriter|Application stopped!

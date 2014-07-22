@@ -71,6 +71,8 @@ namespace KitchIn.Core.Entities
 
         public virtual ISet<FavoriteRecipe> FavoriteRecipes { get; set; }
 
+        public virtual ISet<UserPreference> UserPreferences { get; set; }
+
         public User()
         {
             this.Products = new HashedSet<ProductsOnKitchen>();

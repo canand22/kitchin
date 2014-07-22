@@ -43,14 +43,21 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         protected readonly IManageUserProvider manageUserProvider;
 
 
+        /// <summary>
+        /// The manage Ingredient Provider
+        /// </summary>
+        protected readonly IManageIngredientProvider manageIngredientProvider;
+
+
         public ProductsByUserController(IManageProductProvider manageProductProvider, IManageCategoryProvider manageCategoryProvider,
-            IManageStoreProvider manageStoreProvider, IManageProductByUserProvider manageProductByUserProvider, IManageUserProvider manageUserProvider)
+            IManageStoreProvider manageStoreProvider, IManageProductByUserProvider manageProductByUserProvider, IManageUserProvider manageUserProvider, IManageIngredientProvider manageIngredientProvider)
         {
             this.manageCategoryProvider = manageCategoryProvider;
             this.manageProductByUserProvider = manageProductByUserProvider;
             this.manageProductProvider = manageProductProvider;
             this.manageStoreProvider = manageStoreProvider;
             this.manageUserProvider = manageUserProvider;
+            this.manageIngredientProvider = manageIngredientProvider;
         }
 
         /// <summary>
@@ -74,7 +81,12 @@ namespace KitchIn.Web.Areas.Admin.Controllers
                 Value = x.Key.ToString()
             }).ToList();
 
-            var model = new NixJqGridProductsByUserModel(categories, stores);
+            var ingredients = this.manageIngredientProvider.GetAllIngredients().OrderBy(x => x.Value).Select(x => new SelectListItem
+            {
+                Text = x.Value,
+                Value = x.Key.ToString()
+            }).ToList();
+            var model = new NixJqGridProductsByUserModel(categories, stores,ingredients);
             return this.View(model);
         }
 
@@ -96,7 +108,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
                 Date = p.Date.ToString("MM/dd/yyyy"),
                 ExpirationDate = p.ExpirationDate.ToString(),
                 Id = p.Id,
-                IngredientName = p.IngredientName,
+                Ingredient = p.Ingredient,
                 Name = p.Name,
                 Store = p.Store != null ? p.Store.Name : null,
                 PosDescription = p.ShortName,
@@ -114,7 +126,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
             var categoryId = Convert.ToInt64(product.Category);
             var storeId = Convert.ToInt64(product.Store);
             var user = this.manageUserProvider.GetUser(product.UsersEmail);
-            this.manageProductByUserProvider.Save(product.UpcCode, product.PosDescription, product.Name, product.IngredientName, categoryId, 
+            this.manageProductByUserProvider.Save(product.UpcCode, product.PosDescription, product.Name, product.Ingredient.Term, categoryId, 
                 storeId, user, Convert.ToInt32(product.ExpirationDate), id);
         }
 
@@ -128,7 +140,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
             {
                 throw new HttpException(404, string.Format("ProductByuser with id [{0}] not found.", id));
             }
-            this.manageProductProvider.Save(product.ShortName, product.Name, product.IngredientName, product.Category.Id, product.Store.Id, upcCode:product.UpcCode);
+            this.manageProductProvider.Save(product.ShortName, product.Name, product.Ingredient.Term, product.Category.Id, product.Store.Id, upcCode:product.UpcCode);
             this.manageProductByUserProvider.Remove(product);
         }
 

@@ -65,14 +65,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbInitializer.cs" />
+    <Compile Include="Mappings\AllergyMappingOverride.cs" />
     <Compile Include="Mappings\CategoryMappingOverride.cs" />
     <Compile Include="Mappings\CategoryInStoresMappingOverride.cs" />
+    <Compile Include="Mappings\CourseMappingOverride.cs" />
+    <Compile Include="Mappings\CuisineMappingOverride.cs" />
+    <Compile Include="Mappings\DietMappingOverride.cs" />
+    <Compile Include="Mappings\HolidayMappingOverride.cs" />
+    <Compile Include="Mappings\IngredientMappingOverride.cs" />
     <Compile Include="Mappings\ProductByUserMappingOverride.cs" />
     <Compile Include="Mappings\FavoriteRecipeMappingOverride.cs" />
     <Compile Include="Mappings\ProductMappingOverride.cs" />
     <Compile Include="Mappings\ProductsOnKitchenMappingOverride.cs" />
+    <Compile Include="Mappings\RecipeMappingOverride.cs" />
     <Compile Include="Mappings\StoreMappingOverride.cs" />
     <Compile Include="Mappings\UserMappingOverride.cs" />
+    <Compile Include="Mappings\UserPreferenceMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

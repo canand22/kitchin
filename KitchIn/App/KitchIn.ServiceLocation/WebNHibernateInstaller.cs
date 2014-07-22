@@ -44,6 +44,7 @@ namespace KitchIn.ServiceLocation
             container.Register(Component.For<IManageStoreProvider>().ImplementedBy<ManageStoreProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IManageCategoryProvider>().ImplementedBy<ManageCategoryProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IManageProductByUserProvider>().ImplementedBy<ManageProductByUserProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageIngredientProvider>().ImplementedBy<ManageIngredientProvider>().LifestylePerWebRequest());
             container.Register(
                 AllTypes
                  .FromAssembly(typeof(IAuthenticationService).Assembly)
