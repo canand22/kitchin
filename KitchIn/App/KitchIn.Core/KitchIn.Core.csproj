@@ -64,19 +64,30 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Allergy.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\CategoryInStore.cs" />
+    <Compile Include="Entities\Course.cs" />
+    <Compile Include="Entities\Cuisine.cs" />
+    <Compile Include="Entities\Diet.cs" />
+    <Compile Include="Entities\Holiday.cs" />
+    <Compile Include="Entities\Ingredient.cs" />
     <Compile Include="Entities\ProductByUser.cs" />
     <Compile Include="Entities\FavoriteRecipe.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductsOnKitchen.cs" />
+    <Compile Include="Entities\Recipe.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserPreference.cs" />
     <Compile Include="Enums\MarketType.cs" />
     <Compile Include="Enums\TypeAdd.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="Enums\UserRoles.cs" />
+    <Compile Include="Interfaces\IManageIngredientProvider.cs" />
     <Compile Include="Interfaces\IManageProductByUserProvider.cs" />
     <Compile Include="Interfaces\IManageCaches.cs" />
     <Compile Include="Interfaces\IManageMatchingTexts.cs" />

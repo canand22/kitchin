@@ -19,6 +19,8 @@ namespace KitchIn.BL.Implementation
 
         private readonly IRepository<Store> storesRepo;
 
+        private readonly IRepository<Ingredient> ingredientsRepo;
+
         private const string NonFoodCategory = "NON-FOOD";
 
         public ManageProductProvider()
@@ -26,11 +28,12 @@ namespace KitchIn.BL.Implementation
             
         }
 
-        public ManageProductProvider(IRepository<Product> productsRepo, IRepository<Category> categoriesRepo, IRepository<Store> storesRepo)
+        public ManageProductProvider(IRepository<Product> productsRepo, IRepository<Category> categoriesRepo, IRepository<Store> storesRepo, IRepository<Ingredient> ingredientsRepo)
         {
             this.productsRepo = productsRepo;
             this.categoriesRepo = categoriesRepo;
             this.storesRepo = storesRepo;
+            this.ingredientsRepo = ingredientsRepo;
         }
 
         public void Save(Product product)
@@ -41,12 +44,13 @@ namespace KitchIn.BL.Implementation
         public void Save(string shortName, string name, string ingredientName, long categoryId, long storeId, long id = 0, string upcCode = null)
         {
             var isNewItem = id == 0;
+            var ingredient = this.ingredientsRepo.FirstOrDefault(p => p.Term == ingredientName);
             if (isNewItem)
             {
                 var product = new Product()
                                   {
                                       Category = this.categoriesRepo.Get(categoryId),
-                                      IngredientName = ingredientName,
+                                      Ingredient = ingredient,
                                       ModificationDate = DateTime.Now,
                                       Name = name,
                                       ShortName = shortName,
@@ -60,7 +64,7 @@ namespace KitchIn.BL.Implementation
             {
                 var product = this.productsRepo.Get(id);
                 product.Category = this.categoriesRepo.Get(categoryId);
-                product.IngredientName = ingredientName;
+                product.Ingredient = ingredient;
                 product.ModificationDate = DateTime.Now;
                 product.Name = name;
                 product.ShortName = shortName;

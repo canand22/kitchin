@@ -60,11 +60,13 @@ namespace KitchIn.Data.NHibernate
         {
             var config = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008
-                .ConnectionString(this.ConnectionString))
+                    .ConnectionString(this.ConnectionString))
                 .Mappings(m => m.AutoMappings.Add(CreateAutomappings))
-                .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
-                .BuildConfiguration();
-
+                .ExposeConfiguration(cfg =>
+                {
+                    new SchemaUpdate(cfg).Execute(false, true);
+                })
+    .BuildConfiguration();
             return config;
         }
 
@@ -77,6 +79,16 @@ namespace KitchIn.Data.NHibernate
                 .UseOverridesFromAssemblyOf<ProductMappingOverride>()
                 .UseOverridesFromAssemblyOf<ProductsOnKitchenMappingOverride>()
                 .UseOverridesFromAssemblyOf<FavoriteRecipeMappingOverride>()
+                .UseOverridesFromAssemblyOf<AllergyMappingOverride>()
+                .UseOverridesFromAssemblyOf<CourseMappingOverride>()
+                .UseOverridesFromAssemblyOf<CuisineMappingOverride>()
+                .UseOverridesFromAssemblyOf<DietMappingOverride>()
+                .UseOverridesFromAssemblyOf<HolidayMappingOverride>()
+                .UseOverridesFromAssemblyOf<IngredientMappingOverride>()
+                .UseOverridesFromAssemblyOf<RecipeMappingOverride>()
+                .UseOverridesFromAssemblyOf<UserPreferenceMappingOverride>()
+                .UseOverridesFromAssemblyOf<CategoryInStoresMappingOverride>()
+                .UseOverridesFromAssemblyOf<ProductByUserMappingOverride>()
                 .IgnoreBase<BaseEntity>();
         }
 

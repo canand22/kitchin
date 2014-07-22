@@ -42,6 +42,11 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         /// </summary>
         protected readonly IManageKitchenProvider manageKitchenProvider;
 
+        /// <summary>
+        /// The manage Ingredient Provider
+        /// </summary>
+        protected readonly IManageIngredientProvider manageIngredientProvider;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsController"/> class.
@@ -58,13 +63,17 @@ namespace KitchIn.Web.Areas.Admin.Controllers
         /// <param name="manageKitchenProvider">
         /// The manage Kitchen Provider.
         /// </param>
+        /// /// <param name="manageIngredientProvider">
+        /// The manage Ingredient Provider.
+        /// </param>
         public ProductsController(IManageProductProvider manageProductProvider, IManageCategoryProvider manageCategoryProvider, 
-            IManageStoreProvider manageStoreProvider, IManageKitchenProvider manageKitchenProvider)
+            IManageStoreProvider manageStoreProvider, IManageKitchenProvider manageKitchenProvider, IManageIngredientProvider manageIngredientProvider)
         {
             this.manageProductProvider = manageProductProvider;
             this.manageCategoryProvider = manageCategoryProvider;
             this.manageStoreProvider = manageStoreProvider;
             this.manageKitchenProvider = manageKitchenProvider;
+            this.manageIngredientProvider = manageIngredientProvider;
         }
 
         /// <summary>
@@ -86,8 +95,12 @@ namespace KitchIn.Web.Areas.Admin.Controllers
                 Text = x.Value,
                 Value = x.Key.ToString()
             }).ToList();
-
-            var model = new NixJqGridProductModel(categories, stores);
+            var ingredients = this.manageIngredientProvider.GetAllIngredients().OrderBy(x => x.Value).Select(x => new SelectListItem
+            {
+                Text = x.Value,
+                Value = x.Key.ToString()
+            }).ToList();
+            var model = new NixJqGridProductModel(categories, stores,ingredients);
             return this.View(model);
         }
 
@@ -178,7 +191,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
                                                          Name = p.Name,
                                                          PosDescription = p.ShortName,
                                                          TypeAdd = p.TypeAdd.ToString(),
-                                                         IngredientName = p.IngredientName,
+                                                         Ingredient = p.Ingredient,
                                                          ModificationDate = p.ModificationDate.ToString("MM/dd/yyyy HH:mm"),
                                                          Store = p.Store.Name
                                                      });
@@ -191,7 +204,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
             var id = Convert.ToInt64(model.Id);
             var categoryId = Convert.ToInt64(model.Category);
             var storeId = Convert.ToInt64(model.Store);
-            this.manageProductProvider.Save(model.PosDescription, model.Name, model.IngredientName, categoryId, storeId, id);
+            this.manageProductProvider.Save(model.PosDescription, model.Name, model.Ingredient.Term, categoryId, storeId, id);
         }
 
         /// <summary>

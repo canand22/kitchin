@@ -10,7 +10,7 @@ namespace KitchIn.Data.NHibernate.Mappings
         {
             mapping.Table("ProductsOnKitchens");
             mapping.Id().GeneratedBy.Identity();
-            mapping.Map(x => x.Name).Nullable();
+            mapping.Map(x => x.Name).Not.Nullable();
             mapping.Map(x => x.DateOfPurchase).Nullable();
             mapping.Map(x => x.UnitType).CustomType<int>().Nullable();
             mapping.Map(x => x.Quantity).Nullable();

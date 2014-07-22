@@ -15,9 +15,9 @@ namespace KitchIn.Data.NHibernate.Mappings
              mapping.Map(x => x.UpcCode).Nullable();
              mapping.Map(x => x.TypeAdd).Not.Nullable();
              mapping.Map(x => x.ModificationDate).Not.Nullable();
-             mapping.Map(x => x.IngredientName).Nullable();
 
-             mapping.References(x => x.Store, "StoreId").Not.Nullable();
+             mapping.References(x => x.Ingredient, "IngredientId").Nullable();
+             mapping.References(x => x.Store, "StoreId").Nullable();
              mapping.References(x => x.Category, "CategoryId").Nullable();
          }
     }
