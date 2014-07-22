@@ -1,0 +1,77 @@
+﻿@using SmartArch.NixJqGridFramework.Helpers
+@model KitchIn.Web.Core.Models.Admin.NixJqGridProductsByUserModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+	<link href="@Url.Content("~/Content/ui.jqgrid.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/Admin/Products/styles.css")" rel="stylesheet" type="text/css" />
+    	    
+    <script src="@Url.Content("~/Scripts/grid.locale-en.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery.jqDatePicker.min.js")" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		function approveProductLink(cellvalue, options, rowObject)
+		{
+		    return "<button type='button' class='approve' value='@Url.Action("Approve", "ProductsByUser")/" + rowObject.Id + "'>Approve</button>";
+		}
+
+		function declineProductLink(cellvalue, options, rowObject) {
+		    return "<button type='button' class='decline' value='@Url.Action("DeleteAjaxGrid", "ProductsByUser")/" + rowObject.Id + "'>Decline</button>";
+		}
+
+		$('.decline').live('click', function () {
+		    var url = $(this).val();
+		    ajaxSend("POST", null, url, function() {
+		        $(".ui-jqgrid-btable").trigger('reloadGrid');
+		    });
+		});
+
+		$('.approve').live('click', function() {
+		    var url = $(this).val();
+		    ajaxSend("POST", null, url, function() {
+		        $(".ui-jqgrid-btable").trigger('reloadGrid');
+		    });
+		});
+		
+		function ajaxSend(method, data, url, callback) {
+		     $.ajax({
+		            method: method,
+		            url: url,
+		            cache: false,
+		            complete: function () {
+		                if(callback != null){
+		                    callback();
+		                }
+		            }
+		        });
+		}
+		
+		function DeleteSelectedRow(){
+		    debugger;
+		    var selRow = $('.ui-jqgrid-btable').jqGrid('getGridParam', 'selarrrow').join(',');
+		    var url = '@Url.Action("DeleteAjaxGrid", "ProductsByUser")/' + selRow;
+		    ajaxSend("GET", null, url, function() {
+		        $(".ui-jqgrid-btable").trigger('reloadGrid');
+		    });
+		}
+		
+	</script>
+}
+<div>
+    <ul>
+        <li>@(Html.ActionLink("Users", "Index", "Users"))</li>
+        <li>@(Html.ActionLink("Categories", "Index", "Categories"))</li>
+        <li>@(Html.ActionLink("Products", "Index", "Products"))</li>
+        <li>Products added by users</li>
+        <li>@(Html.ActionLink("Stores", "Index", "Stores"))</li>
+    </ul>
+</div>
+<div>
+    <p>@Html.NixJqGrid(Model.AjaxGrid)</p>
+</div>

@@ -1,0 +1,1073 @@
+2013-01-02 11:11:12.5493|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:c38acbd5-af68-47f3-9a13-7b2d7af6b73a
+2013-01-02 11:11:12.7124|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:c38acbd5-af68-47f3-9a13-7b2d7af6b73a
+2013-01-02 11:11:22.9045|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:12:23.0726|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:5596f404-02a4-487e-a138-40788de01d04
+2013-01-02 11:12:23.4037|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:5596f404-02a4-487e-a138-40788de01d04
+2013-01-02 11:13:52.9105|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:15:04.9695|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:6118d9e8-d390-4863-8463-a5d368625982
+2013-01-02 11:15:05.0285|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:6118d9e8-d390-4863-8463-a5d368625982
+2013-01-02 11:15:15.0535|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:32:19.8891|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:7c5f43f3-8b99-4a9a-a1a7-c0d87c22ef38
+2013-01-02 11:32:19.9551|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:692cb498-f47f-4728-8cf2-70841806d8f9
+2013-01-02 11:32:30.1050|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:34:08.7194|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:4c3e07ad-8ad2-44c5-98af-74f82ce8e01e
+2013-01-02 11:34:08.7834|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:4c3e07ad-8ad2-44c5-98af-74f82ce8e01e
+2013-01-02 11:34:18.8754|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:36:26.7730|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:7ccaebdd-ef9a-49c9-8e56-0c2b6da3840a
+2013-01-02 11:36:26.8580|ERROR|KitchIn.Core.LogWriter|NHibernate configuration failed: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "KitchIn" requested by the login. The login failed.
+Login failed for user 'IIS APPPOOL\KitchInAppWeb'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.Tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.Prepare()
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.GetReservedWords(Dialect dialect, IConnectionHelper connectionHelper)
+   at NHibernate.Tool.hbm2ddl.SchemaMetadataUpdater.Update(ISessionFactory sessionFactory)
+   at NHibernate.Impl.SessionFactoryImpl..ctor(Configuration cfg, IMapping mapping, Settings settings, EventListeners listeners)
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at KitchIn.Data.NHibernate.DbInitializer.BuildFactory() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 51
+   at KitchIn.Data.NHibernate.DbInitializer.Initialize() in D:\KitchIn\KitchIn\App\KitchIn.Data.NHibernate\DbInitializer.cs:line 93
+ClientConnectionId:a56e3d94-6446-4111-ba31-41452373bb23
+2013-01-02 11:36:36.8840|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:37:51.9354|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 11:37:52.0114|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 11:37:52.4793|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 11:39:16.9969|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:48:06.7487|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 11:48:06.8287|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 11:48:07.1659|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 11:55:17.0227|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 11:55:43.7237|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 11:55:43.8148|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 11:55:44.1420|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 12:01:13.7142|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 12:04:01.3846|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:04:11.4846|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:04:26.1917|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 12:16:39.1761|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 12:38:29.6096|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:38:30.2313|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:38:30.5990|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 12:39:28.4053|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 12:44:07.7686|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:44:12.0261|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:44:29.2157|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 12:46:21.3234|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 12:46:50.6648|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:46:51.6292|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:47:07.9344|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 12:53:49.9447|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 12:55:10.2407|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:55:10.3318|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 12:55:10.6569|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:05:00.2117|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:05:37.4268|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:05:38.2771|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:05:41.3320|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:10:15.9355|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:10:43.2611|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:10:43.3492|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:10:43.6663|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:15:10.5167|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:15:44.9399|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:15:45.0350|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:15:45.3581|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:30:19.8889|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:31:22.3692|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:31:23.1130|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:31:24.9234|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:36:14.3825|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:36:49.6820|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:36:50.3458|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:36:51.6444|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:41:50.5676|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:43:54.2144|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:43:55.2639|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:43:56.9678|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:49:51.8642|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:50:11.7211|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:50:12.7616|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:50:13.0537|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 13:55:14.8756|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 13:55:47.4358|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:55:47.5399|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 13:55:50.4233|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 14:01:38.6993|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 14:02:56.5677|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:02:56.7097|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:02:57.0466|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 14:07:20.7149|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 14:16:48.1491|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:16:48.2351|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:16:48.5542|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 14:23:01.6975|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 14:27:26.2969|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:27:26.3749|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:27:26.6990|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 14:27:41.2454|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 14:28:41.8545|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:28:42.4485|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:28:42.7306|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 14:39:01.3642|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 14:50:41.1059|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:50:42.0462|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:50:42.4753|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 14:54:14.9861|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 14:54:51.8061|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:54:51.8811|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 14:54:52.2052|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:00:27.7769|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:00:56.7706|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:00:56.9126|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:00:57.2347|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:08:03.2482|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:10:13.7955|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:10:13.9515|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:10:14.3127|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:18:48.9729|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:18:49.0550|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:18:49.4061|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:23:29.9834|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:31:54.9747|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:31:55.0947|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:31:55.5286|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:34:35.4046|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:34:54.7548|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:34:54.8358|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:34:55.1617|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:36:36.8652|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:36:55.1487|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:36:55.2127|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:36:55.5176|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:52:15.0977|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:53:04.1522|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:53:04.2182|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:53:04.5034|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 15:53:36.7447|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 15:53:51.6246|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:53:51.6907|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 15:53:51.9678|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:04:42.6936|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:05:16.9487|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:05:17.1677|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:05:17.4546|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:10:09.5712|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:14:03.4164|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:14:03.4844|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:14:03.7783|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:14:40.4470|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:16:13.4174|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:16:13.4864|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:16:13.7673|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:18:41.3420|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:20:41.3170|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:20:41.3870|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:20:41.7020|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:22:05.0913|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:22:13.7722|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:22:13.8502|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:22:14.2302|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:22:35.5794|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:22:47.7476|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:22:47.8136|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:22:48.0996|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:23:12.5441|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:23:22.9731|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:23:23.0411|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:23:23.3482|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:24:15.4634|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:25:08.1766|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:25:08.3217|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:25:08.6067|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:34:36.0388|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:34:56.9453|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:34:57.0962|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:34:57.4390|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:34:59.7676|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:35:04.8525|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:35:04.9924|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:35:05.3002|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:35:29.9814|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:35:37.5869|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:35:37.6548|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:35:37.9516|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:35:39.7875|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:35:43.3514|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:35:43.4184|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:35:43.7132|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:52:58.8723|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:53:59.8056|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:53:59.8696|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:54:00.1697|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:56:14.8431|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 16:56:44.4150|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:56:44.4800|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 16:56:44.7941|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 16:59:39.4164|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:00:26.9337|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:00:27.2458|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:00:27.5349|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:09:59.8175|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:10:27.3153|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:10:27.4083|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:10:27.7455|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:11:34.7200|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:11:46.6289|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:11:46.7000|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:11:46.9881|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:13:29.0371|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:13:41.2852|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:13:41.4313|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:13:41.8315|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:33:03.5396|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:33:36.8666|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:33:36.9326|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:33:37.2195|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:35:26.9315|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:35:36.7256|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:35:36.9915|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:35:37.3134|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:35:39.1119|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 17:35:43.1517|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:35:43.2177|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 17:35:43.5146|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 17:58:46.6674|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 18:00:08.0431|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:00:08.1132|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:00:08.5003|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 18:22:01.1838|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 18:29:32.2229|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:29:32.3059|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:29:32.6439|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 18:35:48.1093|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 18:37:33.9438|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:37:34.0057|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:37:34.3385|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 18:45:45.2008|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 18:47:11.9498|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:47:12.0147|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:47:12.2746|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 18:51:04.7000|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 18:51:38.1090|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:51:38.4158|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:51:38.6996|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 18:53:16.6158|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 18:54:20.8481|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:54:20.9141|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 18:54:21.2242|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 19:02:22.8296|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 19:03:22.7876|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:03:22.8716|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:03:23.1527|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 19:25:49.1053|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 19:27:07.8861|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:27:07.9751|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:27:08.2730|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 19:36:04.2562|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 19:36:23.4234|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:36:23.4924|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:36:23.7953|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 19:54:31.1014|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 19:55:41.7858|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:55:41.8518|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 19:55:42.1399|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 20:11:20.0534|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 20:11:42.2090|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 20:11:42.2710|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 20:11:42.5529|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 20:39:23.7545|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-02 20:42:55.1766|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 20:42:55.2625|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-02 20:42:55.6223|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-02 21:05:54.5051|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 10:54:39.3523|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 10:54:39.4262|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 10:54:39.7350|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 11:15:33.0799|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 11:27:07.7929|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 11:27:07.8678|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 11:27:08.1856|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 11:54:04.4611|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 12:54:43.8874|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 12:54:43.9614|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 12:54:44.2705|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 13:13:06.1004|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 13:47:06.5018|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 13:47:06.5688|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 13:47:06.8624|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 13:57:07.4901|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:13:57.3411|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:13:57.4122|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:13:57.7044|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:24:22.6005|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:25:36.0962|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:25:36.1762|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:25:36.4702|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:26:16.9121|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:27:40.7047|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:27:40.7747|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:27:41.1137|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:31:48.9899|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:33:00.8227|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:33:00.8877|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:33:01.1937|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:34:20.9167|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:45:07.0166|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:45:07.0837|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:45:07.3789|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:48:43.4700|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:49:07.2317|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:49:07.3037|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:49:07.6249|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:52:17.7569|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:53:38.0481|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:53:38.1141|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:53:38.4154|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 14:54:48.0881|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 14:55:12.8524|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:55:12.9185|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 14:55:13.1977|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:07:33.9252|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:08:28.6117|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:08:28.6807|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:08:28.9757|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:10:43.2163|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:11:32.3963|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:11:32.4653|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:11:32.7643|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:13:36.2340|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:14:09.5326|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:14:09.6006|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:14:09.8956|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:21:25.9646|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:23:07.0788|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:23:07.1488|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:23:07.4499|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:28:06.2556|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:37:43.1443|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:37:43.2112|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:37:43.5031|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:40:26.3936|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:40:40.6285|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:40:40.6974|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:40:41.0033|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 15:43:32.5035|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 15:53:19.0547|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:53:19.1598|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 15:53:19.5439|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 16:31:26.7496|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 16:31:44.3064|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 16:31:44.3764|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 16:31:44.6663|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 16:35:20.5245|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 16:35:20.5895|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 16:35:20.8864|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 16:41:54.7222|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 16:55:06.6696|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 16:55:06.7396|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 16:55:07.0358|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 17:15:17.3478|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 18:51:32.0911|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 18:51:32.1631|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 18:51:32.4773|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 19:05:28.1669|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 19:16:00.9523|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 19:16:01.0213|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 19:16:01.4092|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 19:28:37.9845|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 19:29:34.8962|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 19:29:34.9652|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 19:29:35.2572|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 19:33:18.9286|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 19:33:48.7305|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 19:33:48.7976|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 19:33:49.0856|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 19:54:28.4672|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 20:09:33.8507|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 20:09:33.9207|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 20:09:34.2238|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 20:10:20.6638|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 20:11:31.1640|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 20:11:31.2330|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 20:11:31.5222|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 20:20:20.2444|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-04 20:20:37.1298|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 20:20:37.2029|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-04 20:20:37.5430|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-04 20:54:31.2039|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 10:49:52.8410|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 10:49:52.9111|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 10:49:53.2052|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 10:51:33.8076|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 10:52:44.4469|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 10:52:44.5130|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 10:52:44.7991|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 10:54:29.6500|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 10:55:08.6894|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 10:55:08.7605|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 10:55:09.0616|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:00:48.3550|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:01:07.5092|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:01:07.6581|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:01:07.9491|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:06:19.7467|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:12:44.7377|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:12:44.8057|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:12:45.1406|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:13:12.7701|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:13:30.2180|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:13:30.2910|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:13:30.6010|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:27:46.6489|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:28:03.1886|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:28:03.2576|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:28:03.5656|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:38:34.4263|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:44:12.8921|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:44:12.9740|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:44:13.3258|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:44:42.7961|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:44:59.8149|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:44:59.8848|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:45:00.1917|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:46:47.0605|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:47:10.9212|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:47:10.9911|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:47:11.2820|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 11:54:49.3213|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 11:57:30.0626|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:57:30.1286|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 11:57:30.4238|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 12:04:45.9479|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 12:21:04.0349|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 12:21:04.1150|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 12:21:04.4681|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 12:25:15.2372|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 12:26:13.3398|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 12:26:13.4087|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 12:26:13.7416|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 12:36:18.6001|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 12:36:33.7346|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 12:36:33.8046|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 12:36:34.1035|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 12:36:48.7131|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 18:56:10.1825|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 18:56:10.2665|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 18:56:10.6087|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 19:19:46.4709|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-08 19:20:25.0607|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 19:20:25.1237|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-08 19:20:25.4498|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-08 19:40:59.6293|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 11:56:52.3305|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 11:56:52.4055|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 11:56:52.7027|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 12:22:16.7398|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 12:24:24.5666|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:24:24.6336|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:24:24.9316|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 12:30:27.8519|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 12:31:46.3447|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:31:46.4027|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:31:46.6748|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 12:46:37.7099|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 12:47:01.9084|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:47:01.9793|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:47:02.2672|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 12:50:32.9577|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 12:50:51.0418|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:50:51.1148|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 12:50:51.4566|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 13:06:17.5308|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 13:06:35.5782|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 13:06:35.6532|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 13:06:36.0253|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 14:16:47.5985|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 14:33:03.0580|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 14:33:03.1770|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 14:33:03.5200|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 14:34:56.2504|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 14:35:22.4032|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 14:35:22.4702|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 14:35:22.7511|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 16:01:51.3525|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 16:09:16.6905|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 16:09:16.7746|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 16:09:17.0980|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 17:02:06.0762|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-09 17:06:44.5385|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 17:06:44.6104|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-09 17:06:44.9521|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-09 17:58:43.8861|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 10:55:40.3791|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 10:55:40.5792|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 10:55:41.1304|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 11:17:35.1962|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 11:54:54.6524|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 11:54:54.7234|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 11:54:55.0726|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 12:10:34.2594|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 12:24:27.6248|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 12:24:27.7048|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 12:24:28.0768|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 12:26:56.0896|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 12:27:44.8305|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 12:27:44.8965|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 12:27:45.1985|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 13:11:25.9680|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 13:46:10.2641|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 13:46:10.3481|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 13:46:10.6633|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 14:37:03.3564|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:06:40.6123|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:06:40.6943|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:06:41.1024|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 15:11:17.2730|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:11:40.4026|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:11:40.4856|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:11:40.7998|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 15:15:26.6606|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:15:51.9203|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:15:51.9923|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:15:52.3024|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 15:29:23.2079|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:31:19.4910|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:31:19.5630|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:31:19.8609|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 15:38:07.0127|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:40:32.6430|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:40:32.7140|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:40:33.0329|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 15:43:05.7188|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:44:41.9779|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:44:42.0479|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:44:42.4041|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 15:46:05.3816|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 15:51:56.6931|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:51:56.7632|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 15:51:57.0663|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 16:34:34.2027|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 16:53:59.2557|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 16:53:59.3258|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 16:53:59.6359|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 17:58:28.6869|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 17:59:41.4983|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 17:59:41.5664|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 17:59:41.8685|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 18:27:56.6538|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 18:32:22.1814|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 18:32:22.2524|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 18:32:22.6204|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 19:25:18.6999|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-10 19:27:31.6803|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 19:27:32.1711|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-10 19:27:32.4720|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-10 19:48:31.9640|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-11 15:02:34.6851|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 15:02:34.9243|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 15:02:35.5606|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-11 15:14:24.2245|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-11 15:15:07.7229|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 15:15:07.8250|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 15:15:08.2493|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-11 17:36:16.7904|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-11 17:36:23.8490|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 17:36:23.9169|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 17:36:24.2179|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-11 18:16:24.5487|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-11 18:56:41.4224|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 18:56:41.5164|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-11 18:56:41.9136|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-11 19:17:39.9530|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-14 11:07:04.8118|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 11:07:04.8848|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 11:07:05.2150|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-14 11:11:57.9105|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-14 11:12:49.1703|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 11:12:49.2323|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 11:12:49.4925|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-14 11:16:51.7017|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-14 11:18:00.7031|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 11:18:00.8522|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 11:18:01.1474|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-14 11:38:57.1767|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-14 15:27:36.1800|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 15:27:36.4459|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-14 15:27:37.0567|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-14 15:32:29.8458|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 10:44:25.5283|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 10:44:25.8234|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 10:44:26.4237|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 10:59:36.5967|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 11:05:12.5949|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 11:05:12.7189|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 11:05:13.1567|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 11:31:43.0887|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 11:32:17.0391|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 11:32:17.1171|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 11:32:17.5561|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 12:11:05.8462|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 12:11:27.4149|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:11:27.5450|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:11:27.8431|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 12:12:28.2613|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 12:12:46.5055|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:12:46.5895|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:12:46.8867|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 12:13:44.7095|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 12:15:58.0252|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:15:58.1392|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:15:58.4454|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 12:16:53.5779|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 12:20:27.9851|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:20:28.1111|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 12:20:28.3963|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 12:41:59.2518|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 13:05:00.7448|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 13:05:00.8288|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 13:05:01.1377|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 13:16:39.5050|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 14:45:17.9206|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 14:45:18.1297|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 14:45:18.6691|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 14:48:53.8756|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 14:52:15.1074|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 14:52:15.2235|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 14:52:15.5387|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 15:04:02.9578|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 15:04:28.2872|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 15:04:28.4182|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 15:04:28.7222|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 15:06:17.6923|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 16:39:04.9829|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 16:39:05.2089|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 16:39:05.6947|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 16:47:20.3399|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 16:48:53.9360|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 16:48:54.0170|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 16:48:54.2942|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 17:15:48.5956|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 17:27:19.0883|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 17:27:19.2232|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 17:27:19.7438|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 17:37:02.5124|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 17:38:35.2746|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 17:38:35.3625|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 17:38:35.6621|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 17:55:44.8866|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 18:01:18.5283|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:01:18.8402|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:01:19.2162|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 18:36:20.4651|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 18:37:22.7869|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:37:22.9189|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:37:23.2707|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 18:41:59.4975|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 18:51:13.0467|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:51:13.1287|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:51:13.4198|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 18:51:20.4746|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 18:51:32.5705|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:51:32.6865|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:51:32.9896|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 18:56:48.0546|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 18:57:23.7649|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:57:23.9180|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 18:57:24.2291|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 19:38:06.0694|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-15 19:52:45.2552|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 19:52:45.3371|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-15 19:52:45.7128|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-15 20:13:43.5369|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-16 11:50:39.6928|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-16 11:50:39.7728|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-16 11:50:40.1120|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-16 12:12:38.4855|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-16 16:18:19.7781|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-16 16:18:19.9772|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-16 16:18:20.3914|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-16 16:32:40.6532|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-17 12:51:42.4749|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-17 12:51:42.7120|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-17 12:51:43.0990|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-17 12:58:16.8221|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-17 13:55:50.6254|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-17 13:55:50.7045|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-17 13:55:50.9936|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-17 14:17:44.9051|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-18 16:36:05.8025|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-18 16:36:06.6180|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-18 16:36:07.4805|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-18 17:04:45.7182|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-21 12:34:55.7022|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-21 12:34:55.8191|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-21 12:34:56.2258|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-21 12:41:36.9173|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-21 12:41:58.0876|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-21 12:41:58.1755|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-21 12:41:58.4664|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-21 12:56:32.5106|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-21 12:59:00.0669|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-21 12:59:00.1639|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-21 12:59:00.5150|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-21 13:19:53.6956|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 15:56:38.1744|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 15:56:38.4434|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 15:56:38.8425|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 16:06:12.7287|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 16:07:22.5007|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 16:07:22.6077|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 16:07:22.9156|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 16:19:06.7330|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 16:19:28.8562|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 16:19:28.9753|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 16:19:29.2993|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 16:37:02.8478|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 16:37:37.9452|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 16:37:38.0592|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 16:37:38.3590|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 16:50:02.5243|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:07:37.7934|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:07:37.9144|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:07:38.2456|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:10:12.2186|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:11:30.9779|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:11:31.0910|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:11:31.4051|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:18:41.3660|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:19:11.6451|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:19:11.7622|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:19:12.0613|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:23:47.5627|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:24:18.7523|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:24:18.9083|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:24:19.2861|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:28:51.6744|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:32:57.9015|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:32:58.0145|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:32:58.3244|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:38:51.1475|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:39:29.8349|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:39:29.9459|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:39:30.2448|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:44:21.8013|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:45:16.0718|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:45:16.1829|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:45:16.4651|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:50:59.1256|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:51:50.5224|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:51:50.6384|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:51:50.9466|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:56:43.6281|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:57:03.5541|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:57:03.6691|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:57:04.0274|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 17:58:38.2982|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 17:58:53.7591|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:58:53.8731|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 17:58:54.2240|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:04:55.0648|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:05:55.7397|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:05:55.9216|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:05:56.2846|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:16:08.3200|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:16:42.5555|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:16:42.6835|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:16:43.0405|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:23:22.5885|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:24:26.6679|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:24:26.7759|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:24:27.0829|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:38:06.5268|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:39:06.3639|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:39:06.4708|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:39:06.7686|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:41:37.6301|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:45:11.4317|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:45:11.5486|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:45:11.8445|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:47:48.6823|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:48:41.0709|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:48:41.2528|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:48:41.5676|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 18:57:52.6400|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 18:58:52.6199|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:58:52.7320|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 18:58:53.0361|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 19:02:27.7105|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 19:05:26.8862|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:05:27.0082|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:05:27.3203|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 19:19:05.4686|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 19:20:26.9544|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:20:27.0774|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:20:27.4046|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 19:27:29.4403|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 19:28:30.6399|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:28:30.7509|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:28:31.0838|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 19:29:58.3676|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 19:31:47.8247|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:31:47.9517|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:31:48.2766|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 19:50:31.4872|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 19:54:39.9324|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:54:40.0384|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 19:54:40.3326|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 20:02:12.1882|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 20:02:50.2356|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:02:50.4146|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:02:50.9125|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 20:09:08.4620|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 20:10:05.6285|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:10:05.7385|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:10:06.0454|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 20:11:54.1388|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 20:12:32.0922|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:12:32.2092|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:12:32.4972|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 20:12:34.8847|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-01-22 20:12:39.1998|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:12:39.3848|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-01-22 20:12:39.7507|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-01-22 20:36:26.1138|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-02-05 17:58:16.1346|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-05 17:58:16.3587|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-05 17:58:16.6998|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-02-05 18:25:08.4879|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-02-05 18:30:06.2522|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-05 18:30:06.3582|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-05 18:30:06.6481|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-02-05 18:52:07.1543|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-02-07 18:07:56.1811|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-07 18:07:56.4180|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-07 18:07:56.9129|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-02-07 18:29:53.0665|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-02-08 17:45:32.2990|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-08 17:45:32.6028|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-08 17:45:33.2904|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-02-08 18:06:17.7200|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-02-08 18:06:53.2967|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-08 18:06:53.4147|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-02-08 18:06:53.8308|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-02-08 18:29:44.7476|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-11-19 10:52:53.7496|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-11-19 10:52:54.0056|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-11-19 10:52:54.3807|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-11-19 11:55:41.4488|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-12-10 18:02:30.2805|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-12-10 18:02:30.5695|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-12-10 18:02:30.9935|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-12-10 18:23:18.5321|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-12-19 18:03:03.9011|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-12-19 18:03:04.3401|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-12-19 18:03:05.0671|INFO|KitchIn.Core.LogWriter|Application started successfully!
+2013-12-19 18:26:45.2088|INFO|KitchIn.Core.LogWriter|Application stopped!
+2013-12-20 11:12:58.1096|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-12-20 11:12:58.4246|INFO|KitchIn.Core.LogWriter|NHibernate was configurated successfully!
+2013-12-20 11:12:58.7576|INFO|KitchIn.Core.LogWriter|Application started successfully!

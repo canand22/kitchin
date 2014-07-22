@@ -1,0 +1,43 @@
+﻿@model $solutionName$.Web.Core.Models.Admin.UserEditModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "User details";
+}
+
+@Html.ActionLink("<- Return to users management page", "Index")
+<br />
+<br />
+<hgroup class="title">
+    <h2>User details.</h2>
+</hgroup>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+	<fieldset>
+		<legend>User details form</legend>
+		<ol>
+			<li>
+				@Html.LabelFor(m => m.Login)
+				@Html.TextBoxFor(m => m.Login)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Email)
+				@Html.TextBoxFor(m => m.Email)
+			</li>  
+			 <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </li>
+			<li>
+				@for (int i = 0; i < Model.Roles.Count; i++)
+	{
+					@Html.LabelFor(m => m.Roles[i].IsChecked, Model.Roles[i].Name)
+					@Html.CheckBoxFor(m => m.Roles[i].IsChecked)   
+					@Html.HiddenFor(m => m.Roles[i].Name)
+	}
+			</li>
+		</ol>
+		<input type="submit" value="Save" />
+	</fieldset>
+}

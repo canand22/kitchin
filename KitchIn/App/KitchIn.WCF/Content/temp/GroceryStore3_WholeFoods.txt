@@ -1,0 +1,27 @@
+﻿wh5le
+POODS
+3640 North Halsted Street
+Chicago, IL 60613 773-472-0400
+0	.89	LB e 2.49 /It)	I ARE	= .01
+UT		0G MACINTOSH	APPLE	2.22 B
+			ITEM	- 94154
+		3650 LF SR CR	16Z	2.99 B
+		36b 0RG DJN MST08Z		1 .99 B
+		RD CR CHILI 1	.2 02	2 49 B
+		SUT PAPRIKA I	410Z	2.99 B
+		SO CHILIPOWIl	. 60Z	2.99 B
+0.	73	LB 6 2.69 /lb	TARt	- .05
+UT		OG CUCUMBERS		1 .96 B
+			ITEM	- 94062
+	#*** Tax 0 2.25H			.40
+	**** TAX .40		BAL	18.03
+VF		MasterCard		18.03
+fleet # ************4 Ob2
+Se<* it 7203
+Authorization t 01582Z
+CHANGE	.00
+TOTAL NUMBER OF ITEMS SOLD =	7
+9/29/12 10:51 AM 0555 12 0192 128
+Your cashier today is STACIE
+Receipts are required for all refunds
+Refunds must be made within 30 days

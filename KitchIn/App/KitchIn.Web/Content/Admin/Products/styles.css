@@ -1,0 +1,10 @@
+﻿.ui-widget select {
+    width: 257px;
+    height: 19px;
+    margin-left: 1px;
+}
+
+.ui-jqgrid .ui-pg-selbox {
+    margin: 0px;
+    width: auto;
+}
