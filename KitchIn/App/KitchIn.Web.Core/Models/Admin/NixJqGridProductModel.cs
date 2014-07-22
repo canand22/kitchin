@@ -18,7 +18,7 @@ namespace KitchIn.Web.Core.Models.Admin
         /// <param name="categories">
         /// The list categories.
         /// </param>
-        public NixJqGridProductModel(List<SelectListItem> categories, List<SelectListItem> stores)
+        public NixJqGridProductModel(List<SelectListItem> categories, List<SelectListItem> stores, List<SelectListItem> ingredients)
         {
             this.AjaxGrid =
                new NixJqGrid<ProductViewModel>(
@@ -28,7 +28,7 @@ namespace KitchIn.Web.Core.Models.Admin
                            new NixJqGridColumn<ProductViewModel>(x => x.Id).Hidden(),
                            new NixJqGridColumn<ProductViewModel>(x => x.PosDescription).Set(p => p.Searchable, true),
                            new NixJqGridColumn<ProductViewModel>(x => x.Name).Set(p => p.Searchable, true),
-                           new NixJqGridColumn<ProductViewModel>(x => x.IngredientName).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductViewModel>(x => x.Ingredient).SetDropDownList(ingredients),
                            new NixJqGridColumn<ProductViewModel>(x => x.Category).SetDropDownList(categories),
                            new NixJqGridColumn<ProductViewModel>(x => x.TypeAdd).Set(p => p.Searchable, true),
                            new NixJqGridColumn<ProductViewModel>(x => x.Store).SetDropDownList(stores),
@@ -101,8 +101,8 @@ namespace KitchIn.Web.Core.Models.Admin
             this.AjaxGrid[c => c.Name].Searchable = true;
             this.AjaxGrid[c => c.Name].Width = 250;
 
-            this.AjaxGrid[c => c.IngredientName].Searchable = true;
-            this.AjaxGrid[c => c.IngredientName].Width = 250;
+            this.AjaxGrid[c => c.Ingredient].Searchable = true;
+            this.AjaxGrid[c => c.Ingredient].Width = 250;
 
             this.AjaxGrid[c => c.Category].Searchable = true;
             this.AjaxGrid[c => c.Category].Width = 220;

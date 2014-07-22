@@ -16,7 +16,7 @@ namespace KitchIn.Web.Core.Models.Admin
         /// <param name="categories">
         /// The list categories.
         /// </param>
-        public NixJqGridProductsByUserModel(List<SelectListItem> categories, List<SelectListItem> stores)
+        public NixJqGridProductsByUserModel(List<SelectListItem> categories, List<SelectListItem> stores,List<SelectListItem> ingredients )
         {
             this.AjaxGrid =
                new NixJqGrid<ProductByUserViewModel>(
@@ -28,7 +28,7 @@ namespace KitchIn.Web.Core.Models.Admin
                            new NixJqGridColumn<ProductByUserViewModel>(x => x.Category).SetDropDownList(categories),
                            new NixJqGridColumn<ProductByUserViewModel>(x => x.Name).Set(p => p.Searchable, true),
                            new NixJqGridColumn<ProductByUserViewModel>(x => x.UpcCode).Set(p => p.Searchable, true),
-                           new NixJqGridColumn<ProductByUserViewModel>(x => x.IngredientName).Set(p => p.Searchable, true),
+                           new NixJqGridColumn<ProductByUserViewModel>(x => x.Ingredient).SetDropDownList(ingredients),
                            new NixJqGridColumn<ProductByUserViewModel>(x => x.ExpirationDate),
                            new NixJqGridColumn<ProductByUserViewModel>(x => x.Store).SetDropDownList(stores),
                            new NixJqGridColumn<ProductByUserViewModel>(x => x.Date),
@@ -90,9 +90,9 @@ namespace KitchIn.Web.Core.Models.Admin
             this.AjaxGrid[c => c.UpcCode].Searchable = true;
             this.AjaxGrid[c => c.UpcCode].Width = 100;
 
-            this.AjaxGrid[c => c.IngredientName].Searchable = true;
-            this.AjaxGrid[c => c.IngredientName].Width = 100;
-            this.AjaxGrid[c => c.IngredientName].ColumnName = "Ingredient";
+            this.AjaxGrid[c => c.Ingredient].Searchable = true;
+            this.AjaxGrid[c => c.Ingredient].Width = 100;
+          //  this.AjaxGrid[c => c.Ingredient].ColumnName = "Ingredient";
 
             this.AjaxGrid[c => c.ExpirationDate].Sortable = false;
             this.AjaxGrid[c => c.ExpirationDate].Width = 70;

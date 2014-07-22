@@ -1,4 +1,5 @@
-﻿using SmartArch.Core.Domain.Base;
+﻿using Iesi.Collections.Generic;
+using SmartArch.Core.Domain.Base;
 using System;
 
 namespace KitchIn.Core.Entities
@@ -11,7 +12,7 @@ namespace KitchIn.Core.Entities
 
         public virtual string Name { get; set; }
 
-        public virtual string IngredientName { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
 
         public virtual Category Category { get; set; }
 

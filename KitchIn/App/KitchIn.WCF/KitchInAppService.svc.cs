@@ -136,8 +136,7 @@ namespace KitchIn.WCF
 
         public StatusResponse Forgot(string email)
         {
-            this.userProvider.ChangeUserPassword(email);
-            var result = new StatusResponse() { IsSuccessfully = true, Message = "Ok" };
+            var result = new StatusResponse() { IsSuccessfully = this.userProvider.ChangeUserPassword(email), Message = "Ok" };
             return result;
         }
 
