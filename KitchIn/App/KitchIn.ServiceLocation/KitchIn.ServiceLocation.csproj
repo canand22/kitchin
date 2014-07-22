@@ -36,17 +36,11 @@
     <Reference Include="Castle.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.FactorySupport">
-      <HintPath>..\..\packages\Castle.FactorySupportFacility.3.1.0\lib\net40\Castle.Facilities.FactorySupport.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Facilities.WcfIntegration">
       <HintPath>..\..\packages\Castle.WcfIntegrationFacility.3.1.0\lib\net40\Castle.Facilities.WcfIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Fasterflect">
       <HintPath>..\..\packages\fasterflect.2.1.2\lib\net35\Fasterflect.dll</HintPath>
@@ -73,10 +67,6 @@
     <Reference Include="SmartArch, Version=1.0.145.25, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\SmartArch.1.0.145.25\lib\net40\SmartArch.dll</HintPath>
-    </Reference>
-    <Reference Include="SmartArch.Data.EF, Version=1.0.132.13, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SmartArch.Data.EF.1.0.132.13\lib\net40\SmartArch.Data.EF.dll</HintPath>
     </Reference>
     <Reference Include="SmartArch.Data.NH, Version=1.0.132.12, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -99,6 +99,8 @@
     <Compile Include="Services\Cache\ManageCaches.cs" />
     <Compile Include="Services\CSVParser\CSVParser.cs" />
     <Compile Include="Services\CSVParser\ICSVParser.cs" />
+    <Compile Include="Services\Jobs\IRunable.cs" />
+    <Compile Include="Services\Jobs\YummlyMetaUpdater.cs" />
     <Compile Include="Services\Mailing\IMailService.cs" />
     <Compile Include="Services\Mailing\MailService.cs" />
     <Compile Include="Services\OCRRecognize\Parsers\PotashParser.cs" />
@@ -114,6 +116,17 @@
     <Compile Include="Services\TextMatching\LevenshteinDistance.cs" />
     <Compile Include="Services\Uploader\FileUploader.cs" />
     <Compile Include="Services\Uploader\FileUploaderResult.cs" />
+    <Compile Include="Services\Yummly\Attributes.cs" />
+    <Compile Include="Services\Yummly\Attribution.cs" />
+    <Compile Include="Services\Yummly\Criteria.cs" />
+    <Compile Include="Services\Yummly\FacetCounts.cs" />
+    <Compile Include="Services\Yummly\Flavors.cs" />
+    <Compile Include="Services\Yummly\ImageUrlsBySize.cs" />
+    <Compile Include="Services\Yummly\IYummly.cs" />
+    <Compile Include="Services\Yummly\Match.cs" />
+    <Compile Include="Services\Yummly\RecipeJson.cs" />
+    <Compile Include="Services\Yummly\YummlyManager.cs" />
+    <Compile Include="Services\Yummly\YummlyReqEntity.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
