@@ -1,8 +1,11 @@
 ﻿using System;
 
 using Castle.Facilities.WcfIntegration;
+using Castle.MicroKernel.Lifestyle;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using KitchIn.Core.Services.Jobs;
+using KitchIn.Core.Services.Yummly;
 using KitchIn.ServiceLocation;
 using KitchIn.WCF.Contracts;
 using KitchIn.WCF.Services;
@@ -42,6 +45,9 @@ namespace KitchIn.WCF
 
             container.Register(Component.For<IKitchInAppService>().ImplementedBy<KitchInAppService>().AsWcfService(new DefaultServiceModel().
             Hosted()).IsDefault().LifestylePerWebRequest());
+            
+            container.Register(Component.For<IRunable>().ImplementedBy<YummlyMetaUpdater>().LifestyleSingleton());
+            container.Register(Component.For<IYummly>().ImplementedBy<YummlyManager>().LifestyleSingleton());
 
             //container.AddFacility<WcfFacility>();
         }

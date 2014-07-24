@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{830564
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTool", "ConsoleTool\ConsoleTool.csproj", "{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -170,6 +172,16 @@ Global
 		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8708ADA7-35A9-4677-93BC-032B70837512}.Release|x86.ActiveCfg = Release|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +189,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AFE1B98E-1EE5-4340-A90E-E6C5AFECC4F8} = {4A2809A7-363F-4BF6-8563-0760C2B2A7F1}
 		{8708ADA7-35A9-4677-93BC-032B70837512} = {4A2809A7-363F-4BF6-8563-0760C2B2A7F1}
+		{571D1CD2-EC31-4D2A-9BD6-4621C9EA37EC} = {4A2809A7-363F-4BF6-8563-0760C2B2A7F1}
 		{9C4E2ED5-29DB-430B-9CAF-A0E2E522D7ED} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
 		{EAA7A555-4CB4-47B8-9111-8D22C61AF158} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}
 		{30F13F87-8607-422B-B34E-4444EB55F92E} = {31D8C263-D281-45B8-925D-F8A904E2F4D0}

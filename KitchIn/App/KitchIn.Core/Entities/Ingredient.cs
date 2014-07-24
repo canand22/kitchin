@@ -8,7 +8,7 @@ namespace KitchIn.Core.Entities
     [JsonObject]
     public class Ingredient : BaseEntity
     {
-        [JsonIgnore]
+        [JsonProperty("id")]
         public virtual string YummlyId { get; set; }
 
         [JsonProperty("searchValue")]

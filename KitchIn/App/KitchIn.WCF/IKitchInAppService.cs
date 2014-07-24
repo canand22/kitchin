@@ -2,6 +2,7 @@
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using KitchIn.Core.Services.Yummly.Response;
 using KitchIn.WCF.Core.Models;
 using KitchIn.WCF.Core.Models.MyAccount;
 using KitchIn.WCF.Core.Models.MyFavorites;
@@ -137,5 +138,13 @@ namespace KitchIn.WCF
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Adding of the product to the database by the user")]
         StatusResponse Product(ProductByUserModel productByUserModel);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Recipies?cookwith={cookWith}&cookwithout={cookWithout}&allergies={allergies}&diets={diets}&cuisine={cuisine}&dishtype={dishType}&holiday={holiday}&meal={meal}&time={time}")]
+        IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith, string cookWithout, string allergies, string diets, string cuisine, string dishType, string holiday, string meal, string time);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Recipe/{id}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        RecipeRes GetRecipe(string id);
     }
 }

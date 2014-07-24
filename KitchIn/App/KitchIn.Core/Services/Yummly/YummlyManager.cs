@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Configuration;
-using Iesi.Collections;
-using Iesi.Collections.Generic;
 using KitchIn.Core.Entities;
+using KitchIn.Core.Services.Yummly.Recipe;
+using KitchIn.Core.Services.Yummly.Response;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmartArch.Data;
 
 namespace KitchIn.Core.Services.Yummly
@@ -16,15 +17,7 @@ namespace KitchIn.Core.Services.Yummly
     {
         private IDictionary<string, string> endpoints;
 
-        private static IDictionary<string, string> metadata = new Dictionary<string, string>()
-            {
-                {"Ingredients", String.Empty},
-                {"Allergies", String.Empty},
-                {"Diets", String.Empty},
-                {"Cuisine", String.Empty},
-                {"Course", String.Empty},
-                {"Holiday", String.Empty}
-            };
+        private static IDictionary<string, string> metadata;
 
         private IRepository<Ingredient> ingredientsRepository;
         private IRepository<Course> coursesRepository;
@@ -58,6 +51,22 @@ namespace KitchIn.Core.Services.Yummly
                 {"Recipes", "http://api.yummly.com/v1/api/recipes?_app_id={0}&_app_key={1}{2}"},
                 {"GetRecipe", "http://api.yummly.com/v1/api/recipe/{2}?_app_id={0}&_app_key={1}"}
             };
+
+            if (metadata == null)
+            {
+                metadata = new Dictionary<string, string>()
+                {
+                    {"Ingredients", String.Empty},
+                    {"Allergies", String.Empty},
+                    {"Diets", String.Empty},
+                    {"Cuisine", String.Empty},
+                    {"Course", String.Empty},
+                    {"Holiday", String.Empty}
+                };
+
+                UpdateMetadata();
+            }
+
         }
 
         private string GetData(string url, string query = "", string param = "")
@@ -85,242 +94,359 @@ namespace KitchIn.Core.Services.Yummly
         {
             foreach (var item in endpoints)
             {
-                var result = GetData(item.Value, String.Empty);
-                var itemList = String.Empty;
-
-                if (!String.IsNullOrWhiteSpace(result))
+                try
                 {
-                    switch (item.Key)
+                    var result = GetData(item.Value, String.Empty);
+                    var itemList = String.Empty;
+
+                    if (!String.IsNullOrWhiteSpace(result))
                     {
-                        case "Ingredient":
-                            var ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(result);
+                        switch (item.Key)
+                        {
+                            case "Ingredient":
+                                result =
+                                    result.Replace("set_metadata('ingredient',", String.Empty)
+                                        .Replace(");", String.Empty)
+                                        .Trim();
 
-                            foreach (var ingredient in ingredients)
-                            {
-                                var currIngredient =
-                                    this.ingredientsRepository.FirstOrDefault(
-                                        i => i.SearchValue.Equals(ingredient.SearchValue));
+                                var ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(result);
 
-                                if (currIngredient == null)
+                                if (ingredients.Any())
                                 {
-                                    var newIngr = new Ingredient()
-                                    {
-                                        SearchValue = ingredient.SearchValue,
-                                        Description = ingredient.Description,
-                                        Term = ingredient.Term
-                                    };
-
-                                    ingredientsRepository.Save(newIngr);
+                                    itemList = String.Empty;
+                                    ingredients.ForEach(x => itemList += x.Term.ToLower() + ",");
+                                    metadata["Ingredients"] = itemList;
                                 }
-                            }
 
-                            if (ingredients.Any())
-                            {
-                                itemList = String.Empty;
-                                ingredients.ForEach(x => itemList += x.Term + " ");
-                                metadata["Ingredients"] = itemList;
-                            }
-
-                            break;
-
-                        case "Allergy":
-                            var allergies = JsonConvert.DeserializeObject<List<Allergy>>(result);
-
-                            foreach (var allergy in allergies)
-                            {
-                                var currAllergy = allergiesRepository.FirstOrDefault(a => a.SearchValue.Equals(allergy.SearchValue));
-
-                                if (currAllergy == null)
+                                foreach (var ingredient in ingredients)
                                 {
-                                    var newAllergy = new Allergy()
+                                    var currIngredient =
+                                        this.ingredientsRepository.FirstOrDefault(
+                                            i => i.SearchValue.Equals(ingredient.Term.ToLower()));
+
+                                    if (currIngredient == null)
                                     {
-                                        SearchValue = currAllergy.SearchValue,
-                                        ShortDescription = currAllergy.ShortDescription,
-                                        LongDescription = currAllergy.LongDescription,
-                                        Type = currAllergy.Type,
-                                        LocalesAvailableIn = currAllergy.LocalesAvailableIn
-                                    };
+                                        var newIngr = new Ingredient()
+                                        {
+                                            SearchValue = ingredient.SearchValue,
+                                            Description = ingredient.Description,
+                                            Term = ingredient.Term
+                                        };
 
-                                    allergiesRepository.Save(newAllergy);
+                                        ingredientsRepository.Save(newIngr);
+                                    }
                                 }
-                            }
 
-                            if (allergies.Any())
-                            {
-                                itemList = String.Empty;                                
-                                allergies.ForEach(x => itemList += x.SearchValue + " ");
-                                metadata["Allergies"] = itemList;
-                            }
+                                break;
 
-                            break;
+                            case "Allergy":
+                                result =
+                                    result.Replace("set_metadata('allergy',", String.Empty)
+                                        .Replace(");", String.Empty)
+                                        .Trim();
 
-                        case "Diet":
-                            var diets = JsonConvert.DeserializeObject<List<Diet>>(result);
+                                var allergies = JsonConvert.DeserializeObject<List<Allergy>>(result);
 
-                            foreach (var diet in diets)
-                            {
-                                var currDiet = dietsRepository.FirstOrDefault(d => d.SearchValue.Equals(diet.SearchValue));
-
-                                if (currDiet == null)
+                                if (allergies.Any())
                                 {
-                                    var newDied = new Diet()
-                                    {
-                                        SearchValue = diet.SearchValue,
-                                        ShortDescription = diet.ShortDescription,
-                                        LongDescription = diet.LongDescription,
-                                        Type = diet.Type,
-                                        LocalesAvailableIn = diet.LocalesAvailableIn
-                                    };
-
-                                    dietsRepository.Save(newDied);
+                                    itemList = String.Empty;
+                                    allergies.ForEach(x => itemList += x.ShortDescription.ToLower() + ",");
+                                    metadata["Allergies"] = itemList;
                                 }
-                            }
 
-                            if (diets.Any())
-                            {
-                                itemList = String.Empty;
-                                diets.ForEach(x => itemList += x.SearchValue + " ");
-                                metadata["Diets"] = itemList;
-                            }
-
-                            break;
-
-                        case "Cuisine":
-                            var cuisines = JsonConvert.DeserializeObject<List<Cuisine>>(result);
-
-                            foreach (var cuisin in cuisines)
-                            {
-                                var currCuisine = cuisinesRepository.FirstOrDefault(c => c.SearchValue.Equals(cuisin.SearchValue));
-
-                                if (currCuisine == null)
+                                foreach (var allergy in allergies)
                                 {
-                                    var newCuisine = new Cuisine()
+                                    var currAllergy =
+                                        allergiesRepository.FirstOrDefault(
+                                            a => a.SearchValue.Equals(allergy.SearchValue.ToLower()));
+
+                                    if (currAllergy == null)
                                     {
-                                        SearchValue = cuisin.SearchValue,
-                                        Name = cuisin.Name,
-                                        Description = cuisin.Description,
-                                        Type = cuisin.Type,
-                                        LocalesAvailableIn = cuisin.LocalesAvailableIn
-                                    };
+                                        var newAllergy = new Allergy()
+                                        {
+                                            SearchValue = currAllergy.SearchValue,
+                                            ShortDescription = currAllergy.ShortDescription,
+                                            LongDescription = currAllergy.LongDescription,
+                                            Type = currAllergy.Type,
+                                            LocalesAvailableIn = currAllergy.LocalesAvailableIn
+                                        };
 
-                                    cuisinesRepository.Save(newCuisine);
+                                        allergiesRepository.Save(newAllergy);
+                                    }
                                 }
-                            }
 
-                            if (cuisines.Any())
-                            {
-                                itemList = String.Empty;
-                                cuisines.ForEach(x => itemList += x.SearchValue + " ");
-                                metadata["Cuisine"] = itemList;
-                            }
+                                break;
 
-                            break;
+                            case "Diet":
+                                result =
+                                    result.Replace("set_metadata('diet',", String.Empty)
+                                        .Replace(");", String.Empty)
+                                        .Trim();
 
-                        case "Course":
-                            var courses = JsonConvert.DeserializeObject<List<Course>>(result);
+                                var diets = JsonConvert.DeserializeObject<List<Diet>>(result);
 
-                            foreach (var course in courses)
-                            {
-                                var currCourse = coursesRepository.FirstOrDefault(c => c.SearchValue.Equals(course.SearchValue));
-
-                                if (currCourse == null)
+                                if (diets.Any())
                                 {
-                                    var newCourse = new Course()
-                                    {
-                                        SearchValue = course.SearchValue,
-                                        Name = course.Name,
-                                        Description = course.Description,
-                                        Type = course.Type,
-                                        LocalesAvailableIn = course.LocalesAvailableIn
-                                    };
-
-                                    coursesRepository.Save(newCourse);
+                                    itemList = String.Empty;
+                                    diets.ForEach(x => itemList += x.ShortDescription.ToLower() + ",");
+                                    metadata["Diets"] = itemList;
                                 }
-                            }
 
-                            if (courses.Any())
-                            {
-                                itemList = String.Empty;
-                                courses.ForEach(x => itemList += x.SearchValue + " ");
-                                metadata["Courses"] = itemList;
-                            }
-
-                            break;
-
-                        case "Holiday":
-                            var holidays = JsonConvert.DeserializeObject<List<Holiday>>(result);
-
-                            foreach (var holiday in holidays)
-                            {
-                                var currHoliday = holidaysRepository.FirstOrDefault(h => h.SearchValue.Equals(holiday.SearchValue));
-
-                                if (currHoliday == null)
+                                foreach (var diet in diets)
                                 {
-                                    var newHoliday = new Holiday()
+                                    var currDiet =
+                                        dietsRepository.FirstOrDefault(d => d.SearchValue.Equals(diet.SearchValue.ToLower()));
+
+                                    if (currDiet == null)
                                     {
-                                        SearchValue = holiday.SearchValue,
-                                        Name = holiday.Name,
-                                        Description = holiday.Description,
-                                        Type = holiday.Type,
-                                        LocalesAvailableIn = holiday.LocalesAvailableIn
-                                    };
+                                        var newDied = new Diet()
+                                        {
+                                            SearchValue = diet.SearchValue,
+                                            ShortDescription = diet.ShortDescription,
+                                            LongDescription = diet.LongDescription,
+                                            Type = diet.Type,
+                                            LocalesAvailableIn = diet.LocalesAvailableIn
+                                        };
 
-                                    holidaysRepository.Save(newHoliday);
+                                        dietsRepository.Save(newDied);
+                                    }
                                 }
-                            }
 
-                            if (holidays.Any())
-                            {
-                                itemList = String.Empty;
-                                holidays.ForEach(x => itemList += x.SearchValue + " ");
-                                metadata["Holidays"] = itemList;
-                            }
+                                break;
 
-                            break;
+                            case "Cuisine":
+                                result =
+                                    result.Replace("set_metadata('cuisine',", String.Empty)
+                                        .Replace(");", String.Empty)
+                                        .Trim();
+
+                                var cuisines = JsonConvert.DeserializeObject<List<Cuisine>>(result);
+
+                                if (cuisines.Any())
+                                {
+                                    itemList = String.Empty;
+                                    cuisines.ForEach(x => itemList += x.Name.ToLower() + ",");
+                                    metadata["Cuisine"] = itemList;
+                                }
+
+                                foreach (var cuisin in cuisines)
+                                {
+                                    var currCuisine =
+                                        cuisinesRepository.FirstOrDefault(c => c.SearchValue.Equals(cuisin.SearchValue.ToLower()));
+
+                                    if (currCuisine == null)
+                                    {
+                                        var newCuisine = new Cuisine()
+                                        {
+                                            SearchValue = cuisin.SearchValue,
+                                            Name = cuisin.Name,
+                                            Description = cuisin.Description,
+                                            Type = cuisin.Type,
+                                            LocalesAvailableIn = cuisin.LocalesAvailableIn
+                                        };
+
+                                        cuisinesRepository.Save(newCuisine);
+                                    }
+                                }
+
+                                break;
+
+                            case "Course":
+                                result =
+                                    result.Replace("set_metadata('course',", String.Empty)
+                                        .Replace(");", String.Empty)
+                                        .Trim();
+
+                                var courses = JsonConvert.DeserializeObject<List<Course>>(result);
+
+                                if (courses.Any())
+                                {
+                                    itemList = String.Empty;
+                                    courses.ForEach(x => itemList += x.Name.ToLower() + ",");
+                                    metadata["Course"] = itemList;
+                                }
+
+                                foreach (var course in courses)
+                                {
+                                    var currCourse =
+                                        coursesRepository.FirstOrDefault(c => c.SearchValue.Equals(course.SearchValue.ToLower()));
+
+                                    if (currCourse == null)
+                                    {
+                                        var newCourse = new Course()
+                                        {
+                                            SearchValue = course.SearchValue,
+                                            Name = course.Name,
+                                            Description = course.Description,
+                                            Type = course.Type,
+                                            LocalesAvailableIn = course.LocalesAvailableIn
+                                        };
+
+                                        coursesRepository.Save(newCourse);
+                                    }
+                                }
+
+                                break;
+
+                            case "Holiday":
+                                result =
+                                    result.Replace("set_metadata('holiday',", String.Empty)
+                                        .Replace(");", String.Empty)
+                                        .Trim();
+
+                                var holidays = JsonConvert.DeserializeObject<List<Holiday>>(result);
+
+                                if (holidays.Any())
+                                {
+                                    itemList = String.Empty;
+                                    holidays.ForEach(x => itemList += x.Name.ToLower() + ",");
+                                    metadata["Holiday"] = itemList;
+                                }
+
+                                foreach (var holiday in holidays)
+                                {
+                                    var currHoliday =
+                                        holidaysRepository.FirstOrDefault(h => h.SearchValue.Equals(holiday.SearchValue.ToLower()));
+
+                                    if (currHoliday == null)
+                                    {
+                                        var newHoliday = new Holiday()
+                                        {
+                                            SearchValue = holiday.SearchValue,
+                                            Name = holiday.Name,
+                                            Description = holiday.Description,
+                                            Type = holiday.Type,
+                                            LocalesAvailableIn = holiday.LocalesAvailableIn
+                                        };
+
+                                        holidaysRepository.Save(newHoliday);
+                                    }
+                                }
+
+                                break;
+                        }
                     }
+                }
+                catch
+                {
+                    continue;
                 }
             }
         }
 
-        public RecipeSearchJson SearchRecipes(string request)
+        public IEnumerable<RecipeSearchRes> SearchRecipes(YummlyReqEntity entity)
         {
             try
             {
-                var entity = JsonConvert.DeserializeObject<YummlyReqEntity>(request);
                 var query = GenerateRequest(entity);
                 var response = GetData(endpoints["Recipes"], query, String.Empty);
                 var recipies = JsonConvert.DeserializeObject<RecipeSearchJson>(response);
 
-                return recipies;
+                var rearchRes = new List<RecipeSearchRes>();
+
+                foreach (var recipe in recipies.matches)
+                {
+                    var tmp = JObject.Parse(recipe.ToString());
+
+                    //Uncomment if you need calories in recipes list
+
+                    //try
+                    //{
+                    //var currec = GetRecipe(tmp["id"].ToString());
+
+                    var item = new RecipeSearchRes()
+                    {
+                        Id = tmp["id"],
+                        Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
+                        //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
+                        Kalories = 0,
+                        PhotoUrl = tmp["smallImageUrls"].ToString(),
+                        Title = tmp["recipeName"].ToString(),
+                        TotalTime = tmp["totalTimeInSeconds"]
+                    };
+
+                    rearchRes.Add(item);
+                    //}
+                    //catch
+                    //{
+                    //    var item = new RecipeSearhRes()
+                    //    {
+                    //        Id = tmp["id"],
+                    //        Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
+                    //        Kalories = 0,
+                    //        PhotoUrl = tmp["smallImageUrls"].ToString(),
+                    //        Title = tmp["recipeName"].ToString(),
+                    //        TotalTime = tmp["totalTimeInSeconds"]
+                    //    };
+
+                    //    rearchRes.Add(item);
+                    //}
+                }
+
+                return rearchRes;
             }
             catch
             {
-                return null;
+                return new List<RecipeSearchRes>();
             }
         }
 
+        public RecipeRes GetRecipe(string id)
+        {
+            try
+            {
+                var response = GetData(endpoints["GetRecipe"], String.Empty, id);
+                var recipeYummly = JsonConvert.DeserializeObject<RecipeJson>(response);
 
+                var nutritions = recipeYummly.nutritionEstimates;
+                var nutritionDic = nutritions.ToDictionary(item => item.attribute,
+                    item => new Tuple<string, double, string>(item.description, item.value, item.unit.name));
+
+                var recipe = new RecipeRes()
+                {
+                    RecipeName = recipeYummly.name,
+                    Ingredients = recipeYummly.ingredientLines,
+                    Picture = recipeYummly.images[0].hostedMediumUrl,
+                    Rating = recipeYummly.rating,
+                    Served = recipeYummly.numberOfServings.ToString(),
+                    RecipeUrl = recipeYummly.attribution.url,
+                    Time = recipeYummly.totalTimeInSeconds,
+                    Nutritions = nutritionDic
+                };
+
+                return recipe;
+            }
+            catch
+            {
+                return new RecipeRes();
+            }
+        }
+
+        public IDictionary<string, string> GetMetadata()
+        {
+            return metadata;
+        }
 
         private string GenerateRequest(YummlyReqEntity entity)
         {
             var query = "&requirePictures=true";
 
-            if (entity.CookWith.Any())
+            if (entity.CookWith != null)
             {
                 query = entity.CookWith.Where(field => metadata["Ingredients"].Contains(field)).Aggregate(query, (current, field) => current + ("&allowedIngredient[]=" + field));
             }
 
-            if (entity.CookWithout.Any())
+            if (entity.CookWithout != null)
             {
                 query = entity.CookWith.Where(field => metadata["Ingredients"].Contains(field)).Aggregate(query, (current, field) => current + ("&excludedIngredient[]=" + field));
             }
 
-            if (entity.Allergies.Any())
+            if (entity.Allergies != null)
             {
                 query = entity.Allergies.Where(field => metadata["Allergies"].Contains(field)).Aggregate(query, (current, field) => current + ("&allowedAllergy[]=" + field));
             }
 
-            if (entity.Meal.Any())
+            if (entity.Meal != null)
             {
                 foreach (var field in entity.Meal)
                 {
@@ -339,22 +465,25 @@ namespace KitchIn.Core.Services.Yummly
                 }
             }
 
-            if (entity.Cuisine.Any())
+            if (entity.Cuisine != null)
             {
-                query = entity.Cuisine.Where(field => metadata["Cuisine"].Contains(field)).Aggregate(query, (current, field) => current + ("&allowedCuisine[]=" + field));
+                query = entity.Cuisine.Where(field => metadata["Cuisine"].Contains(field))
+                    .Aggregate(query, (current, field) => current + ("&allowedCuisine[]=" + field));
             }
 
-            if (entity.Holiday.Any())
+            if (entity.Holiday != null)
             {
-                query = entity.Holiday.Where(field => metadata["Holiday"].Contains(field)).Aggregate(query, (current, field) => current + ("&allowedHoliday[]=" + field));
+                query = entity.Holiday.Where(field => metadata["Holiday"].Contains(field))
+                    .Aggregate(query, (current, field) => current + ("&allowedHoliday[]=" + field));
             }
 
-            if (entity.DishType.Any())
+            if (entity.DishType != null)
             {
-                query = entity.DishType.Where(field => metadata["Course"].Contains(field)).Aggregate(query, (current, field) => current + ("&allowedCourse[]=" + field));
+                query = entity.DishType.Where(field => metadata["Course"].Contains(field))
+                    .Aggregate(query, (current, field) => current + ("&allowedCourse[]=" + field));
             }
 
-            if (entity.Diets.Any())
+            if (entity.Diets != null)
             {
                 foreach (var field in entity.Diets)
                 {
@@ -384,21 +513,27 @@ namespace KitchIn.Core.Services.Yummly
                 switch (entity.Time)
                 {
                     case "Less than 15 mins":
+                    case "900":
                         query += "&maxTotalTimeInSeconds[]=900";
                         break;
                     case "Less than 30 mins":
+                    case "1800":
                         query += "&maxTotalTimeInSeconds[]=1800";
                         break;
                     case "Less than 45 mins":
+                    case "2700":
                         query += "&maxTotalTimeInSeconds[]=2700";
                         break;
                     case "Less than 1 hour":
+                    case "3600":
                         query += "&maxTotalTimeInSeconds[]=3600";
                         break;
                     case "Less than 2 hours":
+                    case "7200":
                         query += "&maxTotalTimeInSeconds[]=7200";
                         break;
                     case "Less than 3 hours":
+                    case "1080":
                         query += "&maxTotalTimeInSeconds[]=10800";
                         break;
                     case "Low-Calorie":
@@ -420,19 +555,6 @@ namespace KitchIn.Core.Services.Yummly
             }
 
             return query;
-        }
-
-        public Recipe GetRecipe(string id)
-        {
-            var response = GetData(endpoints["GetRecipe"], String.Empty, id);
-            var recipies = JsonConvert.DeserializeObject<RecipeJson>(response);
-
-            return new Recipe();
-        };
-
-        public IDictionary<string, string> GetMetadata()
-        {
-            return metadata;
         }
     }
 }
