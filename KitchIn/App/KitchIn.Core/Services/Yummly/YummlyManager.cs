@@ -158,7 +158,7 @@ namespace KitchIn.Core.Services.Yummly
                                 {
                                     var currAllergy =
                                         allergiesRepository.FirstOrDefault(
-                                            a => a.SearchValue.Equals(allergy.SearchValue.ToLower()));
+                                            a => a.SearchValue.Equals(allergy.ShortDescription.ToLower()));
 
                                     if (currAllergy == null)
                                     {
@@ -195,7 +195,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var diet in diets)
                                 {
                                     var currDiet =
-                                        dietsRepository.FirstOrDefault(d => d.SearchValue.Equals(diet.SearchValue.ToLower()));
+                                        dietsRepository.FirstOrDefault(d => d.ShortDescription.Equals(diet.ShortDescription.ToLower()));
 
                                     if (currDiet == null)
                                     {
@@ -232,7 +232,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var cuisin in cuisines)
                                 {
                                     var currCuisine =
-                                        cuisinesRepository.FirstOrDefault(c => c.SearchValue.Equals(cuisin.SearchValue.ToLower()));
+                                        cuisinesRepository.FirstOrDefault(c => c.Name.Equals(cuisin.Name.ToLower()));
 
                                     if (currCuisine == null)
                                     {
@@ -269,7 +269,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var course in courses)
                                 {
                                     var currCourse =
-                                        coursesRepository.FirstOrDefault(c => c.SearchValue.Equals(course.SearchValue.ToLower()));
+                                        coursesRepository.FirstOrDefault(c => c.Name.Equals(course.Name.ToLower()));
 
                                     if (currCourse == null)
                                     {
@@ -306,7 +306,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var holiday in holidays)
                                 {
                                     var currHoliday =
-                                        holidaysRepository.FirstOrDefault(h => h.SearchValue.Equals(holiday.SearchValue.ToLower()));
+                                        holidaysRepository.FirstOrDefault(h => h.Name.Equals(holiday.Name.ToLower()));
 
                                     if (currHoliday == null)
                                     {

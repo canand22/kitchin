@@ -398,8 +398,6 @@ namespace KitchIn.WCF
         {
             try
             {
-                var i = yummlyManager.GetMetadata();
-
                 var entity = new YummlyReqEntity()
                 {
                     CookWith = cookWith.Split(','),
