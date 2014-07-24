@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.ServiceModel.Activation;
+using System.ServiceModel.Description;
 using System.ServiceModel.Web;
 using System.Web;
 using System.Web.Hosting;
@@ -10,6 +11,8 @@ using KitchIn.BL.Helpers;
 using KitchIn.Core.Enums;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
+using KitchIn.Core.Services.Yummly;
+using KitchIn.Core.Services.Yummly.Response;
 using KitchIn.WCF.Core.Models;
 using KitchIn.WCF.Core.Models.MyAccount;
 using KitchIn.WCF.Core.Models.MyFavorites;
@@ -20,6 +23,7 @@ using System.Diagnostics;
 using Castle.Core.Internal;
 using KitchIn.Core.Services.OCRRecognize;
 using KitchIn.WCF.Core.Models.CommonDataContract;
+using Newtonsoft.Json;
 
 
 namespace KitchIn.WCF
@@ -49,9 +53,11 @@ namespace KitchIn.WCF
 
         private readonly IManageProductByUserProvider productByUserProvider;
 
-        public KitchInAppService(IManageUserProvider userProvider, IManageProductProvider productProvider, IManageKitchenProvider kitchenProvider, 
+        private IYummly yummlyManager;
+
+        public KitchInAppService(IManageUserProvider userProvider, IManageProductProvider productProvider, IManageKitchenProvider kitchenProvider,
             IManageFavoritesProvider favoritesProvider, IManageStoreProvider manageStoreProvider, IManageMatchingTexts manageMatchingTexts,
-            IManageProductByUserProvider productByUserProvider)
+            IManageProductByUserProvider productByUserProvider, IYummly yummlyManager)
         {
             this.userProvider = userProvider;
             this.productProvider = productProvider;
@@ -60,6 +66,7 @@ namespace KitchIn.WCF
             this.manageStoreProvider = manageStoreProvider;
             this.manageMatchingTexts = manageMatchingTexts;
             this.productByUserProvider = productByUserProvider;
+            this.yummlyManager = yummlyManager;
         }
 
         public LoginResponse LogIn(LoginRequest request)
@@ -97,18 +104,17 @@ namespace KitchIn.WCF
         {
             if (request == null)
             {
-                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyRequest.GetMessage()};
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyRequest.GetMessage() };
             }
 
             if (!this.IsEmail(request.Email))
-
             {
                 return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = String.Format(Errors.EmailNotValid.GetMessage(), request.Email) };
             }
 
             if (String.IsNullOrEmpty(request.FirstName))
             {
-                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyFirstName.GetMessage()};
+                return new RegisterResponse { IsUserRegistered = false, SessionId = null, Message = Errors.EmptyFirstName.GetMessage() };
             }
 
             if (String.IsNullOrEmpty(request.LastName))
@@ -126,11 +132,15 @@ namespace KitchIn.WCF
             return user == null
                       ? new RegisterResponse
                       {
-                          IsUserRegistered = false, SessionId = null, Message = Errors.ErrorCreatingUser.GetMessage()
+                          IsUserRegistered = false,
+                          SessionId = null,
+                          Message = Errors.ErrorCreatingUser.GetMessage()
                       }
                       : new RegisterResponse
                       {
-                          IsUserRegistered = true, SessionId = user.SessionId, Message = "Ok"
+                          IsUserRegistered = true,
+                          SessionId = user.SessionId,
+                          Message = "Ok"
                       };
         }
 
@@ -220,7 +230,7 @@ namespace KitchIn.WCF
         public ProductsResponse AllProducts(long storeId, long categoryId)
         {
             var products = this.productProvider.GetAllProductsByStoreAndCategory(storeId, categoryId)
-                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName});
+                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName });
             return new ProductsResponse { Products = products };
         }
 
@@ -300,18 +310,19 @@ namespace KitchIn.WCF
                 var products = parser.GetProducts().Select(x => x.Title).ToArray();
                 var resultsOfTheMatching = manageMatchingTexts.GetResultsOfTheMatching(products, checkOutOfTheStore.StoreId);
                 resultsOfTheMatching.ForEach(
-                    x => {
-                             if (x.IsSuccessMatching && x.Id!=null && productProvider.IsFoodGroupe(x.Id.Value))
-                             {
-                                 result.Add(x);
-                             }
-                             else
-                             {
-                                 if (!x.IsSuccessMatching)
-                                 {
-                                     result.Add(x);
-                                 }
-                             }
+                    x =>
+                    {
+                        if (x.IsSuccessMatching && x.Id != null && productProvider.IsFoodGroupe(x.Id.Value))
+                        {
+                            result.Add(x);
+                        }
+                        else
+                        {
+                            if (!x.IsSuccessMatching)
+                            {
+                                result.Add(x);
+                            }
+                        }
                     });
             }
             return result;
@@ -381,6 +392,41 @@ namespace KitchIn.WCF
                                        @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
                                        @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
             return rgxEmail.IsMatch(strEmail);
+        }
+
+        public IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith, string cookWithout, string allergies, string diets, string cuisine, string dishType, string holiday, string meal, string time)
+        {
+            try
+            {
+                var i = yummlyManager.GetMetadata();
+
+                var entity = new YummlyReqEntity()
+                {
+                    CookWith = cookWith.Split(','),
+                    CookWithout = cookWithout.Split(','),
+                    Allergies = allergies.Split(','),
+                    Cuisine = cuisine.Split(','),
+                    Diets = diets.Split(','),
+                    DishType = dishType.Split(','),
+                    Holiday = holiday.Split(','),
+                    Meal = meal.Split(','),
+                    Time = time
+                };
+
+                return yummlyManager.SearchRecipes(entity);
+
+
+            }
+            catch
+            {
+                return new List<RecipeSearchRes>();
+            }
+        }
+
+        public RecipeRes GetRecipe(string id)
+        {
+            var res = yummlyManager.GetRecipe(id);
+            return res;
         }
     }
 }

@@ -133,9 +133,21 @@
     <Compile Include="Services\Yummly\FacetCounts.cs" />
     <Compile Include="Services\Yummly\Flavors.cs" />
     <Compile Include="Services\Yummly\ImageUrlsBySize.cs" />
+    <Compile Include="Services\Yummly\IngredientItem.cs" />
     <Compile Include="Services\Yummly\IYummly.cs" />
     <Compile Include="Services\Yummly\Match.cs" />
-    <Compile Include="Services\Yummly\RecipeJson.cs" />
+    <Compile Include="Services\Yummly\RecipeSearchJson.cs" />
+    <Compile Include="Services\Yummly\Recipe\Attributes.cs" />
+    <Compile Include="Services\Yummly\Recipe\Attribution.cs" />
+    <Compile Include="Services\Yummly\Recipe\Flavors.cs" />
+    <Compile Include="Services\Yummly\Recipe\Images.cs" />
+    <Compile Include="Services\Yummly\Recipe\ImageUrlsBySize.cs" />
+    <Compile Include="Services\Yummly\Recipe\NutritionEstimate.cs" />
+    <Compile Include="Services\Yummly\Recipe\RecipeJson.cs" />
+    <Compile Include="Services\Yummly\Recipe\Source.cs" />
+    <Compile Include="Services\Yummly\Recipe\UnitMesh.cs" />
+    <Compile Include="Services\Yummly\Response\RecipeRes.cs" />
+    <Compile Include="Services\Yummly\Response\RecipeSearchRes.cs" />
     <Compile Include="Services\Yummly\YummlyManager.cs" />
     <Compile Include="Services\Yummly\YummlyReqEntity.cs" />
   </ItemGroup>
