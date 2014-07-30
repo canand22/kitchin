@@ -109,8 +109,8 @@ namespace KitchIn.WCF
                                .Select(p => new UserPreferenceiPhoneModel
                                {
                                    Allergies = p.Allergies.Select(t => t.SearchValue).ToList(),
-                                   AllowedIngridients = p.AllowedIngredients == null ? null : p.AllowedIngredients.Select(t => t.SearchValue).ToList(),
-                                   ExcludedIngridients = p.ExcludedIngredients == null ? null : p.ExcludedIngredients.Select(t => t.SearchValue).ToList(),
+                                   AllowedIngridients = p.AllowedIngredients == null ? null : p.AllowedIngredients.Select(t => t.Term).ToList(),
+                                   ExcludedIngridients = p.ExcludedIngredients == null ? null : p.ExcludedIngredients.Select(t => t.Term).ToList(),
                                    Cuisines = p.Cuisines==null?null:p.Cuisines.Select(t => t.Name).ToList(),
                                    Diets = p.Diets==null?null:p.Diets.Select(t => t.ShortDescription).ToList(),
                                    DishType = p.DishType==null?null:p.DishType.Name,
