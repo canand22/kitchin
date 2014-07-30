@@ -146,5 +146,9 @@ namespace KitchIn.WCF
         [OperationContract]
         [WebGet(UriTemplate = "Recipe/{id}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         RecipeRes GetRecipe(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Metadata/{key}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        IDictionary<string, string> GetMetadata(string key);
     }
 }
