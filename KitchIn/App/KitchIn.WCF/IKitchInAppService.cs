@@ -9,6 +9,7 @@ using KitchIn.WCF.Core.Models.MyKitchen;
 using KitchIn.WCF.Core.Models.CommonDataContract;
 using System.Collections.Generic;
 using System.ComponentModel;
+using KitchIn.WCF.Core.Models.UserPreference;
 
 namespace KitchIn.WCF
 {
@@ -137,5 +138,28 @@ namespace KitchIn.WCF
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [Description("Adding of the product to the database by the user")]
         StatusResponse Product(ProductByUserModel productByUserModel);
+
+
+        #region UserPreference
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UserPreference/AddOrUpdate", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Add new user or update preference for current user")]
+        UserPreferenceResponse AddOrUpdateUserPreference(UserPreferenceRequest request);
+
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UserPreference/Remove", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Remove preference for current user")]
+        UserPreferenceResponse RemoveUserPreference(UserPreferenceRequest request);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UserPreference/Get", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Get all preferences for current user")]
+        GetUserPreferenceResponse GetUserPreferences(GetUserPreferenceRequest request);
+        #endregion
     }
 }

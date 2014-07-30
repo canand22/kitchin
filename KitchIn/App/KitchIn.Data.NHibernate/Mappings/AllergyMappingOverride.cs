@@ -24,7 +24,8 @@ namespace KitchIn.Data.NHibernate.Mappings
             .Table("UserPreferences_Allergy")
                   .ParentKeyColumn("AllergyId")
                   .ChildKeyColumn("UserPreferencesId")
-                  .Not.LazyLoad();
+                  .Not.LazyLoad()
+             .Cascade.SaveUpdate();
         }
     }
 }

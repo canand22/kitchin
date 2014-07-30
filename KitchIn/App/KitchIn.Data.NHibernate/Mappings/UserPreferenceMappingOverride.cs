@@ -14,36 +14,49 @@ namespace KitchIn.Data.NHibernate.Mappings
         {
             mapping.Table("UserPreferences");
             mapping.Id().GeneratedBy.Identity();
-            mapping.HasMany(x => x.AllowedIngridients).KeyColumn("AllowedIngridientId");
-            mapping.HasMany(x => x.ExcludedIngridients).KeyColumn("ExcludedIngridientId");
+            mapping.HasMany(x => x.AllowedIngredients).KeyColumn("AllowedIngridientId");
+            mapping.HasMany(x => x.ExcludedIngredients).KeyColumn("ExcludedIngridientId");
             mapping.Map(x => x.Meal).Not.Nullable();
-            mapping.Map(x => x.DishType).Not.Nullable();
+            mapping.References(x => x.DishType, "DishTypeId");
             mapping.Map(x => x.Time);
+            mapping.Map(x => x.OwnerPreference);
             mapping.HasManyToMany(x => x.Cuisines)
               .Table("UserPreferences_Cuisine")
                     .ParentKeyColumn("UserPreferencesId")
                     .ChildKeyColumn("CiusineId")
-                    .Not.LazyLoad();
+                    .Not.LazyLoad()
+                    .Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Diets)
               .Table("UserPreferences_Diet")
                     .ParentKeyColumn("UserPreferencesId")
                     .ChildKeyColumn("DietId")
-                    .Not.LazyLoad();
+                    .Not.LazyLoad()
+                    .Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Allergies)
               .Table("UserPreferences_Allergy")
                     .ParentKeyColumn("UserPreferencesId")
                     .ChildKeyColumn("AllergyId")
-                    .Not.LazyLoad();
+                    .Not.LazyLoad()
+            .Cascade.SaveUpdate();
             mapping.HasManyToMany(x => x.Holidays)
                 .Table("UserPreferences_Holiday")
                       .ParentKeyColumn("UserPreferencesId")
                       .ChildKeyColumn("HolidayId")
-                      .Not.LazyLoad();
-            mapping.HasManyToMany(x => x.User)
-                .Table("UserPreferences_Users")
-                      .ParentKeyColumn("UserPreferencesId")
-                      .ChildKeyColumn("UserId")
-                      .Not.LazyLoad();
+                      .Not.LazyLoad()
+            .Cascade.SaveUpdate();
+            mapping.References(x => x.User, "UserId").Nullable();
+            mapping.HasManyToMany(x => x.AllowedIngredients)
+               .Table("UserPreferences_AllowedIngredients")
+                     .ParentKeyColumn("UserPreferencesId")
+                     .ChildKeyColumn("AllowedIngredientsId")
+                     .Not.LazyLoad()
+            .Cascade.SaveUpdate();
+            mapping.HasManyToMany(x => x.ExcludedIngredients)
+               .Table("UserPreferences_ExcludedIngredients")
+                     .ParentKeyColumn("UserPreferencesId")
+                     .ChildKeyColumn("ExcludedIngredientsId")
+                     .Not.LazyLoad()
+            .Cascade.SaveUpdate();
         }
     }
 }

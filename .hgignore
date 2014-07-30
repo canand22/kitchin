@@ -538,4 +538,22 @@ KitchIn/packages/SharpTestsEx.1.1.1/SharpTestsEx.snk
 KitchIn/packages/SharpTestsEx.1.1.1/SharpTestsEx.1.1.1.nupkg
 KitchIn/packages/SharpTestsEx.1.1.1/Read_Me.txt
 KitchIn/packages/SharpTestsEx.1.1.1/License.txt
+packages/Microsoft.Net.Http.2.0.20710.0/lib/net45/_._
+packages/Microsoft.Net.Http.2.0.20710.0/lib/net40/System.Net.Http.xml
+packages/Microsoft.Net.Http.2.0.20710.0/lib/net40/System.Net.Http.dll
+packages/Microsoft.Net.Http.2.0.20710.0/lib/net40/System.Net.Http.WebRequest.xml
+packages/Microsoft.Net.Http.2.0.20710.0/lib/net40/System.Net.Http.WebRequest.dll
+packages/Microsoft.Net.Http.2.0.20710.0/Microsoft.Net.Http.2.0.20710.0.nupkg
+packages/Microsoft.AspNet.WebApi.WebHost.4.0.20710.0/lib/net40/System.Web.Http.WebHost.xml
+packages/Microsoft.AspNet.WebApi.WebHost.4.0.20710.0/lib/net40/System.Web.Http.WebHost.dll
+packages/Microsoft.AspNet.WebApi.WebHost.4.0.20710.0/Microsoft.AspNet.WebApi.WebHost.4.0.20710.0.nupkg
+packages/Microsoft.AspNet.WebApi.Core.4.0.20710.0/lib/net40/System.Web.Http.xml
+packages/Microsoft.AspNet.WebApi.Core.4.0.20710.0/lib/net40/System.Web.Http.dll
+packages/Microsoft.AspNet.WebApi.Core.4.0.20710.0/content/web.config.transform
+packages/Microsoft.AspNet.WebApi.Core.4.0.20710.0/Microsoft.AspNet.WebApi.Core.4.0.20710.0.nupkg
+packages/Microsoft.AspNet.WebApi.Client.4.0.20710.0/lib/net40/System.Net.Http.Formatting.xml
+packages/Microsoft.AspNet.WebApi.Client.4.0.20710.0/lib/net40/System.Net.Http.Formatting.dll
+packages/Microsoft.AspNet.WebApi.Client.4.0.20710.0/Microsoft.AspNet.WebApi.Client.4.0.20710.0.nupkg
+packages/Microsoft.AspNet.WebApi.4.0.20710.0/Microsoft.AspNet.WebApi.4.0.20710.0.nupkg
+KitchIn/packages/packages.rar
 syntax: regexp
