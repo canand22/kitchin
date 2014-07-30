@@ -11,6 +11,7 @@ using KitchIn.BL.Helpers;
 using KitchIn.Core.Enums;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
+using KitchIn.Core.Services.Jobs;
 using KitchIn.Core.Services.Yummly;
 using KitchIn.Core.Services.Yummly.Response;
 using KitchIn.WCF.Core.Models;
@@ -55,9 +56,11 @@ namespace KitchIn.WCF
 
         private IYummly yummlyManager;
 
+        private IRunable yummlyUpdater;
+
         public KitchInAppService(IManageUserProvider userProvider, IManageProductProvider productProvider, IManageKitchenProvider kitchenProvider,
             IManageFavoritesProvider favoritesProvider, IManageStoreProvider manageStoreProvider, IManageMatchingTexts manageMatchingTexts,
-            IManageProductByUserProvider productByUserProvider, IYummly yummlyManager)
+            IManageProductByUserProvider productByUserProvider, IYummly yummlyManager, IRunable yummlyUpdater)
         {
             this.userProvider = userProvider;
             this.productProvider = productProvider;
@@ -67,6 +70,8 @@ namespace KitchIn.WCF
             this.manageMatchingTexts = manageMatchingTexts;
             this.productByUserProvider = productByUserProvider;
             this.yummlyManager = yummlyManager;
+            this.yummlyUpdater = yummlyUpdater;            
+            yummlyUpdater.Run();
         }
 
         public LoginResponse LogIn(LoginRequest request)
@@ -412,8 +417,6 @@ namespace KitchIn.WCF
                 };
 
                 return yummlyManager.SearchRecipes(entity);
-
-
             }
             catch
             {
@@ -424,7 +427,13 @@ namespace KitchIn.WCF
         public RecipeRes GetRecipe(string id)
         {
             var res = yummlyManager.GetRecipe(id);
+
             return res;
+        }
+
+        public IDictionary<string, string> GetMetadata(string key)
+        {
+            return YummlyManager.GetMetadata(key);
         }
     }
 }

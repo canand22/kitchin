@@ -17,7 +17,15 @@ namespace KitchIn.Core.Services.Yummly
     {
         private IDictionary<string, string> endpoints;
 
-        private static IDictionary<string, string> metadata;
+        private static IDictionary<string, string> metadata = new Dictionary<string, string>()
+                {
+                    {"Ingredients", String.Empty},
+                    {"Allergies", String.Empty},
+                    {"Diets", String.Empty},
+                    {"Cuisine", String.Empty},
+                    {"Course", String.Empty},
+                    {"Holiday", String.Empty}
+                };
 
         private IRepository<Ingredient> ingredientsRepository;
         private IRepository<Course> coursesRepository;
@@ -52,21 +60,12 @@ namespace KitchIn.Core.Services.Yummly
                 {"GetRecipe", "http://api.yummly.com/v1/api/recipe/{2}?_app_id={0}&_app_key={1}"}
             };
 
-            if (metadata == null)
+            if (String.IsNullOrWhiteSpace(metadata["Ingredients"]) || String.IsNullOrWhiteSpace(metadata["Allergies"]) ||
+                String.IsNullOrWhiteSpace(metadata["Diets"]) || String.IsNullOrWhiteSpace(metadata["Cuisine"]) ||
+                String.IsNullOrWhiteSpace(metadata["Course"]) || String.IsNullOrWhiteSpace(metadata["Holiday"]))
             {
-                metadata = new Dictionary<string, string>()
-                {
-                    {"Ingredients", String.Empty},
-                    {"Allergies", String.Empty},
-                    {"Diets", String.Empty},
-                    {"Cuisine", String.Empty},
-                    {"Course", String.Empty},
-                    {"Holiday", String.Empty}
-                };
-
                 UpdateMetadata();
             }
-
         }
 
         private string GetData(string url, string query = "", string param = "")
@@ -133,9 +132,19 @@ namespace KitchIn.Core.Services.Yummly
                                             Term = ingredient.Term
                                         };
 
-                                        ingredientsRepository.Save(newIngr);
+                                        this.ingredientsRepository.Save(newIngr);
                                     }
                                 }
+
+                                var tmpIngr = metadata["Ingredients"];
+
+                                var ingredientsToRemove = this.ingredientsRepository.Where(x => !tmpIngr.Contains(x.Term)).ToList();
+                                foreach (var ingr in ingredientsToRemove)
+                                {
+                                    this.ingredientsRepository.Remove(ingr);
+                                }
+
+                                this.ingredientsRepository.SaveChanges();
 
                                 break;
 
@@ -157,7 +166,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var allergy in allergies)
                                 {
                                     var currAllergy =
-                                        allergiesRepository.FirstOrDefault(
+                                        this.allergiesRepository.FirstOrDefault(
                                             a => a.SearchValue.Equals(allergy.ShortDescription.ToLower()));
 
                                     if (currAllergy == null)
@@ -171,9 +180,19 @@ namespace KitchIn.Core.Services.Yummly
                                             LocalesAvailableIn = currAllergy.LocalesAvailableIn
                                         };
 
-                                        allergiesRepository.Save(newAllergy);
+                                        this.allergiesRepository.Save(newAllergy);
                                     }
                                 }
+
+                                var tmpAllergy = metadata["Allergies"];
+
+                                var allergiesToRemove = this.allergiesRepository.Where(x => !tmpAllergy.Contains(x.ShortDescription)).ToList();
+                                foreach (var allergy in allergiesToRemove)
+                                {
+                                    this.allergiesRepository.Remove(allergy);
+                                }
+
+                                this.allergiesRepository.SaveChanges();
 
                                 break;
 
@@ -195,7 +214,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var diet in diets)
                                 {
                                     var currDiet =
-                                        dietsRepository.FirstOrDefault(d => d.ShortDescription.Equals(diet.ShortDescription.ToLower()));
+                                        this.dietsRepository.FirstOrDefault(d => d.ShortDescription.Equals(diet.ShortDescription.ToLower()));
 
                                     if (currDiet == null)
                                     {
@@ -208,9 +227,19 @@ namespace KitchIn.Core.Services.Yummly
                                             LocalesAvailableIn = diet.LocalesAvailableIn
                                         };
 
-                                        dietsRepository.Save(newDied);
+                                        this.dietsRepository.Save(newDied);
                                     }
                                 }
+
+                                var tmpDiets = metadata["Diets"];
+
+                                var dietsToRemove = this.dietsRepository.Where(x => !tmpDiets.Contains(x.ShortDescription)).ToList();
+                                foreach (var diet in dietsToRemove)
+                                {
+                                    this.dietsRepository.Remove(diet);
+                                }
+
+                                this.dietsRepository.SaveChanges();
 
                                 break;
 
@@ -232,7 +261,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var cuisin in cuisines)
                                 {
                                     var currCuisine =
-                                        cuisinesRepository.FirstOrDefault(c => c.Name.Equals(cuisin.Name.ToLower()));
+                                        this.cuisinesRepository.FirstOrDefault(c => c.Name.Equals(cuisin.Name.ToLower()));
 
                                     if (currCuisine == null)
                                     {
@@ -245,9 +274,19 @@ namespace KitchIn.Core.Services.Yummly
                                             LocalesAvailableIn = cuisin.LocalesAvailableIn
                                         };
 
-                                        cuisinesRepository.Save(newCuisine);
+                                        this.cuisinesRepository.Save(newCuisine);
                                     }
                                 }
+
+                                var tmpCuisines = metadata["Cuisine"];
+
+                                var cuisinesToRemove = this.cuisinesRepository.Where(x => !tmpCuisines.Contains(x.Name)).ToList();
+                                foreach (var cuisine in cuisinesToRemove)
+                                {
+                                    this.cuisinesRepository.Remove(cuisine);
+                                }
+
+                                this.cuisinesRepository.SaveChanges();
 
                                 break;
 
@@ -269,7 +308,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var course in courses)
                                 {
                                     var currCourse =
-                                        coursesRepository.FirstOrDefault(c => c.Name.Equals(course.Name.ToLower()));
+                                        this.coursesRepository.FirstOrDefault(c => c.Name.Equals(course.Name.ToLower()));
 
                                     if (currCourse == null)
                                     {
@@ -282,9 +321,19 @@ namespace KitchIn.Core.Services.Yummly
                                             LocalesAvailableIn = course.LocalesAvailableIn
                                         };
 
-                                        coursesRepository.Save(newCourse);
+                                        this.coursesRepository.Save(newCourse);
                                     }
                                 }
+
+                                var tmpCourses = metadata["Course"];
+
+                                var coursesToRemove = this.coursesRepository.Where(x => !tmpCourses.Contains(x.Name)).ToList();
+                                foreach (var course in coursesToRemove)
+                                {
+                                    this.coursesRepository.Remove(course);
+                                }
+
+                                this.coursesRepository.SaveChanges();
 
                                 break;
 
@@ -306,7 +355,7 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var holiday in holidays)
                                 {
                                     var currHoliday =
-                                        holidaysRepository.FirstOrDefault(h => h.Name.Equals(holiday.Name.ToLower()));
+                                        this.holidaysRepository.FirstOrDefault(h => h.Name.Equals(holiday.Name.ToLower()));
 
                                     if (currHoliday == null)
                                     {
@@ -319,9 +368,19 @@ namespace KitchIn.Core.Services.Yummly
                                             LocalesAvailableIn = holiday.LocalesAvailableIn
                                         };
 
-                                        holidaysRepository.Save(newHoliday);
+                                        this.holidaysRepository.Save(newHoliday);
                                     }
                                 }
+
+                                var tmpHolidays = metadata["Holiday"];
+
+                                var holidaysToRemove = this.holidaysRepository.Where(x => !tmpHolidays.Contains(x.Name)).ToList();
+                                foreach (var holiday in holidaysToRemove)
+                                {
+                                    this.holidaysRepository.Remove(holiday);
+                                }
+
+                                this.holidaysRepository.SaveChanges();
 
                                 break;
                         }
@@ -422,9 +481,13 @@ namespace KitchIn.Core.Services.Yummly
             }
         }
 
-        public IDictionary<string, string> GetMetadata()
+        public static IDictionary<string, string> GetMetadata(string key = "All")
         {
-            return metadata;
+            return key.ToLower().Equals("all")
+                ? metadata
+                : (metadata.ContainsKey(key)
+                    ? new Dictionary<string, string> {{key, metadata[key]}}
+                    : new Dictionary<string, string> {{"Error", "Unknown key"}});
         }
 
         private string GenerateRequest(YummlyReqEntity entity)

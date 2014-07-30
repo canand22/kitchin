@@ -17,11 +17,11 @@ namespace KitchIn.Core.Services.Jobs
 
         public void Run()
         {
-            var nextStartTs = (new TimeSpan(DateTime.Now.Hour, 0, 0) - DateTime.Now.TimeOfDay).TotalSeconds < 0
-                            ? new TimeSpan(DateTime.Now.Hour + 1, 0, 0) - DateTime.Now.TimeOfDay
-                            : new TimeSpan(DateTime.Now.Hour, 0, 0) - DateTime.Now.TimeOfDay;
+            var nextStartTs = (new TimeSpan(DateTime.Now.Hour, 30, 0) - DateTime.Now.TimeOfDay).TotalSeconds < 0
+                            ? new TimeSpan(DateTime.Now.Hour + 1, 30, 0) - DateTime.Now.TimeOfDay
+                            : new TimeSpan(DateTime.Now.Hour, 30, 0) - DateTime.Now.TimeOfDay;
 
-            this.timer.Change(nextStartTs, new TimeSpan(1, 0, 0));
+            this.timer.Change(nextStartTs, new TimeSpan(12, 0, 0));
 
         }
 
