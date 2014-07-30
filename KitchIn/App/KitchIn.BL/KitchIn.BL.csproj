@@ -77,6 +77,7 @@
     <Compile Include="Implementation\ManageFavoritesProvider.cs" />
     <Compile Include="Implementation\ManageKitchenProvider.cs" />
     <Compile Include="Implementation\ManageProductProvider.cs" />
+    <Compile Include="Implementation\ManageUserPreferenceProvider.cs" />
     <Compile Include="Implementation\ManageUserProvider.cs" />
     <Compile Include="Helpers\PreviewProductsHelper.cs" />
     <Compile Include="Implementation\MembershipProvider.cs" />

@@ -13,6 +13,7 @@ using KitchIn.WCF.Services;
 namespace KitchIn.WCF
 {
     using KitchIn.Core.Services.Cache;
+    using KitchIn.Core;
 
     /// <summary>
     /// The application global events.

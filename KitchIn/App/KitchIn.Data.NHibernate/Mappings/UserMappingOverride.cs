@@ -23,11 +23,7 @@ namespace KitchIn.Data.NHibernate.Mappings
                       .ParentKeyColumn("UserId")
                       .ChildKeyColumn("FavoriteRecipeId")
                       .Not.LazyLoad();
-            mapping.HasManyToMany(x => x.UserPreferences)
-                .Table("UserPreferences_Users")
-                      .ParentKeyColumn("UserId")
-                      .ChildKeyColumn("UserPreferencesId")
-                      .Not.LazyLoad();
+            mapping.HasMany(x => x.UserPreferences).KeyColumn("UserId").Cascade.AllDeleteOrphan().Inverse();
         }
     }
 }
