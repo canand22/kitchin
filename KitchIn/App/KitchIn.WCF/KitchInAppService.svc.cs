@@ -8,6 +8,7 @@ using System.ServiceModel.Web;
 using System.Web;
 using System.Web.Hosting;
 using KitchIn.BL.Helpers;
+using KitchIn.Core.Entities;
 using KitchIn.Core.Enums;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
@@ -24,6 +25,7 @@ using System.Diagnostics;
 using Castle.Core.Internal;
 using KitchIn.Core.Services.OCRRecognize;
 using KitchIn.WCF.Core.Models.CommonDataContract;
+using KitchIn.WCF.Core.Models.UserPreference;
 using Newtonsoft.Json;
 
 
@@ -54,13 +56,14 @@ namespace KitchIn.WCF
 
         private readonly IManageProductByUserProvider productByUserProvider;
 
+        private readonly IManageUserPreferenceProvider userPreferenceProvider;
         private IYummly yummlyManager;
 
         private IRunable yummlyUpdater;
 
         public KitchInAppService(IManageUserProvider userProvider, IManageProductProvider productProvider, IManageKitchenProvider kitchenProvider,
             IManageFavoritesProvider favoritesProvider, IManageStoreProvider manageStoreProvider, IManageMatchingTexts manageMatchingTexts,
-            IManageProductByUserProvider productByUserProvider, IYummly yummlyManager, IRunable yummlyUpdater)
+            IManageProductByUserProvider productByUserProvider, IManageUserPreferenceProvider userPreferenceProvider, IYummly yummlyManager, IRunable yummlyUpdater)
         {
             this.userProvider = userProvider;
             this.productProvider = productProvider;
@@ -69,11 +72,55 @@ namespace KitchIn.WCF
             this.manageStoreProvider = manageStoreProvider;
             this.manageMatchingTexts = manageMatchingTexts;
             this.productByUserProvider = productByUserProvider;
+            this.userPreferenceProvider = userPreferenceProvider;
+        
+
             this.yummlyManager = yummlyManager;
             this.yummlyUpdater = yummlyUpdater;            
             yummlyUpdater.Run();
+            }
+            
+        public UserPreferenceResponse AddOrUpdateUserPreference(UserPreferenceRequest request)
+        {
+            string message=this.userPreferenceProvider.AddOrUpdateUserPreference(request.Guid, request.UserPreference);
+            return new UserPreferenceResponse {
+                Success = message ==CommonConstants.MESSAGE_SUCCESS?true:false,  
+            Message=message
+            };
         }
 
+        public UserPreferenceResponse RemoveUserPreference(UserPreferenceRequest request)
+        {
+            string message = this.userPreferenceProvider.RemoveUserPreference(request.Guid, request.UserPreference);
+            return new UserPreferenceResponse
+            {
+                Success = message == CommonConstants.MESSAGE_SUCCESS ? true : false,
+                Message = message
+            };
+        }
+        public GetUserPreferenceResponse GetUserPreferences(GetUserPreferenceRequest request)
+        {
+            return new GetUserPreferenceResponse
+                     {
+                         UserPreference =
+                               this.userPreferenceProvider
+                               .GetUser(request.Guid)
+                               .UserPreferences
+                               .Select(p => new UserPreferenceiPhoneModel
+                               {
+                                   Allergies = p.Allergies.Select(t => t.SearchValue).ToList(),
+                                   AllowedIngridients = p.AllowedIngredients == null ? null : p.AllowedIngredients.Select(t => t.SearchValue).ToList(),
+                                   ExcludedIngridients = p.ExcludedIngredients == null ? null : p.ExcludedIngredients.Select(t => t.SearchValue).ToList(),
+                                   Cuisines = p.Cuisines==null?null:p.Cuisines.Select(t => t.Name).ToList(),
+                                   Diets = p.Diets==null?null:p.Diets.Select(t => t.ShortDescription).ToList(),
+                                   DishType = p.DishType==null?null:p.DishType.Name,
+                                   Holidays = p.Holidays==null?null:p.Holidays.Select(t => t.Name).ToList(),
+                                   Meal = p.Meal,
+                                   OwnerPreference = p.OwnerPreference,
+                                   Time = new List<TimeType>() { (TimeType)Enum.Parse(typeof(TimeType), p.Time, true) }
+                               }).ToList()
+                     };
+        }
         public LoginResponse LogIn(LoginRequest request)
         {
             if (request == null)

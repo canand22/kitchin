@@ -57,8 +57,23 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -83,7 +98,9 @@
     <Compile Include="Entities\Store.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserPreference.cs" />
+    <Compile Include="Enums\CommonConstants.cs" />
     <Compile Include="Enums\MarketType.cs" />
+    <Compile Include="Enums\TimeType.cs" />
     <Compile Include="Enums\TypeAdd.cs" />
     <Compile Include="Enums\UnitType.cs" />
     <Compile Include="Enums\UserRoles.cs" />
@@ -96,6 +113,7 @@
     <Compile Include="Interfaces\IManageFavoritesProvider.cs" />
     <Compile Include="Interfaces\IManageKitchenProvider.cs" />
     <Compile Include="Interfaces\IManageProductProvider.cs" />
+    <Compile Include="Interfaces\IManageUserPreferenceProvider.cs" />
     <Compile Include="Interfaces\IManageUserProvider.cs" />
     <Compile Include="Interfaces\IMembershipProvider.cs" />
     <Compile Include="Interfaces\IProvider.cs" />
@@ -104,6 +122,7 @@
     <Compile Include="Models\ProductiPhoneModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ResultMatching.cs" />
+    <Compile Include="Models\UserPreferenceiPhoneModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Cache\CachePriority.cs" />
     <Compile Include="Services\Cache\KitchInCache.cs" />

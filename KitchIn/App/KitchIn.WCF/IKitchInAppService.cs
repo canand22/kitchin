@@ -10,6 +10,7 @@ using KitchIn.WCF.Core.Models.MyKitchen;
 using KitchIn.WCF.Core.Models.CommonDataContract;
 using System.Collections.Generic;
 using System.ComponentModel;
+using KitchIn.WCF.Core.Models.UserPreference;
 
 namespace KitchIn.WCF
 {
@@ -139,6 +140,27 @@ namespace KitchIn.WCF
         [Description("Adding of the product to the database by the user")]
         StatusResponse Product(ProductByUserModel productByUserModel);
 
+
+        #region UserPreference
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UserPreference/AddOrUpdate", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Add new user or update preference for current user")]
+        UserPreferenceResponse AddOrUpdateUserPreference(UserPreferenceRequest request);
+       
+         [WebInvoke(Method = "POST", UriTemplate = "UserPreference/Remove", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Remove preference for current user")]
+        UserPreferenceResponse RemoveUserPreference(UserPreferenceRequest request);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UserPreference/Get", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [Description("Get all preferences for current user")]
+        GetUserPreferenceResponse GetUserPreferences(GetUserPreferenceRequest request);
+#endregion
+
         [OperationContract]
         [WebGet(UriTemplate = "Recipies?cookwith={cookWith}&cookwithout={cookWithout}&allergies={allergies}&diets={diets}&cuisine={cuisine}&dishtype={dishType}&holiday={holiday}&meal={meal}&time={time}")]
         IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith, string cookWithout, string allergies, string diets, string cuisine, string dishType, string holiday, string meal, string time);
@@ -150,5 +172,7 @@ namespace KitchIn.WCF
         [OperationContract]
         [WebGet(UriTemplate = "Metadata/{key}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         IDictionary<string, string> GetMetadata(string key);
+        
+        
     }
 }

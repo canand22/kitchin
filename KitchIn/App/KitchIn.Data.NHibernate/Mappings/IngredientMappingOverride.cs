@@ -25,6 +25,19 @@ namespace KitchIn.Data.NHibernate.Mappings
         .ParentKeyColumn("IngredientId")
         .ChildKeyColumn("RecipeId")
         .Not.LazyLoad();
+            mapping.HasManyToMany(x => x.UserPreferences)
+               .Table("UserPreferences_AllowedIngredients")
+                     .ParentKeyColumn("AllowedIngredientsId")
+                     .ChildKeyColumn("UserPreferencesId")
+                     .Not.LazyLoad()
+                     .Cascade.SaveUpdate();
+            mapping.HasManyToMany(x => x.UserPreferences)
+               .Table("UserPreferences_ExcludedIngredients")
+                     .ParentKeyColumn("ExcludedIngredientsId")
+                     .ChildKeyColumn("UserPreferencesId")
+                     .Not.LazyLoad()
+                    .Cascade.SaveUpdate();
         }
     }
+       
 }

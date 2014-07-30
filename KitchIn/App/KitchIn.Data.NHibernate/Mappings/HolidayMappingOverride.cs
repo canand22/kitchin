@@ -24,7 +24,8 @@ namespace KitchIn.Data.NHibernate.Mappings
               .Table("UserPreferences_Holiday")
                     .ParentKeyColumn("HolidayId")
                     .ChildKeyColumn("UserPreferencesId")
-                    .Not.LazyLoad();
+                    .Not.LazyLoad()
+                    .Cascade.SaveUpdate();
         }
     }
 }

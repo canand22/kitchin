@@ -16,6 +16,7 @@ using SmartArch.Web.Membership;
 namespace KitchIn.ServiceLocation
 {
     using KitchIn.Core.Services.Cache;
+    using System;
 
     /// <summary>
     /// The WCF initializer
@@ -30,7 +31,6 @@ namespace KitchIn.ServiceLocation
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             new DbInitializer(WebConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString).Initialize();
-
             container.Register(Component.For<ISessionFactory>().Instance(DbInitializer.Factory).LifeStyle.Singleton);
             container.Register(Component.For<ISession>().UsingFactoryMethod(x => x.Resolve<ISessionFactory>().OpenSession()).LifestylePerWebRequest());
 
@@ -51,6 +51,7 @@ namespace KitchIn.ServiceLocation
             container.Register(Component.For<IManageCaches>().ImplementedBy<ManageCaches>().LifestylePerWebRequest());
             container.Register(Component.For<IManageProductByUserProvider>().ImplementedBy<ManageProductByUserProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IManageIngredientProvider>().ImplementedBy<ManageIngredientProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IManageUserPreferenceProvider>().ImplementedBy<ManageUserPreferenceProvider>().LifestylePerWebRequest());
 
             container.Register(
                 AllTypes
