@@ -12,7 +12,7 @@ namespace KitchIn.Core.Entities
     {
 
         [JsonProperty("id")]
-        public virtual Iesi.Collections.Generic.ISet<UserPreference> UserPreferences { get; set; }
+        public virtual ISet<UserPreference> UserPreferences { get; set; }
         public Ingredient()
         {
             UserPreferences = new HashedSet<UserPreference>();
@@ -40,7 +40,7 @@ namespace KitchIn.Core.Entities
             {
                 UserPreferences.Add(userPreference);
                 if(isAllowed)
-                userPreference.AddAllowedIngredient(this);
+                    userPreference.AddAllowedIngredient(this);
                 else
                     userPreference.AddAllowedIngredient(this);
             }

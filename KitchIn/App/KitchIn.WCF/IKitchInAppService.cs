@@ -162,8 +162,8 @@ namespace KitchIn.WCF
 #endregion
 
         [OperationContract]
-        [WebGet(UriTemplate = "Recipies?cookwith={cookWith}&cookwithout={cookWithout}&allergies={allergies}&diets={diets}&cuisine={cuisine}&dishtype={dishType}&holiday={holiday}&meal={meal}&time={time}")]
-        IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith, string cookWithout, string allergies, string diets, string cuisine, string dishType, string holiday, string meal, string time);
+        [WebGet(UriTemplate = "Recipies?cookwith={cookWith}&cookwithout={cookWithout}&allergies={allergies}&diets={diets}&cuisine={cuisine}&dishtype={dishType}&holiday={holiday}&meal={meal}&time={time}", ResponseFormat = WebMessageFormat.Json)]
+        string SearchRecipies(string cookWith, string cookWithout, string allergies, string diets, string cuisine, string dishType, string holiday, string meal, string time);
 
         [OperationContract]
         [WebGet(UriTemplate = "Recipe/{id}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]

@@ -7,7 +7,7 @@ namespace KitchIn.Core.Services.Yummly
     public interface IYummly
     {
         void UpdateMetadata();
-        IEnumerable<RecipeSearchRes> SearchRecipes(YummlyReqEntity entity);
+        IEnumerable<RecipeSearchRes> Search(YummlyReqEntity entity);
         RecipeRes GetRecipe(string id);
     }
 }
