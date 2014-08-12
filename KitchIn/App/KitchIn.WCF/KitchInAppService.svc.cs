@@ -446,28 +446,30 @@ namespace KitchIn.WCF
             return rgxEmail.IsMatch(strEmail);
         }
 
-        public IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith, string cookWithout, string allergies, string diets, string cuisine, string dishType, string holiday, string meal, string time)
+        public string SearchRecipies(string cookWith = "", string cookWithout = "", string allergies = "", string diets = "", string cuisine = "", string dishType = "", string holiday = "", string meal = "", string time = "")
         {
             try
             {
                 var entity = new YummlyReqEntity()
                 {
-                    CookWith = cookWith.Split(','),
-                    CookWithout = cookWithout.Split(','),
-                    Allergies = allergies.Split(','),
-                    Cuisine = cuisine.Split(','),
-                    Diets = diets.Split(','),
-                    DishType = dishType.Split(','),
-                    Holiday = holiday.Split(','),
-                    Meal = meal.Split(','),
+                    CookWith = !String.IsNullOrWhiteSpace(cookWith) ? cookWith.Split(',') : null,
+                    CookWithout = !String.IsNullOrWhiteSpace(cookWithout) ? cookWithout.Split(',') : null,
+                    Allergies = !String.IsNullOrWhiteSpace(allergies) ? allergies.Split(',') : null,
+                    Cuisine = !String.IsNullOrWhiteSpace(cuisine) ? cuisine.Split(',') : null,
+                    Diets = !String.IsNullOrWhiteSpace(diets) ? diets.Split(',') : null,
+                    DishType = !String.IsNullOrWhiteSpace(dishType) ? dishType.Split(',') : null,
+                    Holiday = !String.IsNullOrWhiteSpace(holiday) ? holiday.Split(',') : null,
+                    Meal = !String.IsNullOrWhiteSpace(meal) ? meal.Split(',') : null,
                     Time = time
                 };
+                
+                var res = JsonConvert.SerializeObject(yummlyManager.Search(entity));
 
-                return yummlyManager.SearchRecipes(entity);
+                return res.Replace("\"", "'").Replace("\\", "");
             }
             catch
             {
-                return new List<RecipeSearchRes>();
+                return "Error";
             }
         }
 

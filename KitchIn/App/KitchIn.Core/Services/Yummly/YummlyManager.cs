@@ -74,19 +74,13 @@ namespace KitchIn.Core.Services.Yummly
             var appKey = WebConfigurationManager.AppSettings["Password"];
             var result = String.Empty;
 
-            try
+            using (var client = new WebClient { Encoding = Encoding.UTF8 })
             {
-                using (var client = new WebClient { Encoding = Encoding.UTF8 })
-                {
-                    result = client.DownloadString(String.Format(url + query, appId, appKey, param)).Replace("\\", String.Empty);
-                }
+                var str = String.Format(url + query, appId, appKey, param);
+                result = client.DownloadString(str);
+            }
 
-                return result;
-            }
-            catch (Exception)
-            {
-                return String.Empty;
-            }
+            return result;
         }
 
         public void UpdateMetadata()
@@ -393,61 +387,55 @@ namespace KitchIn.Core.Services.Yummly
             }
         }
 
-        public IEnumerable<RecipeSearchRes> SearchRecipes(YummlyReqEntity entity)
+        public IEnumerable<RecipeSearchRes> Search(YummlyReqEntity entity)
         {
-            try
+            var query = GenerateRequest(entity);
+
+            var response = GetData(endpoints["Recipes"], query, String.Empty);
+            var recipies = JsonConvert.DeserializeObject<RecipeSearchJson>(response);
+
+            var rearchRes = new List<RecipeSearchRes>();
+
+            foreach (var recipe in recipies.matches)
             {
-                var query = GenerateRequest(entity);
-                var response = GetData(endpoints["Recipes"], query, String.Empty);
-                var recipies = JsonConvert.DeserializeObject<RecipeSearchJson>(response);
+                var tmp = JObject.Parse(recipe.ToString());
 
-                var rearchRes = new List<RecipeSearchRes>();
+                //Uncomment if you need calories in recipes list
 
-                foreach (var recipe in recipies.matches)
+                //try
+                //{
+                //var currec = GetRecipe(tmp["id"].ToString());
+
+                var item = new RecipeSearchRes()
                 {
-                    var tmp = JObject.Parse(recipe.ToString());
+                    Id = tmp["id"],
+                    Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
+                    //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
+                    Kalories = 0,
+                    PhotoUrl = tmp["smallImageUrls"].ToString(),
+                    Title = tmp["recipeName"].ToString(),
+                    TotalTime = tmp["totalTimeInSeconds"]
+                };
 
-                    //Uncomment if you need calories in recipes list
+                rearchRes.Add(item);
+                //}
+                //catch
+                //{
+                //    var item = new RecipeSearhRes()
+                //    {
+                //        Id = tmp["id"],
+                //        Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
+                //        Kalories = 0,
+                //        PhotoUrl = tmp["smallImageUrls"].ToString(),
+                //        Title = tmp["recipeName"].ToString(),
+                //        TotalTime = tmp["totalTimeInSeconds"]
+                //    };
 
-                    //try
-                    //{
-                    //var currec = GetRecipe(tmp["id"].ToString());
-
-                    var item = new RecipeSearchRes()
-                    {
-                        Id = tmp["id"],
-                        Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
-                        //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
-                        Kalories = 0,
-                        PhotoUrl = tmp["smallImageUrls"].ToString(),
-                        Title = tmp["recipeName"].ToString(),
-                        TotalTime = tmp["totalTimeInSeconds"]
-                    };
-
-                    rearchRes.Add(item);
-                    //}
-                    //catch
-                    //{
-                    //    var item = new RecipeSearhRes()
-                    //    {
-                    //        Id = tmp["id"],
-                    //        Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
-                    //        Kalories = 0,
-                    //        PhotoUrl = tmp["smallImageUrls"].ToString(),
-                    //        Title = tmp["recipeName"].ToString(),
-                    //        TotalTime = tmp["totalTimeInSeconds"]
-                    //    };
-
-                    //    rearchRes.Add(item);
-                    //}
-                }
-
-                return rearchRes;
+                //    rearchRes.Add(item);
+                //}
             }
-            catch
-            {
-                return new List<RecipeSearchRes>();
-            }
+
+            return rearchRes;
         }
 
         public RecipeRes GetRecipe(string id)
@@ -486,8 +474,8 @@ namespace KitchIn.Core.Services.Yummly
             return key.ToLower().Equals("all")
                 ? metadata
                 : (metadata.ContainsKey(key)
-                    ? new Dictionary<string, string> {{key, metadata[key]}}
-                    : new Dictionary<string, string> {{"Error", "Unknown key"}});
+                    ? new Dictionary<string, string> { { key, metadata[key] } }
+                    : new Dictionary<string, string> { { "Error", "Unknown key" } });
         }
 
         private string GenerateRequest(YummlyReqEntity entity)
@@ -501,7 +489,7 @@ namespace KitchIn.Core.Services.Yummly
 
             if (entity.CookWithout != null)
             {
-                query = entity.CookWith.Where(field => metadata["Ingredients"].Contains(field)).Aggregate(query, (current, field) => current + ("&excludedIngredient[]=" + field));
+                query = entity.CookWithout.Where(field => metadata["Ingredients"].Contains(field)).Aggregate(query, (current, field) => current + ("&excludedIngredient[]=" + field));
             }
 
             if (entity.Allergies != null)
@@ -516,13 +504,13 @@ namespace KitchIn.Core.Services.Yummly
                     switch (field)
                     {
                         case "Breakfast&Brunch":
-                            query += "&allowedCourse [ ] = course^course- Breakfast + course^course- Brunch";
+                            query += "&allowedCourse[]=course^course-Breakfast + course^course-Brunch";
                             break;
                         case "Dinner":
-                            query += "&allowedCourse [ ] = course^course-Main Dishes+course^course-Side Dishes";
+                            query += "&allowedCourse[]=course^course-Main Dishes+course^course-Side%20Dishes";
                             break;
                         case "Lunch& Snack":
-                            query += "&allowedCourse [ ] = course^course- Lunch and Snacks";
+                            query += "&allowedCourse[]=course^course-Lunch%20and%20Snacks";
                             break;
                     }
                 }
@@ -577,27 +565,27 @@ namespace KitchIn.Core.Services.Yummly
                 {
                     case "Less than 15 mins":
                     case "900":
-                        query += "&maxTotalTimeInSeconds[]=900";
+                        query += "&maxTotalTimeInSeconds=900";
                         break;
                     case "Less than 30 mins":
                     case "1800":
-                        query += "&maxTotalTimeInSeconds[]=1800";
+                        query += "&maxTotalTimeInSeconds=1800";
                         break;
                     case "Less than 45 mins":
                     case "2700":
-                        query += "&maxTotalTimeInSeconds[]=2700";
+                        query += "&maxTotalTimeInSeconds=2700";
                         break;
                     case "Less than 1 hour":
                     case "3600":
-                        query += "&maxTotalTimeInSeconds[]=3600";
+                        query += "&maxTotalTimeInSeconds=3600";
                         break;
                     case "Less than 2 hours":
                     case "7200":
-                        query += "&maxTotalTimeInSeconds[]=7200";
+                        query += "&maxTotalTimeInSeconds=7200";
                         break;
                     case "Less than 3 hours":
                     case "1080":
-                        query += "&maxTotalTimeInSeconds[]=10800";
+                        query += "&maxTotalTimeInSeconds=10800";
                         break;
                     case "Low-Calorie":
                         query += "&nutrition.Energ_kcal.min=100&nutrition.Energ_kcal.max=250";
