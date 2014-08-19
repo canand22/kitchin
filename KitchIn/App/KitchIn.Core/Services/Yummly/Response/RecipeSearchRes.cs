@@ -8,11 +8,12 @@ namespace KitchIn.Core.Services.Yummly.Response
 {
     public class RecipeSearchRes
     {
-        public JToken Id { set; get; }
+        public string Id { set; get; }
         public string Title { set; get; }
-        public string PhotoUrl { set; get; }
-        public JToken TotalTime { set; get; }
+        public string[] PhotoUrl { set; get; }
+        public double TotalTime { set; get; }
         public double? Kalories { set; get; }
-        public JToken[] Ingredients { set; get; }
+        public string[] Ingredients { set; get; }
+        public double Rating { set; get; } 
     }
 }

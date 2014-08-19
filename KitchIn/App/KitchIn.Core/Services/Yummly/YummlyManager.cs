@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -400,21 +401,38 @@ namespace KitchIn.Core.Services.Yummly
             {
                 var tmp = JObject.Parse(recipe.ToString());
 
+                var recIngr = tmp["ingredients"].ToArray();
+                var ingredients = new string[recIngr.Length];
+
+                for (int i = 0; i < recIngr.Length; i++)
+                {
+                    ingredients[i] = recIngr[i].ToString();
+                }
+
+                var recImg = tmp["smallImageUrls"].ToArray();
+                var images = new string[recImg.Length];
+
+                for (int i = 0; i < recImg.Length; i++)
+                {
+                    images[i] = recImg[i].ToString();
+                }
+                
                 //Uncomment if you need calories in recipes list
 
                 //try
                 //{
-                //var currec = GetRecipe(tmp["id"].ToString());
+                //var currec = GetRecipe(tmp["id"].ToString()); 
 
                 var item = new RecipeSearchRes()
                 {
-                    Id = tmp["id"],
-                    Ingredients = tmp["ingredients"] == null ? new JToken[] { } : tmp["ingredients"].ToArray(),
+                    Id = tmp["id"] == null ? String.Empty : tmp["id"].ToString(),
+                    Ingredients = tmp["ingredients"] == null ? new string[] {} : ingredients,
                     //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
                     Kalories = 0,
-                    PhotoUrl = tmp["smallImageUrls"].ToString(),
+                    PhotoUrl = tmp["smallImageUrls"] == null ? new string[] {} : images,
                     Title = tmp["recipeName"].ToString(),
-                    TotalTime = tmp["totalTimeInSeconds"]
+                    TotalTime = Double.Parse(tmp["totalTimeInSeconds"] == null ? "0" : tmp["totalTimeInSeconds"].ToString()),
+                    Rating = Double.Parse(tmp["rating"] == null ? "0" : tmp["rating"].ToString())
                 };
 
                 rearchRes.Add(item);

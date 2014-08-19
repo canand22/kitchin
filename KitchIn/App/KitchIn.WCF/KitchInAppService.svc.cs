@@ -446,30 +446,28 @@ namespace KitchIn.WCF
             return rgxEmail.IsMatch(strEmail);
         }
 
-        public string SearchRecipies(string cookWith = "", string cookWithout = "", string allergies = "", string diets = "", string cuisine = "", string dishType = "", string holiday = "", string meal = "", string time = "")
+        public IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith = "", string cookWithout = "", string allergies = "", string diets = "", string cuisine = "", string dishType = "", string holiday = "", string meal = "", string time = "")
         {
             try
             {
                 var entity = new YummlyReqEntity()
                 {
-                    CookWith = !String.IsNullOrWhiteSpace(cookWith) ? cookWith.Split(',') : null,
-                    CookWithout = !String.IsNullOrWhiteSpace(cookWithout) ? cookWithout.Split(',') : null,
-                    Allergies = !String.IsNullOrWhiteSpace(allergies) ? allergies.Split(',') : null,
-                    Cuisine = !String.IsNullOrWhiteSpace(cuisine) ? cuisine.Split(',') : null,
-                    Diets = !String.IsNullOrWhiteSpace(diets) ? diets.Split(',') : null,
-                    DishType = !String.IsNullOrWhiteSpace(dishType) ? dishType.Split(',') : null,
-                    Holiday = !String.IsNullOrWhiteSpace(holiday) ? holiday.Split(',') : null,
-                    Meal = !String.IsNullOrWhiteSpace(meal) ? meal.Split(',') : null,
+                    CookWith = !String.IsNullOrWhiteSpace(cookWith) ? cookWith.ToLower().Split(',') : null,
+                    CookWithout = !String.IsNullOrWhiteSpace(cookWithout) ? cookWithout.ToLower().Split(',') : null,
+                    Allergies = !String.IsNullOrWhiteSpace(allergies) ? allergies.ToLower().Split(',') : null,
+                    Cuisine = !String.IsNullOrWhiteSpace(cuisine) ? cuisine.ToLower().Split(',') : null,
+                    Diets = !String.IsNullOrWhiteSpace(diets) ? diets.ToLower().Split(',') : null,
+                    DishType = !String.IsNullOrWhiteSpace(dishType) ? dishType.ToLower().Split(',') : null,
+                    Holiday = !String.IsNullOrWhiteSpace(holiday) ? holiday.ToLower().Split(',') : null,
+                    Meal = !String.IsNullOrWhiteSpace(meal) ? meal.ToLower().Split(',') : null,
                     Time = time
                 };
-                
-                var res = JsonConvert.SerializeObject(yummlyManager.Search(entity));
 
-                return res.Replace("\"", "'").Replace("\\", "");
+                return yummlyManager.Search(entity);
             }
             catch
             {
-                return "Error";
+                return new List<RecipeSearchRes>();
             }
         }
 
