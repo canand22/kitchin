@@ -423,6 +423,12 @@ namespace KitchIn.Core.Services.Yummly
                 //{
                 //var currec = GetRecipe(tmp["id"].ToString()); 
 
+                double totalTime = 0;
+                double rating = 0;
+                Double.TryParse(tmp["totalTimeInSeconds"].ToString(),out totalTime);
+                Double.TryParse(tmp["rating"].ToString(), out rating);
+                
+                
                 var item = new RecipeSearchRes()
                 {
                     Id = tmp["id"] == null ? String.Empty : tmp["id"].ToString(),
@@ -431,8 +437,8 @@ namespace KitchIn.Core.Services.Yummly
                     Kalories = 0,
                     PhotoUrl = tmp["smallImageUrls"] == null ? new string[] {} : images,
                     Title = tmp["recipeName"].ToString(),
-                    TotalTime = Double.Parse(tmp["totalTimeInSeconds"] == null ? "0" : tmp["totalTimeInSeconds"].ToString()),
-                    Rating = Double.Parse(tmp["rating"] == null ? "0" : tmp["rating"].ToString())
+                    TotalTime = totalTime,
+                    Rating = rating
                 };
 
                 rearchRes.Add(item);
