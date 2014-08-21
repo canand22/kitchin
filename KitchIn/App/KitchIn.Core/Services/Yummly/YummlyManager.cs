@@ -471,17 +471,17 @@ namespace KitchIn.Core.Services.Yummly
 
                 var nutritions = recipeYummly.nutritionEstimates;
                 var nutritionDic = nutritions.ToDictionary(item => item.attribute,
-                    item => new Tuple<string, double, string>(item.description, item.value, item.unit.name));
+                    item => new Tuple<string, double?, string>(item.description, item.value, item.unit.name));
 
                 var recipe = new RecipeRes()
                 {
                     RecipeName = recipeYummly.name,
                     Ingredients = recipeYummly.ingredientLines,
                     Picture = recipeYummly.images[0].hostedMediumUrl,
-                    Rating = recipeYummly.rating,
+                    Rating = recipeYummly.rating == null ? 0 : recipeYummly.rating.Value,
                     Served = recipeYummly.numberOfServings.ToString(),
                     RecipeUrl = recipeYummly.attribution.url,
-                    Time = recipeYummly.totalTimeInSeconds,
+                    Time = recipeYummly.totalTimeInSeconds == null ? 0 : recipeYummly.totalTimeInSeconds.Value,
                     Nutritions = nutritionDic
                 };
 

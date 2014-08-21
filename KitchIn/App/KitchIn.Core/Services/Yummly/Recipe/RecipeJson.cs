@@ -22,15 +22,15 @@ namespace KitchIn.Core.Services.Yummly.Recipe
 
         public Attribution attribution { get; set; }
 
-        public int numberOfServings { get; set; }
+        public int? numberOfServings { get; set; }
 
-        public int totalTimeInSeconds { get; set; }
+        public int? totalTimeInSeconds { get; set; }
 
         public Attributes attributes { get; set; }
 
         public Flavors flavors { get; set; }
 
-        public int rating { get; set; }
+        public int? rating { get; set; }
     }
 
 }

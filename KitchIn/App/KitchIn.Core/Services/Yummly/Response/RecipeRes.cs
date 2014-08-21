@@ -15,6 +15,6 @@ namespace KitchIn.Core.Services.Yummly.Response
         public string[] Ingredients { set; get; }
         public string RecipeUrl { set; get; }
 
-        public Dictionary<string, Tuple<string, double, string>> Nutritions { set; get; }
+        public Dictionary<string, Tuple<string, double?, string>> Nutritions { set; get; }
     }
 }
