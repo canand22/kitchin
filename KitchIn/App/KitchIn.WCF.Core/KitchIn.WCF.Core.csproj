@@ -64,6 +64,7 @@
     <Compile Include="Models\CommonDataContract\ProductMediumModel.cs" />
     <Compile Include="Models\CommonDataContract\PropuctSimpleModel.cs" />
     <Compile Include="Models\CommonDataContract\StatusResponse.cs" />
+    <Compile Include="Models\MyAccount\UpdateUserRequest.cs" />
     <Compile Include="Models\RegisterRequest.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
