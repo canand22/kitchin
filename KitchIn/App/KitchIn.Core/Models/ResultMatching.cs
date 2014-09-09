@@ -14,6 +14,8 @@ namespace KitchIn.Core.Models
 
         public string Category { get; set; }
 
+        public string IngredientName { set; get; }
+
         //public bool Equals(ResultMatching x, ResultMatching y)
         //{
         //    return y.Id != null && (x.Id != null && x.Id.Value == y.Id.Value);

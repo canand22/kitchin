@@ -55,6 +55,35 @@ namespace KitchIn.BL.Implementation
             return this.ChangePassword(user);
         }
 
+        public bool ChangeUserEmail(Guid id, string oldEmail, string newEmail)
+        {
+            var user = this.UserRepo.FirstOrDefault(x => x.SessionId == id && x.Email.Equals(oldEmail));
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Email = newEmail;
+            this.UserRepo.SaveChanges();
+            return true;
+        }
+
+        public bool ChangeUserName(Guid id, string firstName, string lastName)
+        {
+            var user = this.UserRepo.FirstOrDefault(x => x.SessionId == id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            this.UserRepo.SaveChanges();
+            return true;
+        }
+
         public bool ChangeUserPassword(Guid id, string oldPassword, string newPassword)
         {
             var oldPass = this.GetHashString(oldPassword);

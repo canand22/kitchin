@@ -9,5 +9,7 @@ namespace KitchIn.Core.Services.Yummly
         void UpdateMetadata();
         IEnumerable<RecipeSearchRes> Search(YummlyReqEntity entity);
         RecipeRes GetRecipe(string id);
+        IList<ReferenceData> GetIngredientsRelations(string key);
+        IList<ReferenceData> GetIngredientsRelationsByYammlyName(string key);
     }
 }
