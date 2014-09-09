@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 using KitchIn.Core.Entities;
 using KitchIn.Core.Services.Yummly.Recipe;
 using KitchIn.Core.Services.Yummly.Response;
+using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SmartArch.Data;
+
 
 namespace KitchIn.Core.Services.Yummly
 {
@@ -86,6 +90,7 @@ namespace KitchIn.Core.Services.Yummly
 
         public void UpdateMetadata()
         {
+
             foreach (var item in endpoints)
             {
                 try
@@ -115,13 +120,14 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var ingredient in ingredients)
                                 {
                                     var currIngredient =
-                                        this.ingredientsRepository.FirstOrDefault(
+                                        this.ingredientsRepository.Where(
                                             i => i.SearchValue.Equals(ingredient.Term.ToLower()));
 
-                                    if (currIngredient == null)
+                                    if (!currIngredient.Any())
                                     {
                                         var newIngr = new Ingredient()
                                         {
+                                            YummlyId = ingredient.YummlyId ?? String.Empty,
                                             SearchValue = ingredient.SearchValue,
                                             Description = ingredient.Description,
                                             Term = ingredient.Term
@@ -129,14 +135,6 @@ namespace KitchIn.Core.Services.Yummly
 
                                         this.ingredientsRepository.Save(newIngr);
                                     }
-                                }
-
-                                var tmpIngr = metadata["Ingredients"];
-
-                                var ingredientsToRemove = this.ingredientsRepository.Where(x => !tmpIngr.Contains(x.Term)).ToList();
-                                foreach (var ingr in ingredientsToRemove)
-                                {
-                                    this.ingredientsRepository.Remove(ingr);
                                 }
 
                                 this.ingredientsRepository.SaveChanges();
@@ -161,30 +159,23 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var allergy in allergies)
                                 {
                                     var currAllergy =
-                                        this.allergiesRepository.FirstOrDefault(
+                                        this.allergiesRepository.Where(
                                             a => a.SearchValue.Equals(allergy.ShortDescription.ToLower()));
 
-                                    if (currAllergy == null)
+                                    if (!currAllergy.Any())
                                     {
                                         var newAllergy = new Allergy()
                                         {
-                                            SearchValue = currAllergy.SearchValue,
-                                            ShortDescription = currAllergy.ShortDescription,
-                                            LongDescription = currAllergy.LongDescription,
-                                            Type = currAllergy.Type,
-                                            LocalesAvailableIn = currAllergy.LocalesAvailableIn
+                                            YummlyId = allergy.YummlyId ?? String.Empty,
+                                            SearchValue = allergy.SearchValue,
+                                            ShortDescription = allergy.ShortDescription,
+                                            LongDescription = allergy.LongDescription,
+                                            Type = allergy.Type,
+                                            LocalesAvailableIn = allergy.LocalesAvailableIn
                                         };
 
                                         this.allergiesRepository.Save(newAllergy);
                                     }
-                                }
-
-                                var tmpAllergy = metadata["Allergies"];
-
-                                var allergiesToRemove = this.allergiesRepository.Where(x => !tmpAllergy.Contains(x.ShortDescription)).ToList();
-                                foreach (var allergy in allergiesToRemove)
-                                {
-                                    this.allergiesRepository.Remove(allergy);
                                 }
 
                                 this.allergiesRepository.SaveChanges();
@@ -209,12 +200,14 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var diet in diets)
                                 {
                                     var currDiet =
-                                        this.dietsRepository.FirstOrDefault(d => d.ShortDescription.Equals(diet.ShortDescription.ToLower()));
+                                        this.dietsRepository.Where(
+                                            d => d.ShortDescription.Equals(diet.ShortDescription.ToLower()));
 
-                                    if (currDiet == null)
+                                    if (!currDiet.Any())
                                     {
                                         var newDied = new Diet()
                                         {
+                                            YummlyId = diet.YummlyId ?? String.Empty,
                                             SearchValue = diet.SearchValue,
                                             ShortDescription = diet.ShortDescription,
                                             LongDescription = diet.LongDescription,
@@ -224,14 +217,6 @@ namespace KitchIn.Core.Services.Yummly
 
                                         this.dietsRepository.Save(newDied);
                                     }
-                                }
-
-                                var tmpDiets = metadata["Diets"];
-
-                                var dietsToRemove = this.dietsRepository.Where(x => !tmpDiets.Contains(x.ShortDescription)).ToList();
-                                foreach (var diet in dietsToRemove)
-                                {
-                                    this.dietsRepository.Remove(diet);
                                 }
 
                                 this.dietsRepository.SaveChanges();
@@ -256,12 +241,13 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var cuisin in cuisines)
                                 {
                                     var currCuisine =
-                                        this.cuisinesRepository.FirstOrDefault(c => c.Name.Equals(cuisin.Name.ToLower()));
+                                        this.cuisinesRepository.Where(c => c.Name.Equals(cuisin.Name.ToLower()));
 
-                                    if (currCuisine == null)
+                                    if (!currCuisine.Any())
                                     {
                                         var newCuisine = new Cuisine()
                                         {
+                                            YummlyId = cuisin.YummlyId ?? String.Empty,
                                             SearchValue = cuisin.SearchValue,
                                             Name = cuisin.Name,
                                             Description = cuisin.Description,
@@ -271,14 +257,6 @@ namespace KitchIn.Core.Services.Yummly
 
                                         this.cuisinesRepository.Save(newCuisine);
                                     }
-                                }
-
-                                var tmpCuisines = metadata["Cuisine"];
-
-                                var cuisinesToRemove = this.cuisinesRepository.Where(x => !tmpCuisines.Contains(x.Name)).ToList();
-                                foreach (var cuisine in cuisinesToRemove)
-                                {
-                                    this.cuisinesRepository.Remove(cuisine);
                                 }
 
                                 this.cuisinesRepository.SaveChanges();
@@ -303,12 +281,13 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var course in courses)
                                 {
                                     var currCourse =
-                                        this.coursesRepository.FirstOrDefault(c => c.Name.Equals(course.Name.ToLower()));
+                                        this.coursesRepository.Where(c => c.Name.Equals(course.Name.ToLower()));
 
-                                    if (currCourse == null)
+                                    if (!currCourse.Any())
                                     {
                                         var newCourse = new Course()
                                         {
+                                            YummlyId = course.YummlyId ?? String.Empty,
                                             SearchValue = course.SearchValue,
                                             Name = course.Name,
                                             Description = course.Description,
@@ -319,15 +298,6 @@ namespace KitchIn.Core.Services.Yummly
                                         this.coursesRepository.Save(newCourse);
                                     }
                                 }
-
-                                var tmpCourses = metadata["Course"];
-
-                                var coursesToRemove = this.coursesRepository.Where(x => !tmpCourses.Contains(x.Name)).ToList();
-                                foreach (var course in coursesToRemove)
-                                {
-                                    this.coursesRepository.Remove(course);
-                                }
-
                                 this.coursesRepository.SaveChanges();
 
                                 break;
@@ -350,12 +320,13 @@ namespace KitchIn.Core.Services.Yummly
                                 foreach (var holiday in holidays)
                                 {
                                     var currHoliday =
-                                        this.holidaysRepository.FirstOrDefault(h => h.Name.Equals(holiday.Name.ToLower()));
+                                        this.holidaysRepository.Where(h => h.Name.Equals(holiday.Name.ToLower()));
 
-                                    if (currHoliday == null)
+                                    if (!currHoliday.Any())
                                     {
                                         var newHoliday = new Holiday()
                                         {
+                                            YummlyId = holiday.YummlyId ?? String.Empty,
                                             SearchValue = holiday.SearchValue,
                                             Name = holiday.Name,
                                             Description = holiday.Description,
@@ -365,14 +336,6 @@ namespace KitchIn.Core.Services.Yummly
 
                                         this.holidaysRepository.Save(newHoliday);
                                     }
-                                }
-
-                                var tmpHolidays = metadata["Holiday"];
-
-                                var holidaysToRemove = this.holidaysRepository.Where(x => !tmpHolidays.Contains(x.Name)).ToList();
-                                foreach (var holiday in holidaysToRemove)
-                                {
-                                    this.holidaysRepository.Remove(holiday);
                                 }
 
                                 this.holidaysRepository.SaveChanges();
@@ -416,7 +379,7 @@ namespace KitchIn.Core.Services.Yummly
                 {
                     images[i] = recImg[i].ToString();
                 }
-                
+
                 //Uncomment if you need calories in recipes list
 
                 //try
@@ -425,17 +388,17 @@ namespace KitchIn.Core.Services.Yummly
 
                 double totalTime = 0;
                 double rating = 0;
-                Double.TryParse(tmp["totalTimeInSeconds"].ToString(),out totalTime);
+                Double.TryParse(tmp["totalTimeInSeconds"].ToString(), out totalTime);
                 Double.TryParse(tmp["rating"].ToString(), out rating);
-                
-                
+
+
                 var item = new RecipeSearchRes()
                 {
                     Id = tmp["id"] == null ? String.Empty : tmp["id"].ToString(),
-                    Ingredients = tmp["ingredients"] == null ? new string[] {} : ingredients,
+                    Ingredients = tmp["ingredients"] == null ? new string[] { } : ingredients,
                     //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
                     Kalories = 0,
-                    PhotoUrl = tmp["smallImageUrls"] == null ? new string[] {} : images,
+                    PhotoUrl = tmp["smallImageUrls"] == null ? new string[] { } : images,
                     Title = tmp["recipeName"].ToString(),
                     TotalTime = totalTime,
                     Rating = rating
@@ -500,6 +463,82 @@ namespace KitchIn.Core.Services.Yummly
                 : (metadata.ContainsKey(key)
                     ? new Dictionary<string, string> { { key, metadata[key] } }
                     : new Dictionary<string, string> { { "Error", "Unknown key" } });
+        }
+
+        public IList<ReferenceData> GetIngredientsRelations(string key = "All")
+        {
+            List<Product> products;
+
+            var repository = ServiceLocator.Current.GetInstance<IRepository<Product>>();
+
+            switch (key)
+            {
+                case "All":
+                    {
+                        products = repository.Select(x => x).ToList();
+                        break;
+                    }
+                default:
+                    {
+                        products = repository.Where(x => x.Name.ToLower().StartsWith(key.ToLower())).ToList();
+                        break;
+                    }
+            }
+
+            var result = new List<ReferenceData>();
+
+            products.Select(x => new { x.IngredientName, x.Name, x.ShortName, x.Id, x.Category })
+                .ToList()
+                .ForEach(
+                    x =>
+                        result.Add(new ReferenceData()
+                        {
+                            Id = x.Id,
+                            Category = x.Category.Name,
+                            FullName = x.Name,
+                            ShortName = x.ShortName,
+                            YummlyName = x.IngredientName
+                        }));
+
+            return result;
+        }
+
+        public IList<ReferenceData> GetIngredientsRelationsByYammlyName(string key = "All")
+        {
+            List<Product> products;
+
+            var repository = ServiceLocator.Current.GetInstance<IRepository<Product>>();
+
+            switch (key)
+            {
+                case "All":
+                    {
+                        products = repository.Select(x => x).ToList();
+                        break;
+                    }
+                default:
+                    {
+                        products = repository.Where(x => x.IngredientName.ToLower().StartsWith(key.ToLower())).ToList();
+                        break;
+                    }
+            }
+
+            var result = new List<ReferenceData>();
+
+            products.Select(x => new { x.IngredientName, x.Name, x.ShortName, x.Id, x.Category })
+                .ToList()
+                .ForEach(
+                    x =>
+                        result.Add(new ReferenceData()
+                        {
+                            Id = x.Id,
+                            Category = x.Category.Name,
+                            FullName = x.Name,
+                            ShortName = x.ShortName,
+                            YummlyName = x.IngredientName
+                        }));
+
+            return result;
         }
 
         private string GenerateRequest(YummlyReqEntity entity)

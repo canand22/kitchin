@@ -23,5 +23,6 @@ namespace KitchIn.Core.Entities
         public virtual TypeAdd TypeAdd { get; set; }
 
         public virtual DateTime ModificationDate { get; set; }
+        public virtual string IngredientName { get; set; }
     }
 }

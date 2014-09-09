@@ -47,7 +47,7 @@ namespace KitchIn.BL.Implementation
                 if (firstAttempt != null)
                 {
                     result.Add(new ResultMatching() { Id = firstAttempt.Id, IsSuccessMatching = true, ItemName = firstAttempt.Name, 
-                        Category = firstAttempt.Category.Name, ItemShortName = firstAttempt.ShortName});
+                        Category = firstAttempt.Category.Name, ItemShortName = firstAttempt.ShortName, IngredientName = firstAttempt.IngredientName});
                     continue;
                 }
 
@@ -55,7 +55,7 @@ namespace KitchIn.BL.Implementation
                 if (secondAttempt != null)
                 {
                     result.Add(new ResultMatching() { Id = secondAttempt.Id, IsSuccessMatching = true, ItemName = secondAttempt.Name, 
-                        Category = secondAttempt.Category.Name, ItemShortName = secondAttempt.ShortName});
+                        Category = secondAttempt.Category.Name, ItemShortName = secondAttempt.ShortName, IngredientName = secondAttempt.IngredientName});
                     continue;
                 }else
                 {
