@@ -2,6 +2,7 @@
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using KitchIn.Core.Services.Yummly;
 using KitchIn.Core.Services.Yummly.Response;
 using KitchIn.WCF.Core.Models;
 using KitchIn.WCF.Core.Models.MyAccount;
@@ -116,6 +117,14 @@ namespace KitchIn.WCF
             ResponseFormat = WebMessageFormat.Json)]
         bool UpdatePassword(PasswordRequest request);
 
+        [OperationContract]
+        [WebInvoke(UriTemplate = "MyAccount/UpdateEmail", ResponseFormat = WebMessageFormat.Json)]
+        bool UpdateEmail(UpdateUserRequest request);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "MyAccount/UpdateName", ResponseFormat = WebMessageFormat.Json)]
+        bool UpdateUserName(UpdateUserRequest request);
+
         #endregion
 
         [OperationContract]
@@ -172,7 +181,13 @@ namespace KitchIn.WCF
         [OperationContract]
         [WebGet(UriTemplate = "Metadata/{key}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         IDictionary<string, string> GetMetadata(string key);
-        
-        
+
+        [OperationContract]
+        [WebGet(UriTemplate = "IngredientsRelations/{key}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        IList<ReferenceData> IngredientsRelations(string key = "All");
+
+        [OperationContract]
+        [WebGet(UriTemplate = "YummlyIngredientsRelations/{key}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        IList<ReferenceData> YummlyIngredientsRelations(string key = "All");
     }
 }
