@@ -28,7 +28,6 @@ using KitchIn.WCF.Core.Models.CommonDataContract;
 using KitchIn.WCF.Core.Models.UserPreference;
 using Newtonsoft.Json;
 
-
 namespace KitchIn.WCF
 {
     using System.Text.RegularExpressions;
@@ -73,19 +72,19 @@ namespace KitchIn.WCF
             this.manageMatchingTexts = manageMatchingTexts;
             this.productByUserProvider = productByUserProvider;
             this.userPreferenceProvider = userPreferenceProvider;
-        
+
 
             this.yummlyManager = yummlyManager;
-            this.yummlyUpdater = yummlyUpdater;            
-            yummlyUpdater.Run();
-            }
-            
+            this.yummlyUpdater = yummlyUpdater;
+        }
+
         public UserPreferenceResponse AddOrUpdateUserPreference(UserPreferenceRequest request)
         {
-            string message=this.userPreferenceProvider.AddOrUpdateUserPreference(request.Guid, request.UserPreference);
-            return new UserPreferenceResponse {
-                Success = message ==CommonConstants.MESSAGE_SUCCESS?true:false,  
-            Message=message
+            string message = this.userPreferenceProvider.AddOrUpdateUserPreference(request.Guid, request.UserPreference);
+            return new UserPreferenceResponse
+            {
+                Success = message == CommonConstants.MESSAGE_SUCCESS ? true : false,
+                Message = message
             };
         }
 
@@ -111,10 +110,10 @@ namespace KitchIn.WCF
                                    Allergies = p.Allergies.Select(t => t.SearchValue).ToList(),
                                    AllowedIngridients = p.AllowedIngredients == null ? null : p.AllowedIngredients.Select(t => t.Term).ToList(),
                                    ExcludedIngridients = p.ExcludedIngredients == null ? null : p.ExcludedIngredients.Select(t => t.Term).ToList(),
-                                   Cuisines = p.Cuisines==null?null:p.Cuisines.Select(t => t.Name).ToList(),
-                                   Diets = p.Diets==null?null:p.Diets.Select(t => t.ShortDescription).ToList(),
-                                   DishType = p.DishType==null?null:p.DishType.Name,
-                                   Holidays = p.Holidays==null?null:p.Holidays.Select(t => t.Name).ToList(),
+                                   Cuisines = p.Cuisines == null ? null : p.Cuisines.Select(t => t.Name).ToList(),
+                                   Diets = p.Diets == null ? null : p.Diets.Select(t => t.ShortDescription).ToList(),
+                                   DishType = p.DishType == null ? null : p.DishType.Name,
+                                   Holidays = p.Holidays == null ? null : p.Holidays.Select(t => t.Name).ToList(),
                                    Meal = p.Meal,
                                    OwnerPreference = p.OwnerPreference,
                                    Time = new List<TimeType>() { (TimeType)Enum.Parse(typeof(TimeType), p.Time, true) }
@@ -282,7 +281,7 @@ namespace KitchIn.WCF
         public ProductsResponse AllProducts(long storeId, long categoryId)
         {
             var products = this.productProvider.GetAllProductsByStoreAndCategory(storeId, categoryId)
-                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName });
+                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName, IngredientName = x.IngredientName});
             return new ProductsResponse { Products = products };
         }
 
@@ -324,6 +323,16 @@ namespace KitchIn.WCF
         public bool UpdatePassword(PasswordRequest request)
         {
             return this.userProvider.ChangeUserPassword(request.Guid, request.OldPassword, request.NewPassword);
+        }
+
+        public bool UpdateEmail(UpdateUserRequest request)
+        {
+            return this.userProvider.ChangeUserEmail(request.Guid, request.OldEmail, request.NewEmail);
+        }
+
+        public bool UpdateUserName(UpdateUserRequest request)
+        {
+            return this.userProvider.ChangeUserName(request.Guid, request.FirstName, request.LastName);
         }
 
         #endregion
@@ -481,6 +490,16 @@ namespace KitchIn.WCF
         public IDictionary<string, string> GetMetadata(string key)
         {
             return YummlyManager.GetMetadata(key);
+        }
+
+        public IList<ReferenceData> IngredientsRelations(string key = "All")
+        {
+            return yummlyManager.GetIngredientsRelations(key);
+        }
+
+        public IList<ReferenceData> YummlyIngredientsRelations(string key = "All")
+        {
+            return yummlyManager.GetIngredientsRelationsByYammlyName(key);
         }
     }
 }

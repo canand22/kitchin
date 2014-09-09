@@ -22,6 +22,9 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
 
         [DataMember]
         public bool IsSuccessMatching { get; set; }
+
+        [DataMember]
+        public string YummlyName { get; set; }
         
         public static implicit operator ProductMediumModel(ResultMatching resultMatching)
         {
@@ -31,7 +34,8 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
                 IsSuccessMatching = resultMatching.IsSuccessMatching,
                 ItemName = resultMatching.ItemName,
                 Category = resultMatching.Category,
-                ItemShortName = resultMatching.ItemShortName
+                ItemShortName = resultMatching.ItemShortName,
+                YummlyName = resultMatching.IngredientName
             };
             return model;
         }
@@ -44,7 +48,8 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
                 IsSuccessMatching = true,
                 ItemName = product.Name,
                 Category = product.Category.Name,
-                ItemShortName = product.ShortName
+                ItemShortName = product.ShortName,
+                YummlyName = product.IngredientName
             };
             return model;
         }
