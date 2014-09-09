@@ -22,7 +22,7 @@ namespace KitchIn.Core.Services.OCRRecognize
         {
             get
             {
-                return ConfigurationManager.AppSettings["ApplicationId"];
+                return ConfigurationManager.AppSettings["ApplicationLingvoId"];
             }
         }
 
@@ -33,7 +33,7 @@ namespace KitchIn.Core.Services.OCRRecognize
         {
             get
             {
-                return ConfigurationManager.AppSettings["Password"];
+                return ConfigurationManager.AppSettings["PasswordLingvo"];
             }
         }
 
