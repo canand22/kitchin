@@ -439,7 +439,7 @@ namespace KitchIn.Core.Services.Yummly
                 var recipe = new RecipeRes()
                 {
                     RecipeName = recipeYummly.name,
-                    Ingredients = recipeYummly.ingredientLines,
+                    Ingredients = recipeYummly.ingredientLines.Distinct().ToArray(),
                     Picture = recipeYummly.images[0].hostedMediumUrl,
                     Rating = recipeYummly.rating == null ? 0 : recipeYummly.rating.Value,
                     Served = recipeYummly.numberOfServings.ToString(),
