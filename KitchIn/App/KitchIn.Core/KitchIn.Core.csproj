@@ -123,6 +123,7 @@
     <Compile Include="Interfaces\IProvider.cs" />
     <Compile Include="LogWriter.cs" />
     <Compile Include="Models\CategoryiPhoneModel.cs" />
+    <Compile Include="Models\OperationResult.cs" />
     <Compile Include="Models\ProductiPhoneModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ResultMatching.cs" />

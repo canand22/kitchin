@@ -2,6 +2,7 @@
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using KitchIn.Core.Models;
 using KitchIn.Core.Services.Yummly;
 using KitchIn.Core.Services.Yummly.Response;
 using KitchIn.WCF.Core.Models;
@@ -113,17 +114,12 @@ namespace KitchIn.WCF
         #region MyAccount
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "MyAccount/Update",
-            ResponseFormat = WebMessageFormat.Json)]
-        bool UpdatePassword(PasswordRequest request);
+        [WebInvoke(UriTemplate = "MyAccount/Update", ResponseFormat = WebMessageFormat.Json)]
+        OperationResult UpdatePassword(PasswordRequest request);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "MyAccount/UpdateEmail", ResponseFormat = WebMessageFormat.Json)]
-        bool UpdateEmail(UpdateUserRequest request);
-
-        [OperationContract]
-        [WebInvoke(UriTemplate = "MyAccount/UpdateName", ResponseFormat = WebMessageFormat.Json)]
-        bool UpdateUserName(UpdateUserRequest request);
+        [WebInvoke(UriTemplate = "MyAccount/UpdateUserData", ResponseFormat = WebMessageFormat.Json)]
+        OperationResult UpdateUserData(UpdateUserRequest request);
 
         #endregion
 
