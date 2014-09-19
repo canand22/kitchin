@@ -281,7 +281,7 @@ namespace KitchIn.WCF
         public ProductsResponse AllProducts(long storeId, long categoryId)
         {
             var products = this.productProvider.GetAllProductsByStoreAndCategory(storeId, categoryId)
-                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName, IngredientName = x.IngredientName});
+                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName, IngredientName = x.IngredientName });
             return new ProductsResponse { Products = products };
         }
 
@@ -320,19 +320,20 @@ namespace KitchIn.WCF
 
         #region MyAccount
 
-        public bool UpdatePassword(PasswordRequest request)
+        public OperationResult UpdatePassword(PasswordRequest request)
         {
-            return this.userProvider.ChangeUserPassword(request.Guid, request.OldPassword, request.NewPassword);
+            return new OperationResult()
+            {
+                Success = this.userProvider.ChangeUserPassword(request.Guid, request.OldPassword, request.NewPassword)
+            };
         }
 
-        public bool UpdateEmail(UpdateUserRequest request)
+        public OperationResult UpdateUserData(UpdateUserRequest request)
         {
-            return this.userProvider.ChangeUserEmail(request.Guid, request.OldEmail, request.NewEmail);
-        }
-
-        public bool UpdateUserName(UpdateUserRequest request)
-        {
-            return this.userProvider.ChangeUserName(request.Guid, request.FirstName, request.LastName);
+            return new OperationResult()
+            {
+                Success = this.userProvider.ChangeUserData(request.Guid, request.NewEmail, request.FirstName, request.LastName)
+            };
         }
 
         #endregion

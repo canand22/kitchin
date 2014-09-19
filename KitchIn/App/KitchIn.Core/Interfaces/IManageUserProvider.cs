@@ -11,9 +11,7 @@ namespace KitchIn.Core.Interfaces
 
         bool ChangeUserPassword(Guid id, string oldPassword, string newPassword);
 
-        bool ChangeUserEmail(Guid id, string oldEmail, string newEmail);
-
-        bool ChangeUserName(Guid id, string firstName, string lastName);
+        bool ChangeUserData(Guid id, string newEmail, string firstName, string lastName);        
 
         User GetUser(string email, string password);
 

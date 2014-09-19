@@ -13,9 +13,6 @@ namespace KitchIn.WCF.Core.Models.MyAccount
         public Guid Guid { get; set; }
 
         [DataMember]
-        public string OldEmail { get; set; }
-
-        [DataMember]
         public string NewEmail { get; set; }
 
         [DataMember]
