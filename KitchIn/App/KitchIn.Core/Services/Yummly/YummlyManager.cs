@@ -351,14 +351,17 @@ namespace KitchIn.Core.Services.Yummly
             }
         }
 
-        public IEnumerable<RecipeSearchRes> Search(YummlyReqEntity entity)
+        //public IEnumerable<RecipeSearchRes> Search(YummlyReqEntity entity)
+        public SearchResult Search(YummlyReqEntity entity)
         {
+            var result = new SearchResult();
             var query = GenerateRequest(entity);
 
             var response = GetData(endpoints["Recipes"], query, String.Empty);
             var recipies = JsonConvert.DeserializeObject<RecipeSearchJson>(response);
+            result.TotalCount = recipies.totalMatchCount.HasValue ? recipies.totalMatchCount.Value : 0;
 
-            var rearchRes = new List<RecipeSearchRes>();
+            //var rearchRes = new List<RecipeSearchRes>();
 
             foreach (var recipe in recipies.matches)
             {
@@ -404,7 +407,7 @@ namespace KitchIn.Core.Services.Yummly
                     Rating = rating
                 };
 
-                rearchRes.Add(item);
+                result.Recipes.Add(item);
                 //}
                 //catch
                 //{
@@ -422,7 +425,7 @@ namespace KitchIn.Core.Services.Yummly
                 //}
             }
 
-            return rearchRes;
+            return result;
         }
 
         public RecipeRes GetRecipe(string id)
@@ -544,6 +547,8 @@ namespace KitchIn.Core.Services.Yummly
         private string GenerateRequest(YummlyReqEntity entity)
         {
             var query = "&requirePictures=true";
+
+            query += "&maxResult=" + entity.PerPage + "&start=" + (entity.Page - 1) * entity.PerPage;
 
             if (entity.CookWith != null)
             {

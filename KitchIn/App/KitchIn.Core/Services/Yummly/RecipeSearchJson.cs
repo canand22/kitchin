@@ -8,7 +8,7 @@ namespace KitchIn.Core.Services.Yummly
     {
         public Attribution attribution { get; set; }
 
-        public int totalMatchCount { get; set; }
+        public int? totalMatchCount { get; set; }
 
         public FacetCounts facetCounts { get; set; }
 
