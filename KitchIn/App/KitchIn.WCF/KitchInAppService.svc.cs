@@ -7,12 +7,14 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Web;
 using System.Web;
 using System.Web.Hosting;
+using System.Web.UI;
 using KitchIn.BL.Helpers;
 using KitchIn.Core.Entities;
 using KitchIn.Core.Enums;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
 using KitchIn.Core.Services.Jobs;
+using KitchIn.Core.Services.Mailing;
 using KitchIn.Core.Services.Yummly;
 using KitchIn.Core.Services.Yummly.Response;
 using KitchIn.WCF.Core.Models;
@@ -197,7 +199,7 @@ namespace KitchIn.WCF
 
         public StatusResponse Forgot(string email)
         {
-            var result = new StatusResponse() { IsSuccessfully = this.userProvider.ChangeUserPassword(email), Message = "Ok" };
+            var result = new StatusResponse() { IsSuccessfully = this.userProvider.ForgotPassword(email), Message = "Ok" };
             return result;
         }
 
@@ -456,7 +458,8 @@ namespace KitchIn.WCF
             return rgxEmail.IsMatch(strEmail);
         }
 
-        public IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith = "", string cookWithout = "", string allergies = "", string diets = "", string cuisine = "", string dishType = "", string holiday = "", string meal = "", string time = "")
+        //public IEnumerable<RecipeSearchRes> SearchRecipies(string cookWith = "", string cookWithout = "", string allergies = "", string diets = "", string cuisine = "", string dishType = "", string holiday = "", string meal = "", string time = "")
+        public SearchResult SearchRecipies(string cookWith = "", string cookWithout = "", string allergies = "", string diets = "", string cuisine = "", string dishType = "", string holiday = "", string meal = "", string time = "", int page = 1, int perpage = 10)
         {
             try
             {
@@ -470,14 +473,16 @@ namespace KitchIn.WCF
                     DishType = !String.IsNullOrWhiteSpace(dishType) ? dishType.ToLower().Split(',') : null,
                     Holiday = !String.IsNullOrWhiteSpace(holiday) ? holiday.ToLower().Split(',') : null,
                     Meal = !String.IsNullOrWhiteSpace(meal) ? meal.ToLower().Split(',') : null,
-                    Time = time
+                    Time = time,
+                    Page = page,
+                    PerPage = perpage
                 };
 
                 return yummlyManager.Search(entity);
             }
             catch
             {
-                return new List<RecipeSearchRes>();
+                return new SearchResult();
             }
         }
 

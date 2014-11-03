@@ -173,6 +173,7 @@
     <Compile Include="Services\Yummly\ReferenceData.cs" />
     <Compile Include="Services\Yummly\Response\RecipeRes.cs" />
     <Compile Include="Services\Yummly\Response\RecipeSearchRes.cs" />
+    <Compile Include="Services\Yummly\Response\SearchResult.cs" />
     <Compile Include="Services\Yummly\YummlyManager.cs" />
     <Compile Include="Services\Yummly\YummlyReqEntity.cs" />
   </ItemGroup>

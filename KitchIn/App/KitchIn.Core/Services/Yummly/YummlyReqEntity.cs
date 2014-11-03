@@ -16,5 +16,7 @@ namespace KitchIn.Core.Services.Yummly
         public string[] Holiday { set; get; }
         public string[] Meal { set; get; }
         public string Time { set; get; }
+        public int Page { set; get; }
+        public int PerPage { set; get; }
     }
 }
