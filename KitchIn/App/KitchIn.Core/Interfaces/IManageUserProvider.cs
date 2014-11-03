@@ -24,5 +24,7 @@ namespace KitchIn.Core.Interfaces
         void LogIn(User user);
 
         bool IsExistUser(Guid guid);
+
+        bool ForgotPassword(string email);
     }
 }
