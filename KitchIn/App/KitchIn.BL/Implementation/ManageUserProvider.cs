@@ -53,7 +53,7 @@ namespace KitchIn.BL.Implementation
         {
             var user = this.UserRepo.SingleOrDefault(x => x.Email == email);
 
-            return this.ChangePassword(user);
+            return this.ChangePassword(user, String.Empty);
         }
 
         public bool ChangeUserData(Guid id, string newEmail, string firstName, string lastName)
@@ -148,5 +148,39 @@ namespace KitchIn.BL.Implementation
             return byteHash.Aggregate(string.Empty, (current, b) => current + string.Format("{0:x2}", b));
         }
 
+        /// <summary>
+        /// Return new password
+        /// </summary>
+        /// <param name="email">email of user</param>
+        /// <returns>result of operation</returns>
+        public bool ForgotPassword(string email) 
+        {
+            if (!String.IsNullOrWhiteSpace(email)) 
+            {
+                var user = this.GetUser(email);
+                var password = this.GeneratePassword();
+                return this.ChangePassword(user, password);                
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Generate new password
+        /// </summary>
+        /// <returns>password string</returns>
+        public string GeneratePassword() 
+        {
+            var random = new Random();
+            var str = String.Empty;
+
+            for (int i = 0; i < 15; i++)
+            {
+                var smb = (char)random.Next(47, 123);
+                str += smb > 57 && smb < 65 ? (char)64 : smb;
+            }
+
+            return str;
+        }
     }
 }
