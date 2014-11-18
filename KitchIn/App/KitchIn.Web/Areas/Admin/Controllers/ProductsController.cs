@@ -191,6 +191,7 @@ namespace KitchIn.Web.Areas.Admin.Controllers
                                                          Name = p.Name,
                                                          PosDescription = p.ShortName,
                                                          TypeAdd = p.TypeAdd.ToString(),
+                                                         IngredientName = p.IngredientName,
                                                          Ingredient = p.Ingredient,
                                                          ModificationDate = p.ModificationDate.ToString("MM/dd/yyyy HH:mm"),
                                                          Store = p.Store.Name
