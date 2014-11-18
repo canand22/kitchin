@@ -12,6 +12,8 @@ namespace KitchIn.Web.Core.Models.Admin
         
         public string Name { get; set; }
 
+        public string IngredientName { get; set; }
+
         public Ingredient Ingredient { get; set; }
 
         public string Category { get; set; }
