@@ -571,13 +571,13 @@ namespace KitchIn.Core.Services.Yummly
                 {
                     switch (field)
                     {
-                        case "Breakfast&Brunch":
+                        case "breakfast&brunch":
                             query += "&allowedCourse[]=course^course-Breakfast + course^course-Brunch";
                             break;
-                        case "Dinner":
+                        case "dinner":
                             query += "&allowedCourse[]=course^course-Main Dishes+course^course-Side%20Dishes";
                             break;
-                        case "Lunch& Snack":
+                        case "lunch&snack":
                             query += "&allowedCourse[]=course^course-Lunch%20and%20Snacks";
                             break;
                     }
@@ -608,20 +608,35 @@ namespace KitchIn.Core.Services.Yummly
                 {
                     switch (field)
                     {
-                        case "Vegan":
+                        case "vegan":
                             query += "&allowedDiet[]=Vegan";
                             break;
-                        case "Vegetarian":
+                        case "vegetarian":
                             query += "&allowedDiet[]=Vegetarian";
                             break;
-                        case "Lacto Vegetarian":
+                        case "lacto vegetarian":
                             query += "&allowedDiet[]=Lacto%20Vegetarian";
                             break;
-                        case "Ovo Vegetarian ":
+                        case "ovo vegetarian ":
                             query += "&allowedDiet[]=Ovo%20Vegetarian";
                             break;
-                        case "Pescetarian ":
+                        case "pescetarian ":
                             query += "&allowedDiet[]=Pescetarian";
+                            break;
+                        case "low-calorie":
+                            query += "&nutrition.Energ_kcal.min=100&nutrition.Energ_kcal.max=250";
+                            break;
+                        case "low-fat":
+                            query += "&nutrition.fatl.min=1&nutrition.fat.max=15";
+                            break;
+                        case "low-carbohydrate":
+                            query += "&nutrition.CHOCDF.min=10&nutrition.CHOCDF.max=30";
+                            break;
+                        case "low-sodium":
+                            query += "&nutrition.NA.min=10&nutrition.NA.max=30";
+                            break;
+                        case "high-fiber":
+                            query += "&nutrition.NA.min=20&nutrition.NA.max=50";
                             break;
                     }
                 }
@@ -654,21 +669,6 @@ namespace KitchIn.Core.Services.Yummly
                     case "Less than 3 hours":
                     case "1080":
                         query += "&maxTotalTimeInSeconds=10800";
-                        break;
-                    case "Low-Calorie":
-                        query += "&nutrition.Energ_kcal.min=100&nutrition.Energ_kcal.max=250";
-                        break;
-                    case "Low-Fat":
-                        query += "&nutrition.fatl.min=1&nutrition.fat.max=15";
-                        break;
-                    case "Low-Carbohydrate":
-                        query += "&nutrition.CHOCDF.min=10&nutrition.CHOCDF.max=30";
-                        break;
-                    case "Low-Sodium":
-                        query += "&nutrition.NA.min=10&nutrition.NA.max=30";
-                        break;
-                    case "High-Fiber":
-                        query += "&nutrition.NA.min=20&nutrition.NA.max=50";
                         break;
                 }
             }
