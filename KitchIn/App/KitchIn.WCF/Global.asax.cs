@@ -48,7 +48,6 @@ namespace KitchIn.WCF
             Hosted()).IsDefault().LifestylePerWebRequest());
             
             container.Register(Component.For<IRunable>().ImplementedBy<YummlyMetaUpdater>().LifestyleSingleton());
-            container.Register(Component.For<IYummly>().ImplementedBy<YummlyManager>().LifestyleSingleton());
 
             //container.AddFacility<WcfFacility>();
         }

@@ -39,14 +39,9 @@ namespace KitchIn.Core.Services.Yummly
         private IRepository<Cuisine> cuisinesRepository;
         private IRepository<Allergy> allergiesRepository;
 
-        public YummlyManager(IRepository<Ingredient> ingredientsRepository,
-                             IRepository<Course> coursesRepository,
-                             IRepository<Holiday> holidaysRepository,
-                             IRepository<Diet> dietsRepository,
-                             IRepository<Cuisine> cuisinesRepository,
-                             IRepository<Allergy> allergiesRepository)
+        public YummlyManager(IRepository<Ingredient> ingredientRepository, IRepository<Allergy> allergiesRepository, IRepository<Diet> dietsRepository, IRepository<Cuisine> cuisinesRepository, IRepository<Course> coursesRepository, IRepository<Holiday> holidaysRepository)
         {
-            this.ingredientsRepository = ingredientsRepository;
+            this.ingredientsRepository = ingredientRepository;
             this.coursesRepository = coursesRepository;
             this.holidaysRepository = holidaysRepository;
             this.dietsRepository = dietsRepository;
@@ -356,8 +351,8 @@ namespace KitchIn.Core.Services.Yummly
         {
             var result = new SearchResult();
             var query = GenerateRequest(entity);
-
             var response = GetData(endpoints["Recipes"], query, String.Empty);
+
             var recipies = JsonConvert.DeserializeObject<RecipeSearchJson>(response);
             result.TotalCount = recipies.totalMatchCount.HasValue ? recipies.totalMatchCount.Value : 0;
 
@@ -562,7 +557,19 @@ namespace KitchIn.Core.Services.Yummly
 
             if (entity.Allergies != null)
             {
-                query = entity.Allergies.Where(field => metadata["Allergies"].Contains(field)).Aggregate(query, (current, field) => current + ("&allowedAllergy[]=" + field));
+                foreach (string field in entity.Allergies)
+                {
+                    try
+                    {
+                        var allergy = this.allergiesRepository.FirstOrDefault(x => x.ShortDescription.ToLower().Equals(field));
+                        query = allergy != null ? query + "&allowedAllergy[]=" + allergy.SearchValue : query;
+                    }
+                    catch (Exception ex)
+                    {
+                        var k = 1;
+                        var g = 0;
+                    }
+                }
             }
 
             if (entity.Meal != null)
@@ -571,14 +578,14 @@ namespace KitchIn.Core.Services.Yummly
                 {
                     switch (field)
                     {
-                        case "breakfast&brunch":
-                            query += "&allowedCourse[]=course^course-Breakfast + course^course-Brunch";
+                        case "breakfastbrunch":
+                            query += "&allowedCourse[]=course^course-Breakfast and Brunch";
                             break;
                         case "dinner":
-                            query += "&allowedCourse[]=course^course-Main Dishes+course^course-Side%20Dishes";
+                            query += "&allowedCourse[]=course^course-Main Dishes&allowedCourse[]=course^course-Side Dishes";
                             break;
-                        case "lunch&snack":
-                            query += "&allowedCourse[]=course^course-Lunch%20and%20Snacks";
+                        case "lunchsnack":
+                            query += "&allowedCourse[]=course^course-Lunch and Snacks";
                             break;
                     }
                 }
@@ -586,20 +593,29 @@ namespace KitchIn.Core.Services.Yummly
 
             if (entity.Cuisine != null)
             {
-                query = entity.Cuisine.Where(field => metadata["Cuisine"].Contains(field))
-                    .Aggregate(query, (current, field) => current + ("&allowedCuisine[]=" + field));
+                foreach (string field in entity.Cuisine)
+                {
+                    var cuisine = this.cuisinesRepository.FirstOrDefault(x => x.Name.ToLower().Equals(field));
+                    query = cuisine != null ? query + "&allowedCuisine[]=" + cuisine.SearchValue : query;
+                }
             }
 
             if (entity.Holiday != null)
             {
-                query = entity.Holiday.Where(field => metadata["Holiday"].Contains(field))
-                    .Aggregate(query, (current, field) => current + ("&allowedHoliday[]=" + field));
+                foreach (var field in entity.Holiday)
+                {
+                    var holiday = this.holidaysRepository.FirstOrDefault(x => x.Name.ToLower().Equals(field));
+                    query = holiday != null ? query + "&allowedHoliday[]=" + holiday.SearchValue : query;
+                }
             }
 
             if (entity.DishType != null)
             {
-                query = entity.DishType.Where(field => metadata["Course"].Contains(field))
-                    .Aggregate(query, (current, field) => current + ("&allowedCourse[]=" + field));
+                foreach (var field in entity.DishType)
+                {
+                    var dishType = this.coursesRepository.FirstOrDefault(x => x.Name.ToLower().Equals(field));
+                    query = dishType != null ? query + "&allowedCourse[]=" + dishType.SearchValue : query;
+                }
             }
 
             if (entity.Diets != null)
@@ -609,25 +625,30 @@ namespace KitchIn.Core.Services.Yummly
                     switch (field)
                     {
                         case "vegan":
-                            query += "&allowedDiet[]=Vegan";
+                            query += "&allowedDiet[]=386^Vegan";
                             break;
                         case "vegetarian":
-                            query += "&allowedDiet[]=Vegetarian";
+                            query += "&allowedDiet[]=387^Lacto-ovo%20vegetarian";
                             break;
                         case "lacto vegetarian":
-                            query += "&allowedDiet[]=Lacto%20Vegetarian";
+                        case "lacto%20vegetarian":
+                            query += "&allowedDiet[]=388^Lacto%20vegetarian";
                             break;
-                        case "ovo vegetarian ":
-                            query += "&allowedDiet[]=Ovo%20Vegetarian";
+                        case "ovo vegetarian":
+                        case "ovo%20vegetarian":
+                            query += "&allowedDiet[]=389^Ovo%20vegetarian";
                             break;
-                        case "pescetarian ":
-                            query += "&allowedDiet[]=Pescetarian";
+                        case "pescetarian":
+                            query += "&allowedDiet[]=390^Pescetarian";
+                            break;
+                        case "paleo":
+                            query += "403^Paleo";
                             break;
                         case "low-calorie":
-                            query += "&nutrition.Energ_kcal.min=100&nutrition.Energ_kcal.max=250";
+                            query += "&nutrition.ENERC_KCAL.min=100&nutrition.ENERC_KCAL.max=250";
                             break;
                         case "low-fat":
-                            query += "&nutrition.fatl.min=1&nutrition.fat.max=15";
+                            query += "&nutrition.FAT.min=1&nutrition.FAT.max=15";
                             break;
                         case "low-carbohydrate":
                             query += "&nutrition.CHOCDF.min=10&nutrition.CHOCDF.max=30";
