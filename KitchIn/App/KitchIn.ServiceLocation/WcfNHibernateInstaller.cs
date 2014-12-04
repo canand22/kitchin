@@ -4,6 +4,7 @@ using Castle.Facilities.WcfIntegration;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using KitchIn.Core.Services.Yummly;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using SmartArch.Data;
@@ -52,6 +53,7 @@ namespace KitchIn.ServiceLocation
             container.Register(Component.For<IManageProductByUserProvider>().ImplementedBy<ManageProductByUserProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IManageIngredientProvider>().ImplementedBy<ManageIngredientProvider>().LifestylePerWebRequest());
             container.Register(Component.For<IManageUserPreferenceProvider>().ImplementedBy<ManageUserPreferenceProvider>().LifestylePerWebRequest());
+            container.Register(Component.For<IYummly>().ImplementedBy<YummlyManager>().LifestylePerWebRequest());
 
             container.Register(
                 AllTypes
