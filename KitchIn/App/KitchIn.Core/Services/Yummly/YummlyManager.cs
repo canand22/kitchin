@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using KitchIn.Core.Entities;
@@ -85,6 +87,8 @@ namespace KitchIn.Core.Services.Yummly
 
         public void UpdateMetadata()
         {
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
 
             foreach (var item in endpoints)
             {
@@ -109,7 +113,7 @@ namespace KitchIn.Core.Services.Yummly
                                 {
                                     itemList = String.Empty;
                                     ingredients.ForEach(x => itemList += x.Term.ToLower() + ",");
-                                    metadata["Ingredients"] = itemList;
+                                    metadata["Ingredients"] = textInfo.ToTitleCase(itemList);
                                 }
 
                                 foreach (var ingredient in ingredients)
@@ -349,6 +353,9 @@ namespace KitchIn.Core.Services.Yummly
         //public IEnumerable<RecipeSearchRes> Search(YummlyReqEntity entity)
         public SearchResult Search(YummlyReqEntity entity)
         {
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
+
             var result = new SearchResult();
             var query = GenerateRequest(entity);
             var response = GetData(endpoints["Recipes"], query, String.Empty);
@@ -393,7 +400,7 @@ namespace KitchIn.Core.Services.Yummly
                 var item = new RecipeSearchRes()
                 {
                     Id = tmp["id"] == null ? String.Empty : tmp["id"].ToString(),
-                    Ingredients = tmp["ingredients"] == null ? new string[] { } : ingredients,
+                    Ingredients = tmp["ingredients"] == null ? new string[] { } : ingredients.Select(textInfo.ToTitleCase).ToArray(),
                     //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
                     Kalories = 0,
                     PhotoUrl = tmp["smallImageUrls"] == null ? new string[] { } : images,
@@ -425,6 +432,9 @@ namespace KitchIn.Core.Services.Yummly
 
         public RecipeRes GetRecipe(string id)
         {
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
+
             try
             {
                 var response = GetData(endpoints["GetRecipe"], String.Empty, id);
@@ -437,7 +447,7 @@ namespace KitchIn.Core.Services.Yummly
                 var recipe = new RecipeRes()
                 {
                     RecipeName = recipeYummly.name,
-                    Ingredients = recipeYummly.ingredientLines.Distinct().ToArray(),
+                    Ingredients = recipeYummly.ingredientLines.Distinct().Select(textInfo.ToTitleCase).ToArray(),
                     Picture = recipeYummly.images[0].hostedMediumUrl,
                     Rating = recipeYummly.rating == null ? 0 : recipeYummly.rating.Value,
                     Served = recipeYummly.numberOfServings.ToString(),
@@ -466,6 +476,8 @@ namespace KitchIn.Core.Services.Yummly
         public IList<ReferenceData> GetIngredientsRelations(string key = "All")
         {
             List<Product> products;
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
 
             var repository = ServiceLocator.Current.GetInstance<IRepository<Product>>();
 
@@ -493,9 +505,9 @@ namespace KitchIn.Core.Services.Yummly
                         {
                             Id = x.Id,
                             Category = x.Category.Name,
-                            FullName = x.Name,
-                            ShortName = x.ShortName,
-                            YummlyName = x.IngredientName
+                            FullName = textInfo.ToTitleCase(x.Name),
+                            ShortName = textInfo.ToTitleCase(x.ShortName),
+                            YummlyName = textInfo.ToTitleCase(x.IngredientName)
                         }));
 
             return result;
@@ -504,6 +516,8 @@ namespace KitchIn.Core.Services.Yummly
         public IList<ReferenceData> GetIngredientsRelationsByYammlyName(string key = "All")
         {
             List<Product> products;
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
 
             var repository = ServiceLocator.Current.GetInstance<IRepository<Product>>();
 
@@ -531,9 +545,9 @@ namespace KitchIn.Core.Services.Yummly
                         {
                             Id = x.Id,
                             Category = x.Category.Name,
-                            FullName = x.Name,
-                            ShortName = x.ShortName,
-                            YummlyName = x.IngredientName
+                            FullName = textInfo.ToTitleCase(x.Name),
+                            ShortName = textInfo.ToTitleCase(x.ShortName),
+                            YummlyName = textInfo.ToTitleCase(x.IngredientName)
                         }));
 
             return result;
