@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using KitchIn.Core.Entities;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
@@ -129,8 +131,10 @@ namespace KitchIn.BL.Implementation
         public IEnumerable<Product> SearchProductsByFirstLetters(string letters, long categoryId, long storeId)
         {
             var products = new List<Product>();
+
             products = this.productsRepo.Where(x => x.Store.Id == storeId && x.Category.Id == categoryId && 
                 x.ShortName.Substring(0, letters.Length).ToLower().Equals(letters.ToLower())).ToList();
+
             return products;
         } 
 

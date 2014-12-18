@@ -113,7 +113,7 @@ namespace KitchIn.Core.Services.Yummly
                                 {
                                     itemList = String.Empty;
                                     ingredients.ForEach(x => itemList += x.Term.ToLower() + ",");
-                                    metadata["Ingredients"] = textInfo.ToTitleCase(itemList);
+                                    metadata["Ingredients"] = textInfo.ToTitleCase(itemList.ToLower());
                                 }
 
                                 foreach (var ingredient in ingredients)
@@ -400,7 +400,7 @@ namespace KitchIn.Core.Services.Yummly
                 var item = new RecipeSearchRes()
                 {
                     Id = tmp["id"] == null ? String.Empty : tmp["id"].ToString(),
-                    Ingredients = tmp["ingredients"] == null ? new string[] { } : ingredients.Select(textInfo.ToTitleCase).ToArray(),
+                    Ingredients = tmp["ingredients"] == null ? new string[] { } : ingredients.Select(x => textInfo.ToTitleCase(x.ToLower())).ToArray(),
                     //Kalories = currec.Nutritions["FAT_KCAL"].Item2,
                     Kalories = 0,
                     PhotoUrl = tmp["smallImageUrls"] == null ? new string[] { } : images,
@@ -447,7 +447,7 @@ namespace KitchIn.Core.Services.Yummly
                 var recipe = new RecipeRes()
                 {
                     RecipeName = recipeYummly.name,
-                    Ingredients = recipeYummly.ingredientLines.Distinct().Select(textInfo.ToTitleCase).ToArray(),
+                    Ingredients = recipeYummly.ingredientLines.Distinct().Select(x => textInfo.ToTitleCase(x.ToLower())).ToArray(),
                     Picture = recipeYummly.images[0].hostedMediumUrl,
                     Rating = recipeYummly.rating == null ? 0 : recipeYummly.rating.Value,
                     Served = recipeYummly.numberOfServings.ToString(),
@@ -505,9 +505,9 @@ namespace KitchIn.Core.Services.Yummly
                         {
                             Id = x.Id,
                             Category = x.Category.Name,
-                            FullName = textInfo.ToTitleCase(x.Name),
-                            ShortName = textInfo.ToTitleCase(x.ShortName),
-                            YummlyName = textInfo.ToTitleCase(x.IngredientName)
+                            FullName = textInfo.ToTitleCase(x.Name.ToLower()),
+                            ShortName = textInfo.ToTitleCase(x.ShortName.ToLower()),
+                            YummlyName = textInfo.ToTitleCase(x.IngredientName.ToLower())
                         }));
 
             return result;
@@ -545,9 +545,9 @@ namespace KitchIn.Core.Services.Yummly
                         {
                             Id = x.Id,
                             Category = x.Category.Name,
-                            FullName = textInfo.ToTitleCase(x.Name),
-                            ShortName = textInfo.ToTitleCase(x.ShortName),
-                            YummlyName = textInfo.ToTitleCase(x.IngredientName)
+                            FullName = textInfo.ToTitleCase(x.Name.ToLower()),
+                            ShortName = textInfo.ToTitleCase(x.ShortName.ToLower()),
+                            YummlyName = textInfo.ToTitleCase(x.IngredientName.ToLower())
                         }));
 
             return result;

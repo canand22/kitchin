@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using KitchIn.Core.Entities;
 using KitchIn.Core.Interfaces;
 using KitchIn.Core.Models;
@@ -28,10 +30,13 @@ namespace KitchIn.BL.Implementation
 
         public IEnumerable<ProductiPhoneModel> GetProducts(Guid id, long categoryId)
         {
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
+
             return this.GetProductsOnKitchen(id, categoryId)
                 .Select(x => new ProductiPhoneModel
                        {
-                           Name = x.Name,
+                           Name = textInfo.ToTitleCase(x.Name.ToLower()),
                            ProductId = x.Product.Id,
                            CategoryId = x.Category.Id,
                            Quantity = x.Quantity,

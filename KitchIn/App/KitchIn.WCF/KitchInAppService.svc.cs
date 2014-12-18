@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Description;
 using System.ServiceModel.Web;
+using System.Threading;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.UI;
@@ -282,8 +284,11 @@ namespace KitchIn.WCF
 
         public ProductsResponse AllProducts(long storeId, long categoryId)
         {
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
+
             var products = this.productProvider.GetAllProductsByStoreAndCategory(storeId, categoryId)
-                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = x.Name, ShortName = x.ShortName, IngredientName = x.IngredientName });
+                .Select(x => new PropuctSimpleModel() { Id = x.Id, Name = textInfo.ToTitleCase(x.Name.ToLower()), ShortName = x.ShortName, IngredientName = textInfo.ToTitleCase(x.IngredientName.ToLower()) });
             return new ProductsResponse { Products = products };
         }
 
@@ -402,6 +407,7 @@ namespace KitchIn.WCF
                     var stId = Convert.ToInt64(storeId);
                     var catid = Convert.ToInt64(categoryId);
                     var tmp = productProvider.SearchProductsByFirstLetters(product, catid, stId);
+                    
                     result.AddRange(tmp.Select(item => (ProductMediumModel)item));
                 }
                 catch (Exception ex)

@@ -1,4 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Globalization;
+using System.Runtime.Serialization;
+using System.Threading;
 using KitchIn.Core.Models;
 
 namespace KitchIn.WCF.Core.Models.CommonDataContract
@@ -34,7 +37,7 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
                 IsSuccessMatching = resultMatching.IsSuccessMatching,
                 ItemName = resultMatching.ItemName,
                 Category = resultMatching.Category,
-                ItemShortName = resultMatching.ItemShortName,
+                ItemShortName = resultMatching.ItemShortName.ToLower(),
                 YummlyName = resultMatching.IngredientName
             };
             return model;
@@ -42,6 +45,9 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
 
         public static implicit operator ProductMediumModel(Product product)
         {
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
+
             var model = new ProductMediumModel()
             {
                 Id = product.Id,
@@ -49,10 +55,9 @@ namespace KitchIn.WCF.Core.Models.CommonDataContract
                 ItemName = product.Name,
                 Category = product.Category.Name,
                 ItemShortName = product.ShortName,
-                YummlyName = product.IngredientName
+                YummlyName = !String.IsNullOrWhiteSpace(product.IngredientName) ? textInfo.ToTitleCase(product.IngredientName) : product.IngredientName
             };
             return model;
         }
-
     }
 }
